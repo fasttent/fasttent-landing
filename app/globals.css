@@ -254,7 +254,7 @@ h3 { letter-spacing: var(--heading-tracking); }
 .link-download .download-icon { transition: transform var(--transition-fast); }
 .link-download:hover .download-icon { transform: translateY(2px); }
 
-.accent-top { border-top: 2px solid var(--signal); }
+.accent-top { border-top: 1px solid var(--signal); }
 
 .faq-question { display: flex; align-items: center; min-height: 56px; }
 

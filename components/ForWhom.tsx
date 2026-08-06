@@ -23,7 +23,7 @@ export default function ForWhom() {
               <div className="relative z-10 p-6 sm:p-10">
                 <h3 className="text-3xl sm:text-4xl font-semibold mb-3">{tile.title}</h3>
                 <p className="text-[var(--muted-foreground)] max-w-sm mb-4">{tile.description}</p>
-                <span className="font-mono-label uppercase tracking-wider text-[var(--foreground)] flex items-center group-hover:text-signal transition-colors">
+                <span className="font-mono-label uppercase !tracking-wider text-[var(--foreground)] flex items-center group-hover:text-signal transition-colors">
                   {forWhom.goLabel}
                   <ArrowIcon className="arrow-icon group-hover:translate-x-0.5" />
                 </span>
