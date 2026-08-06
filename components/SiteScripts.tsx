@@ -303,9 +303,12 @@ export default function SiteScripts() {
       { signal }
     );
 
-    // ── Свайп для лайтбоксу на мобільному/планшеті (замість лише кнопок-стрілок) ──
+    // ── Свайп + тап для лайтбоксу на мобільному/планшеті (замість лише кнопок-стрілок) ──
+    // touchmove з preventDefault — інакше на iOS Safari фонова сторінка все одно
+    // прокручується/"resinguється" під час свайпу, навіть при overflow:hidden на body.
     let touchStartX = 0;
     let touchStartY = 0;
+    let wasSwipe = false;
     lightboxBackdrop?.addEventListener(
       "touchstart",
       (e: TouchEvent) => {
@@ -315,17 +318,38 @@ export default function SiteScripts() {
       { signal, passive: true }
     );
     lightboxBackdrop?.addEventListener(
+      "touchmove",
+      (e: TouchEvent) => {
+        e.preventDefault();
+      },
+      { signal, passive: false }
+    );
+    lightboxBackdrop?.addEventListener(
       "touchend",
       (e: TouchEvent) => {
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
-        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-          lightboxNav(dx < 0 ? 1 : -1);
-        }
+        wasSwipe = Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5;
+        if (wasSwipe) lightboxNav(dx < 0 ? 1 : -1);
       },
       { signal, passive: true }
     );
-    lightboxImg?.addEventListener("click", (e) => e.stopPropagation(), { signal });
+    // Тап (клік/дотик без свайпу) по фото — гортає до наступного, як свайп.
+    // wasSwipe гасить дублювання: після реального свайпу мобільний браузер
+    // все одно генерує синтетичний click, і без цього прапорця фото
+    // перегорталось б одразу двічі за один свайп.
+    lightboxImg?.addEventListener(
+      "click",
+      (e) => {
+        e.stopPropagation();
+        if (wasSwipe) {
+          wasSwipe = false;
+          return;
+        }
+        if (lightboxImages.length > 1) lightboxNav(1);
+      },
+      { signal }
+    );
 
     document.addEventListener(
       "keydown",

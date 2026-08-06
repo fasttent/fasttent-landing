@@ -14,7 +14,7 @@ export default function WarrantyAndSteps() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="font-mono-label uppercase text-signal mb-3">{warrantySection.eyebrow}</p>
           <div className="grid lg:grid-cols-5 gap-10 lg:gap-14">
-            <div className="lg:col-span-2 lg:order-1 flex flex-col h-full">
+            <div className="lg:col-span-2 lg:order-1 flex flex-col h-full mb-10 lg:mb-0">
               <div className="card-grid grid-cols-2">
                 {warrantySection.badges.map((badge) => (
                   <div key={badge.label} className="bg-[var(--background)] p-6 flex flex-col items-center justify-center text-center gap-2">
@@ -23,9 +23,9 @@ export default function WarrantyAndSteps() {
                   </div>
                 ))}
               </div>
-              <div className="mt-auto pt-6 border-t border-hair">
+              <div className="mt-auto pt-8 border-t border-hair">
                 <p className="font-semibold mb-1">{warrantySection.ctaTitle}</p>
-                <p className="text-sm text-[var(--muted-foreground)] mb-4">{warrantySection.ctaText}</p>
+                <p className="text-sm text-[var(--muted-foreground)] mb-6">{warrantySection.ctaText}</p>
                 <a href={warrantySection.ctaButton.href} className="btn btn-primary">
                   {warrantySection.ctaButton.label}
                   <ArrowIcon />

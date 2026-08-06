@@ -83,7 +83,7 @@ export default function Footer() {
             {footerContent.copyrightLine1}
             <br className="md:hidden" /> {footerContent.copyrightLine2}
           </span>
-          <span>{footerContent.copyrightAddress}</span>
+          <span className="hidden sm:inline">{footerContent.copyrightAddress}</span>
         </div>
       </div>
     </footer>

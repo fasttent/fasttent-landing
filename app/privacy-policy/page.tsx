@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ArrowIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Політика конфіденційності — Fast Tent",
@@ -19,8 +20,9 @@ export default function PrivacyPolicyPage() {
       </header>
 
       <main className="max-w-3xl mx-auto px-6 py-16">
-        <a href="/#contacts" className="link-arrow text-sm mb-8 inline-flex">
-          ← На головну
+        <a href="/#contacts" className="link-arrow text-sm mb-8 inline-flex gap-1.5">
+          <ArrowIcon reversed />
+          На головну
         </a>
 
         <p className="font-mono-label uppercase text-signal mb-3">Юридична інформація</p>
@@ -248,14 +250,15 @@ export default function PrivacyPolicyPage() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-hair">
-          <a href="/#contacts" className="link-arrow text-sm">
-            ← На головну
+          <a href="/#contacts" className="link-arrow text-sm inline-flex gap-1.5">
+            <ArrowIcon reversed />
+            На головну
           </a>
         </div>
       </main>
 
-      <footer className="relative border-t border-hair mt-8">
-        <div className="max-w-3xl mx-auto px-6 py-10 font-mono-label text-[var(--muted-foreground)]">
+      <footer className="relative border-t border-hair">
+        <div className="max-w-3xl mx-auto px-6 py-5 font-mono-label text-[var(--muted-foreground)]">
           <span>
             © 2026 FAST TENT.<br className="sm:hidden" /> ФОП ГОЛУБЄВА-ЄФАНОВА НАДІЯ ОЛЕКСАНДРІВНА
           </span>
