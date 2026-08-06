@@ -54,6 +54,7 @@ export const header = {
   phoneHref: "tel:+380668589390",
   ctaLong: "Отримати розрахунок",
   ctaShort: "Контакти",
+  ctaTablet: "Розрахунок",
   mobileMenuOpenLabel: "Відкрити меню",
   mobileMenuCloseLabel: "Закрити меню",
 };

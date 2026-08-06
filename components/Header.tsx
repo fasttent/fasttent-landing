@@ -43,6 +43,12 @@ export default function Header() {
               <ArrowIcon />
             </a>
           </span>
+          <span id="cta-tablet" className="hidden">
+            <a href="#request-form" className="btn btn-primary btn-sm">
+              {header.ctaTablet}
+              <ArrowIcon />
+            </a>
+          </span>
           <button id="mobile-menu-btn" className="min-[1140px]:hidden flex items-center justify-center h-9 w-9 border border-hair rounded-full hover:border-signal transition-colors" aria-label={header.mobileMenuOpenLabel}>
             <HamburgerIcon />
           </button>

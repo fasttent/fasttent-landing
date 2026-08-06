@@ -106,7 +106,8 @@ h3 { letter-spacing: var(--heading-tracking); }
   header #mobile-menu-btn { display: none !important; }
   header a[href="tel:+380668589390"] { display: none !important; }
   header #cta-long { display: none !important; }
-  header #cta-short { display: inline-flex !important; }
+  header #cta-short { display: none !important; }
+  header #cta-tablet { display: inline-flex !important; }
 }
 .photo-hero-overlay {
   position: absolute; inset: 0; z-index: -10;
