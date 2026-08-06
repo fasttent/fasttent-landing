@@ -17,8 +17,9 @@ export function BackToTop() {
 export function ViberFloating() {
   return (
     <a
+      id="viber-floating"
       href="viber://chat?number=%2B380668589390"
-      className="min-[1140px]:hidden fixed bottom-20 right-6 z-40 flex items-center justify-center h-12 w-12 border border-hair rounded-full bg-[var(--card)]/90 backdrop-blur-sm hover:border-signal transition-colors"
+      className="min-[1140px]:hidden fixed bottom-6 right-6 z-40 flex items-center justify-center h-12 w-12 border border-hair rounded-full bg-[var(--card)]/90 backdrop-blur-sm hover:border-signal transition-[bottom,border-color] duration-300"
       aria-label={misc.viberFloatingLabel}
     >
       <ViberIcon />

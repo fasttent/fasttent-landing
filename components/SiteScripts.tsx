@@ -92,15 +92,23 @@ export default function SiteScripts() {
       window.addEventListener("load", () => scrollToSectionTop(location.hash.slice(1)), { signal });
     }
 
-    // ── Header scrolled + back-to-top visibility ──
+    // ── Header scrolled + back-to-top visibility + Viber button position ──
     const header = document.getElementById("site-header");
     const topBtn = document.getElementById("scroll-top-btn");
+    const viberBtn = document.getElementById("viber-floating");
     function onScroll() {
       if (window.scrollY > 40) header?.classList.add("scrolled");
       else header?.classList.remove("scrolled");
 
-      if (window.scrollY > 200) topBtn?.classList.remove("opacity-0", "pointer-events-none");
-      else topBtn?.classList.add("opacity-0", "pointer-events-none");
+      if (window.scrollY > 200) {
+        topBtn?.classList.remove("opacity-0", "pointer-events-none");
+        viberBtn?.classList.remove("bottom-6");
+        viberBtn?.classList.add("bottom-20");
+      } else {
+        topBtn?.classList.add("opacity-0", "pointer-events-none");
+        viberBtn?.classList.remove("bottom-20");
+        viberBtn?.classList.add("bottom-6");
+      }
     }
     window.addEventListener("scroll", onScroll, { passive: true, signal });
     onScroll();
@@ -293,6 +301,29 @@ export default function SiteScripts() {
         if (e.target === lightboxBackdrop) closeLightbox();
       },
       { signal }
+    );
+
+    // ── Свайп для лайтбоксу на мобільному/планшеті (замість лише кнопок-стрілок) ──
+    let touchStartX = 0;
+    let touchStartY = 0;
+    lightboxBackdrop?.addEventListener(
+      "touchstart",
+      (e: TouchEvent) => {
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+      },
+      { signal, passive: true }
+    );
+    lightboxBackdrop?.addEventListener(
+      "touchend",
+      (e: TouchEvent) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          lightboxNav(dx < 0 ? 1 : -1);
+        }
+      },
+      { signal, passive: true }
     );
     lightboxImg?.addEventListener("click", (e) => e.stopPropagation(), { signal });
 

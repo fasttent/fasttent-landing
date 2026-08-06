@@ -255,13 +255,10 @@ export default function PrivacyPolicyPage() {
       </main>
 
       <footer className="relative border-t border-hair mt-8">
-        <div className="max-w-3xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between gap-3 font-mono-label text-[var(--muted-foreground)]">
+        <div className="max-w-3xl mx-auto px-6 py-10 font-mono-label text-[var(--muted-foreground)]">
           <span>
             © 2026 FAST TENT.<br className="sm:hidden" /> ФОП ГОЛУБЄВА-ЄФАНОВА НАДІЯ ОЛЕКСАНДРІВНА
           </span>
-          <a href="/#contacts" className="hover:text-[var(--foreground)] transition-colors">
-            На головну сайту Fast Tent →
-          </a>
         </div>
       </footer>
     </>

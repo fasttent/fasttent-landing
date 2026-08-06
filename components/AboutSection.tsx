@@ -10,7 +10,7 @@ export default function AboutSection() {
 
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-14">
           <div className="lg:col-span-2">
-            <img loading="lazy" src="/assets/nadiya-founder.webp" alt={aboutSection.founderImgAlt} className="w-full aspect-[4/5] object-cover radius" />
+            <img loading="lazy" src="/assets/nadiya-founder.png" alt={aboutSection.founderImgAlt} className="w-full aspect-[4/5] object-cover object-bottom radius" />
             <p className="uppercase text-[var(--foreground)] mt-4 text-[14px]">{aboutSection.founderName}</p>
             <p className="uppercase text-[var(--muted-foreground)] text-[12px]">{aboutSection.founderRole}</p>
           </div>
