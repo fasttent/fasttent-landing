@@ -11,11 +11,23 @@ function FaqItem({ item, isLast }: { item: (typeof faqSection.items)[number]; is
         </button>
       </dt>
       <dd className="pb-6 px-5 text-base leading-relaxed text-[var(--muted-foreground)] hidden">
-        {item.answer.split("\n\n").map((para, i) => (
-          <p key={i} className={i < item.answer.split("\n\n").length - 1 ? "mb-4" : undefined}>
-            {para}
-          </p>
-        ))}
+        {item.downloads
+          ? item.answer.split("\n\n").map((para, i) => (
+              <p key={i} className="mb-4">
+                {para}
+              </p>
+            ))
+          : item.answer.split("\n\n").map((para, i, arr) => (
+              <span key={i}>
+                {para}
+                {i < arr.length - 1 && (
+                  <>
+                    <br />
+                    <br />
+                  </>
+                )}
+              </span>
+            ))}
         {item.downloads && (
           <div className="flex flex-col gap-3">
             {item.downloads.map((d) => (

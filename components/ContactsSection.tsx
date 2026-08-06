@@ -4,13 +4,7 @@ import ContactForm from "./ContactForm";
 
 export default function ContactsSection() {
   return (
-    <div className="relative overflow-hidden">
-      <div className="hero-bg hero-dim-40">
-        <img loading="lazy" src={`/assets/${contactsSection.bgImg}`} alt="" />
-      </div>
-      <div className="hero-overlay"></div>
-
-      <section id="contacts" className="relative section-y scroll-anchor">
+    <section id="contacts" className="relative section-y scroll-anchor">
         <div className="max-w-7xl mx-auto px-6 relative">
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-3">{contactsSection.eyebrow}</p>
           <h2 className="reveal text-3xl font-semibold sm:text-4xl lg:text-5xl mb-6">
@@ -142,7 +136,6 @@ export default function ContactsSection() {
             <ContactForm />
           </div>
         </div>
-      </section>
-    </div>
+    </section>
   );
 }

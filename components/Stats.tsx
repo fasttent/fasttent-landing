@@ -3,12 +3,6 @@ import { StarIcon, LineIcon } from "./icons";
 
 export default function Stats() {
   return (
-    <div className="relative overflow-hidden">
-      <div className="hero-bg hero-dim-50">
-        <img loading="lazy" src="/assets/warehouse-curtains.webp" alt="" />
-      </div>
-      <div className="hero-overlay"></div>
-
       <section className="relative py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-wrap items-baseline justify-between gap-2 mb-10">
@@ -25,7 +19,7 @@ export default function Stats() {
             >
               <div className="flex items-center gap-0.5 text-signal-80 mb-4">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <StarIcon key={i} />
+                  <StarIcon key={i} size={12} />
                 ))}
                 <span className="font-mono-label uppercase text-[var(--muted-foreground)] ml-1.5">{stats.reviewsLabel}</span>
               </div>
@@ -79,6 +73,5 @@ export default function Stats() {
           </div>
         </div>
       </section>
-    </div>
   );
 }

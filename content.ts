@@ -587,7 +587,7 @@ export const warrantySection = {
   ],
   badges: [
     { icon: "shield", label: "24 місяці гарантії" },
-    { icon: "repair", label: "Ремонт і модернізація" },
+    { icon: "hardware", label: "Ремонт і модернізація" },
     { icon: "settings", label: "Заміна комплектуючих" },
     { icon: "chat", label: "Консультації" },
   ],
