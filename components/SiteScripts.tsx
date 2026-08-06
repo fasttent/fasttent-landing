@@ -1,0 +1,328 @@
+"use client";
+
+import { useEffect } from "react";
+
+type LightboxPhoto = { src: string; alt?: string; caption?: string; title?: string };
+
+const ANCHOR_GAP = 50;
+const ANCHOR_IDS = ["business", "home-segment", "products", "about", "contacts"];
+
+export default function SiteScripts() {
+  useEffect(() => {
+    // Єдиний AbortController для всіх listeners — гарантує повне очищення
+    // при unmount/remount (важливо в React StrictMode, де ефект монтується двічі).
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    // ── Reveal-анімація при скролі ──
+    const revealEls = document.querySelectorAll<HTMLElement>(".reveal:not(.in)");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    revealEls.forEach((el) => io.observe(el));
+
+    // ── Анімований підрахунок цифр ──
+    const countIo = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const el = e.target as HTMLElement;
+          const target = parseFloat(el.dataset.countTo || "0");
+          const decimals = parseInt(el.dataset.countDecimals || "0", 10);
+          const duration = 1800;
+          const start = performance.now();
+          el.style.color = "var(--signal)";
+          function tick(now: number) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const value = target * eased;
+            el.textContent = decimals ? value.toFixed(decimals) : String(Math.round(value));
+            if (progress < 1) {
+              requestAnimationFrame(tick);
+            } else {
+              el.style.transition = "color .5s ease";
+              el.style.color = "";
+            }
+          }
+          requestAnimationFrame(tick);
+          countIo.unobserve(el);
+        });
+      },
+      { threshold: 0.2 }
+    );
+    document.querySelectorAll<HTMLElement>(".js-count").forEach((el) => countIo.observe(el));
+
+    // ── Компенсований скрол до якорів (фіксований хедер) ──
+    function scrollToSectionTop(id: string) {
+      const header = document.getElementById("site-header");
+      const section = document.getElementById(id);
+      const eyebrow = section ? section.querySelector("p.font-mono-label") : null;
+      const target = (eyebrow || section) as HTMLElement | null;
+      if (!target || !header) return;
+      const headerHeight = header.getBoundingClientRect().height;
+      const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight - ANCHOR_GAP;
+      window.scrollTo({ top: Math.max(0, targetY) });
+    }
+
+    document
+      .querySelectorAll<HTMLAnchorElement>(ANCHOR_IDS.map((id) => `a[href="#${id}"]`).join(","))
+      .forEach((a) => {
+        a.addEventListener(
+          "click",
+          (e) => {
+            const id = a.getAttribute("href")?.slice(1);
+            if (!id) return;
+            e.preventDefault();
+            scrollToSectionTop(id);
+            history.pushState(null, "", "#" + id);
+          },
+          { signal }
+        );
+      });
+
+    if (ANCHOR_IDS.includes(location.hash.slice(1))) {
+      window.addEventListener("load", () => scrollToSectionTop(location.hash.slice(1)), { signal });
+    }
+
+    // ── Header scrolled + back-to-top visibility ──
+    const header = document.getElementById("site-header");
+    const topBtn = document.getElementById("scroll-top-btn");
+    function onScroll() {
+      if (window.scrollY > 40) header?.classList.add("scrolled");
+      else header?.classList.remove("scrolled");
+
+      if (window.scrollY > 200) topBtn?.classList.remove("opacity-0", "pointer-events-none");
+      else topBtn?.classList.add("opacity-0", "pointer-events-none");
+    }
+    window.addEventListener("scroll", onScroll, { passive: true, signal });
+    onScroll();
+
+    // ── Скрол угору (лого хедера + кнопка "Вгору") ──
+    document.querySelectorAll<HTMLElement>("[data-scroll-top]").forEach((el) => {
+      el.addEventListener(
+        "click",
+        (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        },
+        { signal }
+      );
+    });
+
+    // ── Мобільне меню ──
+    const menuBtn = document.getElementById("mobile-menu-btn");
+    const menuCloseBtn = document.getElementById("mobile-menu-close");
+    const menu = document.getElementById("mobile-menu");
+    function toggleMobileMenu() {
+      if (!menu) return;
+      const isOpen = !menu.classList.contains("hidden");
+      menu.classList.toggle("hidden", isOpen);
+      menu.classList.toggle("flex", !isOpen);
+      document.body.style.overflow = isOpen ? "" : "hidden";
+    }
+    menuBtn?.addEventListener("click", toggleMobileMenu, { signal });
+    menuCloseBtn?.addEventListener("click", toggleMobileMenu, { signal });
+    menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", toggleMobileMenu, { signal }));
+
+    // ── Картки напрямків: hover/tap toggle ──
+    function positionTrustDropdown() {
+      const card = document.querySelector<HTMLElement>("[data-trust-item]");
+      if (!card) return;
+      const detail = card.querySelector<HTMLElement>(".direction-detail");
+      if (!detail) return;
+      const rect = card.getBoundingClientRect();
+      const neededHeight = detail.scrollHeight + 40;
+      const spaceAbove = rect.top;
+      const spaceBelow = window.innerHeight - rect.bottom;
+      card.classList.toggle("direction-card-up", spaceAbove >= neededHeight || spaceAbove > spaceBelow);
+    }
+    document.querySelector("[data-trust-item]")?.addEventListener("mouseenter", positionTrustDropdown, { signal });
+
+    function toggleDirectionCard(card: HTMLElement, event: Event) {
+      const target = event.target as HTMLElement;
+      if (target.closest("a, button")) return;
+      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+      const sel = window.getSelection();
+      if (sel && sel.toString().length > 0) return;
+      if (card.hasAttribute("data-trust-item") && !card.classList.contains("is-expanded")) positionTrustDropdown();
+      card.classList.toggle("is-expanded");
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-direction-card]").forEach((card) => {
+      card.addEventListener("click", (e) => toggleDirectionCard(card, e), { signal });
+      card.addEventListener(
+        "mouseleave",
+        () => {
+          const sel = window.getSelection();
+          if (sel && sel.anchorNode && card.contains(sel.anchorNode)) sel.removeAllRanges();
+        },
+        { signal }
+      );
+    });
+
+    // ── FAQ-акордеон ──
+    function closeAllFaq() {
+      document.querySelectorAll<HTMLElement>("[data-faq] dd").forEach((d) => d.classList.add("hidden"));
+      document.querySelectorAll<HTMLElement>("[data-faq] .faq-icon").forEach((i) => (i.style.transform = "rotate(0deg)"));
+    }
+    function toggleFaq(btn: HTMLElement) {
+      const item = btn.closest<HTMLElement>("[data-faq]");
+      const answer = item?.querySelector<HTMLElement>("dd");
+      if (!item || !answer) return;
+      const isOpen = !answer.classList.contains("hidden");
+      closeAllFaq();
+      if (!isOpen) {
+        answer.classList.remove("hidden");
+        const icon = item.querySelector<HTMLElement>(".faq-icon");
+        if (icon) icon.style.transform = "rotate(45deg)";
+      }
+    }
+    document.querySelectorAll<HTMLElement>("[data-faq-toggle]").forEach((btn) => {
+      btn.addEventListener("click", () => toggleFaq(btn), { signal });
+    });
+    document.querySelectorAll<HTMLElement>("[data-faq-close-all]").forEach((el) => {
+      el.addEventListener("click", closeAllFaq, { signal });
+    });
+
+    // ── About: читати повністю / згорнути ──
+    document.getElementById("about-toggle")?.addEventListener(
+      "click",
+      () => {
+        const m = document.getElementById("about-more");
+        if (!m) return;
+        const shown = !m.classList.contains("hidden");
+        m.classList.toggle("hidden", shown);
+        const label = document.getElementById("about-toggle-label");
+        const icon = document.getElementById("about-toggle-icon");
+        if (label) label.textContent = shown ? "Читати повністю" : "Згорнути";
+        icon?.classList.toggle("reversed", !shown);
+      },
+      { signal }
+    );
+
+    // ── LIGHTBOX ──
+    let lightboxImages: LightboxPhoto[] = [];
+    let lightboxIndex = 0;
+    let lightboxAltBase = "";
+
+    function renderLightbox() {
+      const multi = lightboxImages.length > 1;
+      const current = lightboxImages[lightboxIndex];
+      const img = document.getElementById("lightbox-img") as HTMLImageElement | null;
+      if (!img || !current) return;
+      img.src = current.src;
+      if (current.alt) {
+        img.alt = current.alt;
+      } else {
+        const base = `${lightboxAltBase}, виготовлення на замовлення, Бориспіль`;
+        img.alt = multi ? `${base} — фото ${lightboxIndex + 1} з ${lightboxImages.length}` : base;
+      }
+      if (current.title) img.title = current.title;
+      else img.removeAttribute("title");
+
+      const captionEl = document.getElementById("lightbox-caption");
+      if (captionEl) captionEl.textContent = current.caption || "";
+
+      const counterEl = document.getElementById("lightbox-counter");
+      if (counterEl) counterEl.textContent = multi ? `${lightboxIndex + 1} / ${lightboxImages.length}` : "";
+
+      const prevBtn = document.getElementById("lightbox-prev");
+      const nextBtn = document.getElementById("lightbox-next");
+      if (prevBtn) prevBtn.style.display = multi ? "flex" : "none";
+      if (nextBtn) nextBtn.style.display = multi ? "flex" : "none";
+    }
+
+    function openLightbox(images: LightboxPhoto[], altBase = "", startIndex = 0) {
+      lightboxImages = images;
+      lightboxAltBase = altBase;
+      lightboxIndex = startIndex;
+      renderLightbox();
+      const lb = document.getElementById("lightbox");
+      lb?.classList.remove("hidden");
+      lb?.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById("lightbox");
+      lb?.classList.add("hidden");
+      lb?.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+
+    function lightboxNav(direction: number) {
+      lightboxIndex = (lightboxIndex + direction + lightboxImages.length) % lightboxImages.length;
+      renderLightbox();
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-lightbox-trigger]").forEach((trigger) => {
+      trigger.addEventListener(
+        "click",
+        () => {
+          const raw = trigger.getAttribute("data-lightbox-photos");
+          const altBase = trigger.getAttribute("data-lightbox-alt") || "";
+          if (!raw) return;
+          try {
+            const photos = JSON.parse(raw) as LightboxPhoto[];
+            openLightbox(photos, altBase);
+          } catch {
+            /* noop */
+          }
+        },
+        { signal }
+      );
+    });
+
+    const lightboxBackdrop = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    document.getElementById("lightbox-close")?.addEventListener("click", closeLightbox, { signal });
+    document.getElementById("lightbox-prev")?.addEventListener("click", () => lightboxNav(-1), { signal });
+    document.getElementById("lightbox-next")?.addEventListener("click", () => lightboxNav(1), { signal });
+    lightboxBackdrop?.addEventListener(
+      "click",
+      (e) => {
+        if (e.target === lightboxBackdrop) closeLightbox();
+      },
+      { signal }
+    );
+    lightboxImg?.addEventListener("click", (e) => e.stopPropagation(), { signal });
+
+    document.addEventListener(
+      "keydown",
+      (e) => {
+        const lb = document.getElementById("lightbox");
+        if (!lb || lb.classList.contains("hidden")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") lightboxNav(-1);
+        if (e.key === "ArrowRight") lightboxNav(1);
+      },
+      { signal }
+    );
+
+    // ── Карусель відгуків ──
+    const reviewsTrack = document.getElementById("reviews-track");
+    document.getElementById("reviews-prev")?.addEventListener(
+      "click",
+      () => reviewsTrack?.scrollBy({ left: -360, behavior: "smooth" }),
+      { signal }
+    );
+    document.getElementById("reviews-next")?.addEventListener(
+      "click",
+      () => reviewsTrack?.scrollBy({ left: 360, behavior: "smooth" }),
+      { signal }
+    );
+
+    return () => controller.abort();
+  }, []);
+
+  return null;
+}

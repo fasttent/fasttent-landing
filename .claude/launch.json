@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "fasttent-dev",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "C:\\Users\\HP Zbook G10\\Documents\\GitHub\\fasttent-landing\\dev.cmd"],
+      "port": 3000
+    }
+  ]
+}
