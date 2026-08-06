@@ -238,7 +238,7 @@ h3 { letter-spacing: var(--heading-tracking); }
 
 .link-arrow {
   display: inline-flex; align-items: center;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em;
   color: var(--signal); text-decoration: none;
   background: transparent; border: 0; cursor: pointer; padding: 0;
