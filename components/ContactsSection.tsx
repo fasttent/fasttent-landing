@@ -88,9 +88,11 @@ export default function ContactsSection() {
             <div>
               <ul className="space-y-2 font-mono-label text-[var(--muted-foreground)]">
                 <li data-direction-card data-trust-item className="trust-item direction-card direction-card-up relative">
-                  <div className="trust-item-trigger inline-flex items-center gap-2 cursor-pointer relative">
-                    <span className="text-signal">✔</span>{" "}
-                    <span className="underline decoration-dotted underline-offset-4">{contactsSection.trustDocsLabel}</span>
+                  <div className="trust-item-trigger flex flex-col cursor-pointer relative">
+                    <span className="inline-flex items-center gap-2">
+                      <span className="text-signal">✔</span>
+                      <span className="underline decoration-dotted underline-offset-4">{contactsSection.trustDocsLabel}</span>
+                    </span>
                     <div className="direction-detail">
                       <div className="direction-detail-inner">
                         <ul className="direction-detail-list direction-detail-list--2col">
