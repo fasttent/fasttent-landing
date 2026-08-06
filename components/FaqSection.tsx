@@ -43,7 +43,7 @@ export default function FaqSection() {
 
   return (
     <section id="faq" className="section-y">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-[0.65fr_1fr_1fr] gap-x-10 gap-y-2">
           <div className="lg:col-span-1">
             <p data-faq-close-all className="font-mono-label uppercase text-signal mb-3 cursor-pointer select-none hover:opacity-70 transition-opacity" title={faqSection.eyebrowTitle}>

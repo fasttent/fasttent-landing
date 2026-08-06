@@ -4,7 +4,7 @@ import { ArrowIcon, LineIcon } from "./icons";
 export default function AboutSection() {
   return (
     <section id="about" className="section-y bg-[var(--muted)] scroll-anchor">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <p className="font-mono-label uppercase text-signal mb-3">{aboutSection.eyebrow}</p>
         <h2 className="reveal text-3xl font-semibold sm:text-4xl lg:text-5xl mb-10">{aboutSection.h2}</h2>
 

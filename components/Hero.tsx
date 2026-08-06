@@ -13,7 +13,7 @@ export default function Hero() {
       <div className="photo-hero-overlay"></div>
 
       <div className="relative z-10 pt-28 sm:pt-32">
-        <div className="max-w-7xl mx-auto px-6 w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-6 flex flex-wrap gap-x-2 gap-y-1">
             {hero.eyebrow.map((word, i) => (
               <span key={word} className="whitespace-nowrap">
@@ -47,7 +47,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mt-10 sm:mt-12">
-        <div className="max-w-7xl mx-auto px-6 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-6">{hero.partnersLabel}</p>
           <ul className="flex flex-wrap items-center gap-x-10 gap-y-6 mb-6">
             {hero.partners.map((p) => (

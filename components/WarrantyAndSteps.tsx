@@ -11,7 +11,7 @@ export default function WarrantyAndSteps() {
       <div className="hero-overlay"></div>
 
       <section className="relative section-y">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="font-mono-label uppercase text-signal mb-3">{warrantySection.eyebrow}</p>
           <div className="grid lg:grid-cols-5 gap-10 lg:gap-14">
             <div className="lg:col-span-2 lg:order-1 flex flex-col h-full">
@@ -45,7 +45,7 @@ export default function WarrantyAndSteps() {
       </section>
 
       <section className="relative section-y">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="font-mono-label uppercase text-signal mb-3">{stepsSection.eyebrow}</p>
           <h2 className="reveal text-3xl font-semibold sm:text-4xl mb-4">{stepsSection.h2}</h2>
           <p className="text-base text-[var(--muted-foreground)] sm:text-lg mb-12 max-w-2xl">{stepsSection.p}</p>

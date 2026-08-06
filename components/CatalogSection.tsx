@@ -8,7 +8,7 @@ function CatalogCardItem({ card }: { card: CatalogCard }) {
   );
 
   return (
-    <div className="reveal card-hover group relative flex flex-col gap-6 bg-[var(--background)] p-8 sm:p-10">
+    <div className="reveal card-hover group relative flex flex-col gap-6 bg-[var(--background)] p-4 sm:p-8 lg:p-10">
       <div className="font-mono-label flex items-center justify-between text-[var(--muted-foreground)]">
         <span>{card.id}</span>
         <span className="text-signal">{card.segment}</span>
@@ -46,7 +46,7 @@ export default function CatalogSection() {
       </div>
       <div className="hero-overlay"></div>
 
-      <div className="max-w-7xl mx-auto px-6 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
         <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-3">{catalogSection.eyebrow}</p>
         <h2 className="reveal text-3xl font-semibold sm:text-4xl lg:text-5xl mb-4">{catalogSection.h2}</h2>
         <p className="max-w-xl text-base text-[var(--muted-foreground)] sm:text-lg mb-14">{catalogSection.p}</p>

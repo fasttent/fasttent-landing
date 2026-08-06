@@ -4,7 +4,7 @@ import { ArrowIcon, ChevronIcon, StarIcon } from "./icons";
 export default function ReviewsSection() {
   return (
     <section className="relative section-y">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-end justify-between mb-12">
           <div>
             <p className="font-mono-label uppercase text-signal mb-3">{reviewsSection.eyebrow}</p>

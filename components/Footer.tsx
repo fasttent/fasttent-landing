@@ -3,7 +3,7 @@ import { footerContent, contactsSection } from "@/content";
 export default function Footer() {
   return (
     <footer className="relative border-t border-hair">
-      <div className="max-w-7xl mx-auto px-6 py-16 relative grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-[12fr_8fr_8fr_8fr] md:gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 relative grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-[12fr_8fr_8fr_8fr] md:gap-12">
         <div className="order-1">
           <div className="mb-5">
             <img loading="lazy" src="/assets/logo.svg" alt={footerContent.logoAlt} className="h-20 w-auto object-contain" />
@@ -78,7 +78,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-hair relative">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between gap-3 font-mono-label text-[var(--muted-foreground)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row justify-between gap-3 font-mono-label text-[var(--muted-foreground)]">
           <span>
             {footerContent.copyrightLine1}
             <br className="md:hidden" /> {footerContent.copyrightLine2}

@@ -4,7 +4,7 @@ import { ArrowIcon, PhoneIcon, HamburgerIcon } from "./icons";
 export default function Header() {
   return (
     <header id="site-header" className="fixed top-0 left-0 right-0 z-50 border-b">
-      <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
         <a href="#" data-scroll-top className="flex items-center gap-3 shrink-0" aria-label="На початок сторінки">
           <img loading="lazy" src="/assets/icon-only.svg" alt="" className="h-8 w-auto object-contain" />
           <img loading="lazy" src="/assets/wordmark-only.svg" alt="Fast Tent" className="h-8 w-auto object-contain" />

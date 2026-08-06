@@ -9,7 +9,7 @@ export default function HomeSection() {
         <img loading="lazy" src={`/assets/${homeSection.bgImg}`} alt="" />
       </div>
       <div className="hero-overlay"></div>
-      <div className="max-w-7xl mx-auto px-6 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
         <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-3">{homeSection.eyebrow}</p>
         <h2 className="reveal text-3xl font-semibold sm:text-4xl lg:text-5xl max-w-2xl">{homeSection.h2}</h2>
         <p className="mt-4 max-w-xl text-base text-[var(--muted-foreground)] sm:text-lg">{homeSection.p}</p>

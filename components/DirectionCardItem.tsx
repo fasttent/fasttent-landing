@@ -5,7 +5,7 @@ export default function DirectionCardItem({ card }: { card: DirectionCard }) {
   return (
     <div
       data-direction-card
-      className={`reveal card-hover direction-card${card.openUp ? " direction-card-up" : ""} relative flex flex-col bg-[var(--background)] p-8`}
+      className={`reveal card-hover direction-card${card.openUp ? " direction-card-up" : ""} relative flex flex-col bg-[var(--background)] p-5 sm:p-8`}
     >
       <div className="flex items-center gap-4">
         <DirectionIcon name={card.icon} />

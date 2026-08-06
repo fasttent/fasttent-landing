@@ -4,7 +4,7 @@ import { StarIcon, LineIcon } from "./icons";
 export default function Stats() {
   return (
       <section className="relative py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-wrap items-baseline justify-between gap-2 mb-10">
             <p className="font-mono-label uppercase text-signal">{stats.eyebrow}</p>
             <p className="font-mono-label uppercase text-[var(--muted-foreground)]">{stats.sublabel}</p>
