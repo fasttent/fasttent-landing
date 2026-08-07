@@ -52,7 +52,7 @@ export default function Hero() {
           <ul className="flex flex-wrap items-center gap-x-10 gap-y-6 mb-6">
             {hero.partners.map((p) => (
               <li key={p.name} className="flex items-center">
-                <a href={p.href} target="_blank" rel="noopener noreferrer" className="block opacity-70 hover:opacity-100 transition-opacity">
+                <a href={p.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] opacity-70 hover:opacity-100 transition-opacity">
                   <img loading="lazy" src={`/assets/${p.img}`} alt={p.name} width={p.w} height={p.h} className={`${p.width} h-auto${p.mono ? " logo-mono" : ""}`} />
                 </a>
               </li>

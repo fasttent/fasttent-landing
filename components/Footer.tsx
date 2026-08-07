@@ -1,5 +1,9 @@
 import { footerContent, contactsSection } from "@/content";
 
+// Прозорий розширювач тап-зони до ≥44×44px (padding без фону/рамки — візуально непомітний)
+const contactLinkClass =
+  "inline-flex items-center min-h-[44px] min-w-[44px] hover:text-[var(--foreground)] transition-colors";
+
 export default function Footer() {
   return (
     <footer className="relative border-t border-hair">
@@ -47,28 +51,28 @@ export default function Footer() {
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-4">{footerContent.contactLabel}</p>
           <ul className="space-y-2 text-sm text-[var(--foreground)]/80">
             <li>
-              <a href={contactsSection.phoneHref} className="hover:text-[var(--foreground)] transition-colors">
+              <a href={contactsSection.phoneHref} className={contactLinkClass}>
                 {contactsSection.phoneDisplay}
               </a>
             </li>
             <li>
-              <a href="viber://chat?number=%2B380668589390" className="hover:text-[var(--foreground)] transition-colors">
+              <a href="viber://chat?number=%2B380668589390" className={contactLinkClass}>
                 Viber
               </a>
             </li>
             <li>
-              <a href="https://t.me/Fast_Tent" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--foreground)] transition-colors">
+              <a href="https://t.me/Fast_Tent" target="_blank" rel="noopener noreferrer" className={contactLinkClass}>
                 Telegram
               </a>
             </li>
             <li>
-              <a href={`mailto:${contactsSection.email}`} className="hover:text-[var(--foreground)] transition-colors">
+              <a href={`mailto:${contactsSection.email}`} className={contactLinkClass}>
                 {contactsSection.email}
               </a>
             </li>
             {contactsSection.socials.map((s) => (
               <li key={s.label}>
-                <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--foreground)] transition-colors">
+                <a href={s.href} target="_blank" rel="noopener noreferrer" className={contactLinkClass}>
                   {s.label}
                 </a>
               </li>
