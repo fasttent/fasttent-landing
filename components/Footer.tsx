@@ -62,7 +62,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="https://t.me/Fast_Tent" target="_blank" rel="noopener noreferrer" className={contactLinkClass}>
+              <a href="https://t.me/Fast_Tent" className={contactLinkClass}>
                 Telegram
               </a>
             </li>

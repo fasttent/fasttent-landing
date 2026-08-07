@@ -63,7 +63,7 @@ export const header = {
 export const mobileMenu = {
   buttons: [
     { label: "Viber", href: "viber://chat?number=%2B380668589390", external: false },
-    { label: "Telegram", href: "https://t.me/Fast_Tent", external: true },
+    { label: "Telegram", href: "https://t.me/Fast_Tent", external: false },
     { label: "Instagram", href: "https://www.instagram.com/fast.tent.boryspil", external: true },
   ],
 };
@@ -727,7 +727,7 @@ export const contactsSection = {
   address: "Бориспіль, вул. Чумацька, 12",
   buttons: [
     { label: "Viber", href: "viber://chat?number=%2B380668589390", external: false },
-    { label: "Telegram", href: "https://t.me/Fast_Tent", external: true },
+    { label: "Telegram", href: "https://t.me/Fast_Tent", external: false },
     { label: "Маршрут", href: "https://maps.app.goo.gl/tbS3CZRiXbU8ADx3A?g_st=ic", external: true },
   ],
   socials: [
