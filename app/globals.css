@@ -257,6 +257,13 @@ h3 { letter-spacing: var(--heading-tracking); }
 .accent-top { border-top: 1px solid var(--signal); }
 
 /* ── Міжнародний інпут телефону (react-international-phone), у стилі форми ── */
+/* Прапори flag-icons мають формат 4:3 — задаємо коробку 24×18, щоб не спотворювались.
+   Змінні читаються і в інпуті, і у випадному списку (він рендериться в <body>). */
+:root {
+  --react-international-phone-flag-width: 24px;
+  --react-international-phone-flag-height: 18px;
+}
+.react-international-phone-flag-emoji { object-fit: cover; border-radius: 2px; }
 .cf-phone-field {
   --react-international-phone-height: 40px;
   --react-international-phone-background-color: transparent;
@@ -275,12 +282,14 @@ h3 { letter-spacing: var(--heading-tracking); }
   --react-international-phone-selected-dropdown-item-dial-code-color: var(--muted-foreground);
   --react-international-phone-dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
-.cf-phone-field .react-international-phone-input-container { width: 100%; display: flex; }
+.cf-phone-field .react-international-phone-input-container { width: 100%; display: flex; align-items: stretch; }
+/* Селектор країни розтягуємо на всю висоту рядка й центруємо прапор+стрілку по вертикалі */
+.cf-phone-field .react-international-phone-country-selector { display: flex; align-items: center; }
 .cf-phone-field .react-international-phone-country-selector-button {
   border: 0;
   border-bottom: 1px solid var(--border);
   border-radius: 0;
-  height: auto;
+  height: 100%;
   padding: 0 8px 0 0;
   background: transparent;
 }
@@ -302,6 +311,18 @@ h3 { letter-spacing: var(--heading-tracking); }
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   z-index: 40;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+.react-international-phone-country-selector-dropdown::-webkit-scrollbar { width: 8px; }
+.react-international-phone-country-selector-dropdown::-webkit-scrollbar-track { background: transparent; }
+.react-international-phone-country-selector-dropdown::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  border: 2px solid var(--dropdown-bg);
+}
+.react-international-phone-country-selector-dropdown::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .faq-question { display: flex; align-items: center; min-height: 56px; }

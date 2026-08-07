@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { PhoneInput, type PhoneInputRefType } from "react-international-phone";
-import type { CountryIso2 } from "react-international-phone";
+import { PhoneInput, type PhoneInputRefType, defaultCountries, parseCountry } from "react-international-phone";
+import type { CountryIso2, CustomFlagImage } from "react-international-phone";
 import "react-international-phone/style.css";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { formContent } from "@/content";
@@ -12,6 +12,15 @@ type FieldErrors = { name?: string; phone?: string; email?: string; message?: st
 type Status = "idle" | "sending" | "error";
 
 const inputBase = "w-full bg-transparent border-b py-2 focus:outline-none transition-colors";
+
+// Прапори self-host з /public/assets/flags (без сторонніх CDN-запитів).
+const localFlags: CustomFlagImage[] = defaultCountries.map((c) => {
+  const { iso2 } = parseCountry(c);
+  return { iso2, src: `/assets/flags/${iso2}.svg` };
+});
+
+// Email: медіум-валідація, лише латиниця (кирилиця = друк не тією розкладкою → помилка).
+const EMAIL_RE = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -53,7 +62,7 @@ export default function ContactForm() {
 
     if (!String(fd.get("message") || "").trim()) e.message = formContent.errorRequired;
     const email = String(fd.get("email") || "").trim();
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = formContent.errorEmail;
+    if (email && !EMAIL_RE.test(email)) e.email = formContent.errorEmail;
     return e;
   }
 
@@ -136,6 +145,7 @@ export default function ContactForm() {
         </label>
         <PhoneInput
           ref={phoneRef}
+          flags={localFlags}
           defaultCountry={formContent.defaultCountry as CountryIso2}
           value={phone}
           onChange={(value, meta) => {
