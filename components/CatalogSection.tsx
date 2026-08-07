@@ -19,7 +19,7 @@ function CatalogCardItem({ card }: { card: CatalogCard }) {
         data-lightbox-photos={photosPayload}
         data-lightbox-alt={card.title}
       >
-        <img loading="lazy" src={`/assets/${card.photos[0].src}`} alt={card.coverAlt} className="w-full h-full object-cover" />
+        <img loading="lazy" src={`/assets/${card.photos[0].src}`} alt={card.coverAlt} width={800} height={600} className="w-full h-full object-cover" />
         <div className="absolute top-3 right-3 h-9 w-9 rounded-full bg-[var(--background)]/70 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
           <ZoomIcon />
         </div>

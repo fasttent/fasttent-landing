@@ -7,7 +7,7 @@ export default function Hero() {
       <div className="photo-hero-bg">
         <picture>
           <source media="(max-width: 767px)" srcSet="/assets/hero-mobile-candidate-3.webp" />
-          <img src="/assets/truck-hero.webp" alt={hero.imgAlt} fetchPriority="high" />
+          <img src="/assets/truck-hero.webp" alt={hero.imgAlt} width={1920} height={1280} fetchPriority="high" />
         </picture>
       </div>
       <div className="photo-hero-overlay"></div>
@@ -23,7 +23,7 @@ export default function Hero() {
             ))}
           </p>
 
-          <h1 className="reveal in text-4xl font-semibold sm:text-5xl lg:text-[56px] lg:leading-[1.05] max-w-3xl">
+          <h1 className="text-4xl font-semibold sm:text-5xl lg:text-[56px] lg:leading-[1.05] max-w-3xl">
             {hero.h1}
           </h1>
 
@@ -53,7 +53,7 @@ export default function Hero() {
             {hero.partners.map((p) => (
               <li key={p.name} className="flex items-center">
                 <a href={p.href} target="_blank" rel="noopener noreferrer" className="block opacity-70 hover:opacity-100 transition-opacity">
-                  <img loading="lazy" src={`/assets/${p.img}`} alt={p.name} className={`${p.width} h-auto${p.mono ? " logo-mono" : ""}`} />
+                  <img loading="lazy" src={`/assets/${p.img}`} alt={p.name} width={p.w} height={p.h} className={`${p.width} h-auto${p.mono ? " logo-mono" : ""}`} />
                 </a>
               </li>
             ))}

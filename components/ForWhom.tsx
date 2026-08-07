@@ -17,6 +17,8 @@ export default function ForWhom() {
                 loading="lazy"
                 src={`/assets/${tile.img}`}
                 alt={tile.imgAlt}
+                width={tile.w}
+                height={tile.h}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 tile-overlay"></div>

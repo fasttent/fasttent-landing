@@ -6,8 +6,8 @@ export default function MobileMenu() {
     <div id="mobile-menu" className="fixed inset-0 z-[60] hidden flex-col bg-[var(--background)]">
       <div className="flex items-center justify-between px-6 h-14 border-b border-hair shrink-0">
         <div className="flex items-center gap-3">
-          <img loading="lazy" src="/assets/icon-only.svg" alt="" className="h-8 w-auto object-contain" />
-          <img loading="lazy" src="/assets/wordmark-only.svg" alt="Fast Tent" className="h-8 w-auto object-contain" />
+          <img loading="lazy" src="/assets/icon-only.svg" alt="" width={443} height={308} className="h-8 w-auto object-contain" />
+          <img loading="lazy" src="/assets/wordmark-only.svg" alt="Fast Tent" width={558} height={234} className="h-8 w-auto object-contain" />
         </div>
         <button id="mobile-menu-close" className="flex items-center justify-center h-9 w-9 border border-hair rounded-full hover:border-signal transition-colors" aria-label={header.mobileMenuCloseLabel}>
           <CloseIcon />

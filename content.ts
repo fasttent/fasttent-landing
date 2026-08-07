@@ -77,13 +77,13 @@ export const hero = {
   imgAlt: "Вантажівка з ПВХ-тентом Fast Tent",
   partnersLabel: "Наші партнери",
   partners: [
-    { name: "Artmash", href: "https://artmash.ua/", img: "partner-artmash.webp", width: "w-16", mono: true },
-    { name: "Tertex", href: "https://tertex.in.ua/en", img: "partner-tertex.webp", width: "w-16", mono: true },
-    { name: "Polymer Consulting", href: "https://polymerconsulting.com.ua/ua/golovna", img: "partner-polymer.webp", width: "w-16", mono: true },
-    { name: "Mehler Heytex", href: "https://www.mehlerheytex.com/", img: "partner-mehler.svg", width: "w-16", mono: true },
-    { name: "Bozamet", href: "https://www.bozamet.pl/", img: "partner-bozamet.svg", width: "w-16", mono: false },
-    { name: "Achilles", href: "https://www.achilles.jp/english/", img: "partner-achilles.svg", width: "w-24", mono: true },
-    { name: "Prostir", href: "https://prostirco.com.ua/ua/", img: "partner-prostir.webp", width: "w-16", mono: true },
+    { name: "Artmash", href: "https://artmash.ua/", img: "partner-artmash.webp", width: "w-16", mono: true, w: 147, h: 142 },
+    { name: "Tertex", href: "https://tertex.in.ua/en", img: "partner-tertex.webp", width: "w-16", mono: true, w: 300, h: 100 },
+    { name: "Polymer Consulting", href: "https://polymerconsulting.com.ua/ua/golovna", img: "partner-polymer.webp", width: "w-16", mono: true, w: 784, h: 209 },
+    { name: "Mehler Heytex", href: "https://www.mehlerheytex.com/", img: "partner-mehler.svg", width: "w-16", mono: true, w: 169, h: 44 },
+    { name: "Bozamet", href: "https://www.bozamet.pl/", img: "partner-bozamet.svg", width: "w-16", mono: false, w: 192, h: 70 },
+    { name: "Achilles", href: "https://www.achilles.jp/english/", img: "partner-achilles.svg", width: "w-24", mono: true, w: 402, h: 37 },
+    { name: "Prostir", href: "https://prostirco.com.ua/ua/", img: "partner-prostir.webp", width: "w-16", mono: true, w: 163, h: 78 },
   ],
   trustSignals: [
     { icon: "factory", label: "Власний цех" },
@@ -103,6 +103,8 @@ export const forWhom = {
       imgAlt: "Рішення для бізнесу",
       title: "Для бізнесу",
       description: "Транспорт, склади, HoReCa та індивідуальні промислові рішення.",
+      w: 1024,
+      h: 1024,
     },
     {
       href: "#home-segment",
@@ -110,6 +112,8 @@ export const forWhom = {
       imgAlt: "Рішення для дому",
       title: "Для дому та відпочинку",
       description: "Альтанки, тераси, навіси та штори з ПВХ для приватних клієнтів.",
+      w: 1789,
+      h: 1144,
     },
   ],
   goLabel: "Перейти",
@@ -756,8 +760,11 @@ export const formContent = {
   privacyNotePrefix: "Надсилаючи заявку, ви погоджуєтесь з",
   privacyNoteLink: "Політикою конфіденційності",
   statusSending: "Надсилаємо...",
+  successTitle: "Заявку надіслано",
   statusSuccess: "Дякуємо! Ми зв'яжемося з вами найближчим часом.",
   statusError: "Помилка надсилання. Спробуйте ще раз або зателефонуйте нам.",
+  errorRequired: "Заповніть це поле",
+  errorEmail: "Введіть коректний email",
 };
 
 export const footerContent = {
