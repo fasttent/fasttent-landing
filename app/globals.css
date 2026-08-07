@@ -270,7 +270,7 @@ h3 { letter-spacing: var(--heading-tracking); }
   --react-international-phone-text-color: var(--foreground);
   --react-international-phone-border-color: var(--border);
   --react-international-phone-border-radius: 0;
-  --react-international-phone-font-size: 16px;
+  --react-international-phone-font-size: 14px;
   --react-international-phone-country-selector-background-color: transparent;
   --react-international-phone-country-selector-background-color-hover: rgba(255, 255, 255, 0.05);
   --react-international-phone-country-selector-arrow-color: var(--muted-foreground);
@@ -282,30 +282,30 @@ h3 { letter-spacing: var(--heading-tracking); }
   --react-international-phone-selected-dropdown-item-dial-code-color: var(--muted-foreground);
   --react-international-phone-dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
-.cf-phone-field .react-international-phone-input-container { width: 100%; display: flex; align-items: stretch; }
+/* `cf-phone-field` бібліотека вішає на сам .react-international-phone-input-container —
+   тож єдину нижню лінію рядка ставимо саме на нього (без окремих ліній під кнопкою/інпутом). */
+.cf-phone-field { border-bottom: 1px solid var(--border); }
+.cf-phone-field:focus-within { border-bottom-color: var(--signal); }
+.cf-phone-field--invalid { border-bottom-color: var(--signal); }
 /* Селектор країни розтягуємо на всю висоту рядка й центруємо прапор+стрілку по вертикалі */
 .cf-phone-field .react-international-phone-country-selector { display: flex; align-items: center; }
 .cf-phone-field .react-international-phone-country-selector-button {
   border: 0;
-  border-bottom: 1px solid var(--border);
   border-radius: 0;
   height: 100%;
   padding: 0 8px 0 0;
   background: transparent;
 }
-.cf-phone-field .react-international-phone-input {
+/* Підвищена специфічність (3 класи), щоб перебити внутрішнє border:1px бібліотеки */
+.cf-phone-field.react-international-phone-input-container .react-international-phone-input {
   flex: 1;
   border: 0;
-  border-bottom: 1px solid var(--border);
   border-radius: 0;
   background: transparent;
   color: var(--foreground);
   padding: 8px 0;
   font-family: var(--font-sans);
 }
-.cf-phone-field .react-international-phone-input:focus { border-bottom-color: var(--signal); }
-.cf-phone-field--invalid .react-international-phone-input,
-.cf-phone-field--invalid .react-international-phone-country-selector-button { border-bottom-color: var(--signal); }
 .react-international-phone-country-selector-dropdown {
   background: var(--dropdown-bg);
   border: 1px solid var(--border);
