@@ -260,8 +260,8 @@ h3 { letter-spacing: var(--heading-tracking); }
 /* Прапори flag-icons мають формат 4:3 — задаємо коробку 24×18, щоб не спотворювались.
    Змінні читаються і в інпуті, і у випадному списку (він рендериться в <body>). */
 :root {
-  --react-international-phone-flag-width: 24px;
-  --react-international-phone-flag-height: 18px;
+  --react-international-phone-flag-width: 20px;
+  --react-international-phone-flag-height: 15px;
 }
 .react-international-phone-flag-emoji { object-fit: cover; border-radius: 2px; }
 .cf-phone-field {
@@ -291,7 +291,7 @@ h3 { letter-spacing: var(--heading-tracking); }
 .cf-phone-field .react-international-phone-country-selector { display: flex; align-items: center; }
 .cf-phone-field .react-international-phone-country-selector-button {
   border: 0;
-  border-radius: 0;
+  border-radius: var(--radius-card); /* заокруглення підсвітки ховера, 2px */
   height: 100%;
   padding: 0 8px 0 0;
   background: transparent;
