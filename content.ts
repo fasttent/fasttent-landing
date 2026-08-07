@@ -764,7 +764,9 @@ export const formContent = {
   statusSuccess: "Дякуємо! Ми зв'яжемося з вами найближчим часом.",
   statusError: "Помилка надсилання. Спробуйте ще раз або зателефонуйте нам.",
   errorRequired: "Заповніть це поле",
-  errorEmail: "Введіть коректний email",
+  errorEmail: "Перевірте email — здається, є помилка",
+  errorPhone: "Введіть номер повністю: +380 та 9 цифр",
+  phoneDefault: "+380 ",
 };
 
 export const footerContent = {

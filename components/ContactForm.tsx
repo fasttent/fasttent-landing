@@ -13,12 +13,19 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [success, setSuccess] = useState(false);
   const [fileName, setFileName] = useState("");
+  const [phone, setPhone] = useState(formContent.phoneDefault);
   const [errors, setErrors] = useState<FieldErrors>({});
 
   function validate(fd: FormData): FieldErrors {
     const e: FieldErrors = {};
     if (!String(fd.get("name") || "").trim()) e.name = formContent.errorRequired;
-    if (!String(fd.get("phone") || "").trim()) e.phone = formContent.errorRequired;
+
+    // Телефон: код країни підставлений автоматично; перевіряємо середньої суворості —
+    // рівно +380 та 9 цифр (пробіли/дефіси/дужки ігноруються).
+    const phoneDigits = String(fd.get("phone") || "").replace(/\D/g, "");
+    if (phoneDigits.length <= 3) e.phone = formContent.errorRequired;
+    else if (!/^380\d{9}$/.test(phoneDigits)) e.phone = formContent.errorPhone;
+
     if (!String(fd.get("message") || "").trim()) e.message = formContent.errorRequired;
     const email = String(fd.get("email") || "").trim();
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = formContent.errorEmail;
@@ -103,8 +110,19 @@ export default function ContactForm() {
           id="cf-phone"
           name="phone"
           type="tel"
+          inputMode="tel"
+          value={phone}
           aria-invalid={!!errors.phone}
-          onInput={() => clearError("phone")}
+          onChange={(e) => {
+            setPhone(e.currentTarget.value);
+            clearError("phone");
+          }}
+          onFocus={(e) => {
+            if (!e.currentTarget.value) setPhone(formContent.phoneDefault);
+          }}
+          onBlur={(e) => {
+            if (e.currentTarget.value.replace(/\D/g, "") === "380") setPhone("");
+          }}
           className={`${inputBase} ${errors.phone ? "border-[var(--signal)]" : "border-hair focus:border-[var(--signal)]"}`}
         />
         {errors.phone && <p className="font-mono-label text-signal mt-1.5 normal-case">{errors.phone}</p>}
