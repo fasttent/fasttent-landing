@@ -28,7 +28,7 @@ export default function Stats() {
                   0.0
                 </span>{" "}
                 <span className="text-base font-normal text-[var(--muted-foreground)]">
-                  / <span className="js-count" data-count-to="66">0</span> {stats.reviewsValueSuffix}
+                  / <span className="js-count" data-count-to={stats.reviewsCount}>0</span> {stats.reviewsValueSuffix}
                 </span>
               </div>
               <div className="link-arrow">
