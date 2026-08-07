@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const h = headers();
+  const h = await headers(); // Next.js 16: headers() тепер асинхронний
   const country =
     h.get("x-vercel-ip-country") || // Vercel
     h.get("cf-ipcountry") || // Cloudflare (на випадок іншого проксі)

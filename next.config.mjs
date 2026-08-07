@@ -3,6 +3,8 @@ const nextConfig = {
   images: {
     // next/image віддаватиме AVIF/WebP для перекладених зображень
     formats: ["image/avif", "image/webp"],
+    // Next.js 16: default qualities = [75]; додаємо 35 для розмитого фону (quality={35})
+    qualities: [35, 75],
   },
   async headers() {
     return [

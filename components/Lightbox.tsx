@@ -25,7 +25,8 @@ export default function Lightbox() {
       {/* Сцена зображення — flex-1, фото центроване; висота сцени стала (підпис у footer нижче) */}
       <div className="flex-1 min-h-0 flex items-center justify-center w-full px-4 pt-16 pb-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img loading="lazy" id="lightbox-img" src="" alt="" className="max-w-[85vw] max-h-full object-contain radius" />
+        {/* src задається в SiteScripts при відкритті; без src="" — React 19 попереджає про порожній src */}
+        <img loading="lazy" id="lightbox-img" alt="" className="max-w-[85vw] max-h-full object-contain radius" />
       </div>
 
       {/* Підпис + лічильник — footer фіксованої мін-висоти (1–3 рядки не зсувають фото) */}
