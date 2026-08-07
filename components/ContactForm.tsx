@@ -29,8 +29,17 @@ export default function ContactForm() {
   const [phone, setPhone] = useState("");
   const [dialCode, setDialCode] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [formHeight, setFormHeight] = useState<number>();
   const phoneRef = useRef<PhoneInputRefType>(null);
   const phoneTouched = useRef(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Успіх сам зникає через 8с, щоб форма не лишалась прихованою назавжди
+  useEffect(() => {
+    if (!success) return;
+    const t = setTimeout(() => setSuccess(false), 8000);
+    return () => clearTimeout(t);
+  }, [success]);
 
   // Підставляємо код країни за геолокацією відвідувача (Vercel edge-заголовок).
   // Fallback — Україна. Не перезаписуємо, якщо користувач уже почав вводити номер.
@@ -86,6 +95,7 @@ export default function ContactForm() {
     try {
       const res = await fetch("/api/leads", { method: "POST", body: fd });
       if (!res.ok) throw new Error("request failed");
+      setFormHeight(formRef.current?.offsetHeight); // фіксуємо висоту, щоб success не стрибав
       form.reset();
       setFileName("");
       setPhone("");
@@ -106,6 +116,7 @@ export default function ContactForm() {
         id="request-form"
         role="status"
         aria-live="polite"
+        style={formHeight ? { minHeight: formHeight } : undefined}
         className="accent-top border border-hair radius bg-[var(--background)]/95 backdrop-blur-sm p-8 flex flex-col items-center justify-center text-center min-h-[420px] scroll-anchor"
       >
         <div className="flex items-center justify-center h-16 w-16 rounded-full border border-[var(--signal)] text-signal mb-6">
@@ -120,7 +131,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form id="request-form" noValidate onSubmit={handleSubmit} className="accent-top border border-hair radius bg-[var(--background)]/95 backdrop-blur-sm p-8 space-y-5 scroll-anchor">
+    <form id="request-form" ref={formRef} noValidate onSubmit={handleSubmit} className="accent-top border border-hair radius bg-[var(--background)]/95 backdrop-blur-sm p-8 space-y-5 scroll-anchor">
       <div className="flex items-center gap-3 pb-4 border-b border-hair mb-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-signal shrink-0">
           <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
