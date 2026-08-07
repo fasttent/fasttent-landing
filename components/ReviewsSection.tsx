@@ -55,14 +55,16 @@ export default function ReviewsSection() {
         </div>
 
         {/* Крапки-пагінація (мобільний) — центрують натяк на гортання у стилі сайту */}
-        <div id="reviews-dots" className="flex sm:hidden justify-center items-center gap-2.5 mt-6">
+        <div id="reviews-dots" className="flex sm:hidden justify-center items-center gap-0.5 mt-4">
           {Array.from({ length: reviewsSection.items.length + 1 }).map((_, i) => (
             <button
               key={i}
               data-review-dot={i}
               aria-label={`${reviewsSection.dotLabel} ${i + 1}`}
-              className="h-2 w-2 rounded-full bg-[var(--border)] transition-all duration-200"
-            />
+              className="flex items-center justify-center h-11 w-8"
+            >
+              <span data-review-dot-visual className="h-2 w-2 rounded-full bg-[var(--border)] transition-all duration-200" />
+            </button>
           ))}
         </div>
       </div>

@@ -459,10 +459,12 @@ export default function SiteScripts() {
     );
 
     // ── Крапки-пагінація каруселі відгуків (мобільний) ──
-    const reviewDots = Array.from(document.querySelectorAll<HTMLElement>("[data-review-dot]"));
+    // Кнопка = тап-зона 44px (клік), внутрішній span = візуальна крапка (активний стан).
+    const reviewDotBtns = Array.from(document.querySelectorAll<HTMLElement>("[data-review-dot]"));
+    const reviewDotVisuals = Array.from(document.querySelectorAll<HTMLElement>("[data-review-dot-visual]"));
     const reviewCards = reviewsTrack ? (Array.from(reviewsTrack.children) as HTMLElement[]) : [];
     function updateReviewDots() {
-      if (!reviewsTrack || reviewDots.length === 0) return;
+      if (!reviewsTrack || reviewDotVisuals.length === 0) return;
       const center = reviewsTrack.scrollLeft + reviewsTrack.clientWidth / 2;
       let activeIdx = 0;
       let min = Infinity;
@@ -474,17 +476,30 @@ export default function SiteScripts() {
           activeIdx = i;
         }
       });
-      reviewDots.forEach((dot, i) => {
+      reviewDotVisuals.forEach((dot, i) => {
         const on = i === activeIdx;
         dot.style.backgroundColor = on ? "var(--signal)" : "";
         dot.style.width = on ? "20px" : "";
-        if (on) dot.setAttribute("aria-current", "true");
-        else dot.removeAttribute("aria-current");
+      });
+      reviewDotBtns.forEach((btn, i) => {
+        if (i === activeIdx) btn.setAttribute("aria-current", "true");
+        else btn.removeAttribute("aria-current");
       });
     }
-    reviewsTrack?.addEventListener("scroll", updateReviewDots, { passive: true, signal });
-    reviewDots.forEach((dot, i) => {
-      dot.addEventListener(
+    let reviewDotsRaf = 0;
+    reviewsTrack?.addEventListener(
+      "scroll",
+      () => {
+        if (reviewDotsRaf) return;
+        reviewDotsRaf = requestAnimationFrame(() => {
+          reviewDotsRaf = 0;
+          updateReviewDots();
+        });
+      },
+      { passive: true, signal }
+    );
+    reviewDotBtns.forEach((btn, i) => {
+      btn.addEventListener(
         "click",
         () => reviewCards[i]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }),
         { signal }

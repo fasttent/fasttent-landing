@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { hero } from "@/content";
 import { ArrowIcon, LineIcon } from "./icons";
 
@@ -53,7 +54,13 @@ export default function Hero() {
             {hero.partners.map((p) => (
               <li key={p.name} className="flex items-center">
                 <a href={p.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] opacity-70 hover:opacity-100 transition-opacity">
-                  <img loading="lazy" src={`/assets/${p.img}`} alt={p.name} width={p.w} height={p.h} className={`${p.width} h-auto${p.mono ? " logo-mono" : ""}`} />
+                  {p.img.endsWith(".svg") ? (
+                    // SVG — вектор, next/image не потрібен
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img loading="lazy" src={`/assets/${p.img}`} alt={p.name} width={p.w} height={p.h} className={`${p.width} h-auto${p.mono ? " logo-mono" : ""}`} />
+                  ) : (
+                    <Image src={`/assets/${p.img}`} alt={p.name} width={p.w} height={p.h} sizes="96px" className={`${p.width} h-auto${p.mono ? " logo-mono" : ""}`} />
+                  )}
                 </a>
               </li>
             ))}

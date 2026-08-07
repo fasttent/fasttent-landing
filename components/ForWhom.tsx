@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { forWhom } from "@/content";
 import { ArrowIcon } from "./icons";
 
@@ -13,13 +14,12 @@ export default function ForWhom() {
               href={tile.href}
               className="group relative flex flex-col justify-end overflow-hidden radius aspect-[16/10] sm:aspect-[16/9]"
             >
-              <img
-                loading="lazy"
+              <Image
                 src={`/assets/${tile.img}`}
                 alt={tile.imgAlt}
-                width={tile.w}
-                height={tile.h}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
+                sizes="(min-width: 768px) 46vw, 92vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 tile-overlay"></div>
               <div className="relative z-10 p-6 sm:p-10">

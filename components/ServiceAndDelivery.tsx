@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { serviceSection, deliverySection } from "@/content";
 import { LineIcon } from "./icons";
 
@@ -5,7 +6,7 @@ export default function ServiceAndDelivery() {
   return (
     <div className="relative overflow-hidden">
       <div className="hero-bg hero-dim-45">
-        <img loading="lazy" src={`/assets/${serviceSection.bgImg}`} alt="" />
+        <Image src={`/assets/${serviceSection.bgImg}`} alt="" fill sizes="100vw" quality={35} />
       </div>
       <div className="hero-overlay"></div>
 

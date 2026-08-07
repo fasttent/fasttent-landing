@@ -61,7 +61,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="uk" className={`dark ${plexSans.variable} ${plexMono.variable}`}>
       <head>
-        <link rel="preload" as="image" href="/assets/truck-hero.webp" fetchPriority="high" />
+        {/* Preload саме того hero-зображення, що реально показується на кожному брейкпоінті (LCP) */}
+        <link rel="preload" as="image" href="/assets/hero-mobile-candidate-3.webp" media="(max-width: 767px)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/assets/truck-hero.webp" media="(min-width: 768px)" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.localBusiness) }}
