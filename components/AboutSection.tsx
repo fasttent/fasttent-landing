@@ -9,8 +9,8 @@ export default function AboutSection() {
         <h2 className="reveal text-3xl font-semibold sm:text-4xl lg:text-5xl mb-10">{aboutSection.h2}</h2>
 
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-14">
-          <div className="lg:col-span-2">
-            <img loading="lazy" src="/assets/nadiya-founder.webp" alt={aboutSection.founderImgAlt} width={1086} height={1448} className="w-full aspect-[4/5] object-cover object-bottom radius" />
+          <div className="lg:col-span-2 flex flex-col">
+            <img id="founder-photo" loading="lazy" src="/assets/nadiya-founder.webp" alt={aboutSection.founderImgAlt} width={1086} height={1448} className="w-full aspect-[4/5] object-cover object-bottom radius" />
             <p className="uppercase text-[var(--foreground)] mt-4 text-[14px]">{aboutSection.founderName}</p>
             <p className="uppercase text-[var(--muted-foreground)] text-[12px]">{aboutSection.founderRole}</p>
           </div>

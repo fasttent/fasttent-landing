@@ -200,6 +200,40 @@ export default function SiteScripts() {
       el.addEventListener("click", closeAllFaq, { signal });
     });
 
+    // ── About: вирівнювання фото засновниці по низу бейджів (тільки desktop) ──
+    // Рахуємо висоту фото так, щоб низ підпису співпадав з низом сітки бейджів
+    // у ЗГОРНУТОМУ стані. Поки текст розгорнуто — не чіпаємо (фото не має рости,
+    // натомість бейджі зсуваються вниз).
+    function alignFounderPhoto() {
+      const photo = document.getElementById("founder-photo") as HTMLImageElement | null;
+      const about = document.getElementById("about");
+      if (!photo || !about) return;
+      if (!window.matchMedia("(min-width: 1024px)").matches) {
+        photo.style.height = "";
+        return;
+      }
+      const more = document.getElementById("about-more");
+      const expanded = more ? !more.classList.contains("hidden") : false;
+      if (expanded) return; // freeze — фото залишається фіксованим
+      const col = photo.parentElement;
+      const badges = about.querySelector(".card-grid");
+      const caption = col?.querySelector("p:last-child");
+      if (!col || !badges || !caption) return;
+      const imgRect = photo.getBoundingClientRect();
+      const after = caption.getBoundingClientRect().bottom - imgRect.bottom; // gap + підпис
+      const desired = badges.getBoundingClientRect().bottom - imgRect.top - after;
+      if (desired > 0) photo.style.height = `${desired}px`;
+    }
+    const scheduleAlign = () => {
+      alignFounderPhoto(); // одразу (працює навіть коли rAF задроселено у фоні)
+      requestAnimationFrame(alignFounderPhoto); // уточнення після повного layout
+    };
+    scheduleAlign();
+    window.addEventListener("load", scheduleAlign, { signal });
+    window.addEventListener("resize", scheduleAlign, { signal });
+    const founderImg = document.getElementById("founder-photo") as HTMLImageElement | null;
+    if (founderImg && !founderImg.complete) founderImg.addEventListener("load", scheduleAlign, { signal });
+
     // ── About: читати повністю / згорнути ──
     document.getElementById("about-toggle")?.addEventListener(
       "click",
@@ -212,6 +246,7 @@ export default function SiteScripts() {
         const icon = document.getElementById("about-toggle-icon");
         if (label) label.textContent = shown ? "Читати повністю" : "Згорнути";
         icon?.classList.toggle("reversed", !shown);
+        scheduleAlign(); // згорнули → перерахувати; розгорнули → freeze (no-op)
       },
       { signal }
     );

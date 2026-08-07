@@ -256,6 +256,54 @@ h3 { letter-spacing: var(--heading-tracking); }
 
 .accent-top { border-top: 1px solid var(--signal); }
 
+/* ── Міжнародний інпут телефону (react-international-phone), у стилі форми ── */
+.cf-phone-field {
+  --react-international-phone-height: 40px;
+  --react-international-phone-background-color: transparent;
+  --react-international-phone-text-color: var(--foreground);
+  --react-international-phone-border-color: var(--border);
+  --react-international-phone-border-radius: 0;
+  --react-international-phone-font-size: 16px;
+  --react-international-phone-country-selector-background-color: transparent;
+  --react-international-phone-country-selector-background-color-hover: rgba(255, 255, 255, 0.05);
+  --react-international-phone-country-selector-arrow-color: var(--muted-foreground);
+  --react-international-phone-dropdown-item-background-color: var(--dropdown-bg);
+  --react-international-phone-dropdown-item-text-color: var(--foreground);
+  --react-international-phone-dropdown-item-dial-code-color: var(--muted-foreground);
+  --react-international-phone-selected-dropdown-item-background-color: rgba(255, 255, 255, 0.06);
+  --react-international-phone-selected-dropdown-item-text-color: var(--foreground);
+  --react-international-phone-selected-dropdown-item-dial-code-color: var(--muted-foreground);
+  --react-international-phone-dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+.cf-phone-field .react-international-phone-input-container { width: 100%; display: flex; }
+.cf-phone-field .react-international-phone-country-selector-button {
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  height: auto;
+  padding: 0 8px 0 0;
+  background: transparent;
+}
+.cf-phone-field .react-international-phone-input {
+  flex: 1;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--foreground);
+  padding: 8px 0;
+  font-family: var(--font-sans);
+}
+.cf-phone-field .react-international-phone-input:focus { border-bottom-color: var(--signal); }
+.cf-phone-field--invalid .react-international-phone-input,
+.cf-phone-field--invalid .react-international-phone-country-selector-button { border-bottom-color: var(--signal); }
+.react-international-phone-country-selector-dropdown {
+  background: var(--dropdown-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  z-index: 40;
+}
+
 .faq-question { display: flex; align-items: center; min-height: 56px; }
 
 .card-grid { display: grid; gap: 1px; background: var(--border); }

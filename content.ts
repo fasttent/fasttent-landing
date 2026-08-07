@@ -765,8 +765,8 @@ export const formContent = {
   statusError: "Помилка надсилання. Спробуйте ще раз або зателефонуйте нам.",
   errorRequired: "Заповніть це поле",
   errorEmail: "Перевірте email — здається, є помилка",
-  errorPhone: "Введіть номер повністю: +380 та 9 цифр",
-  phoneDefault: "+380 ",
+  errorPhone: "Перевірте номер — здається, він неповний",
+  defaultCountry: "ua",
 };
 
 export const footerContent = {

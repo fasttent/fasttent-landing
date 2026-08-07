@@ -1,6 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { PhoneInput, type PhoneInputRefType } from "react-international-phone";
+import type { CountryIso2 } from "react-international-phone";
+import "react-international-phone/style.css";
+import { isValidPhoneNumber } from "libphonenumber-js";
 import { formContent } from "@/content";
 import { ArrowIcon } from "./icons";
 
@@ -13,18 +17,39 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [success, setSuccess] = useState(false);
   const [fileName, setFileName] = useState("");
-  const [phone, setPhone] = useState(formContent.phoneDefault);
+  const [phone, setPhone] = useState("");
+  const [dialCode, setDialCode] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
+  const phoneRef = useRef<PhoneInputRefType>(null);
+  const phoneTouched = useRef(false);
+
+  // Підставляємо код країни за геолокацією відвідувача (Vercel edge-заголовок).
+  // Fallback — Україна. Не перезаписуємо, якщо користувач уже почав вводити номер.
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/geo")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        const c = data?.country as string | null;
+        if (!cancelled && c && !phoneTouched.current) {
+          phoneRef.current?.setCountry(c as CountryIso2);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   function validate(fd: FormData): FieldErrors {
     const e: FieldErrors = {};
     if (!String(fd.get("name") || "").trim()) e.name = formContent.errorRequired;
 
-    // Телефон: код країни підставлений автоматично; перевіряємо середньої суворості —
-    // рівно +380 та 9 цифр (пробіли/дефіси/дужки ігноруються).
-    const phoneDigits = String(fd.get("phone") || "").replace(/\D/g, "");
-    if (phoneDigits.length <= 3) e.phone = formContent.errorRequired;
-    else if (!/^380\d{9}$/.test(phoneDigits)) e.phone = formContent.errorPhone;
+    // Телефон: код країни обирається селектором; порожнім вважаємо лише сам код.
+    // Валідність номера перевіряємо за правилами конкретної країни (libphonenumber).
+    const phoneDigits = phone.replace(/\D/g, "");
+    if (phoneDigits.length <= dialCode.length) e.phone = formContent.errorRequired;
+    else if (!isValidPhoneNumber(phone)) e.phone = formContent.errorPhone;
 
     if (!String(fd.get("message") || "").trim()) e.message = formContent.errorRequired;
     const email = String(fd.get("email") || "").trim();
@@ -36,12 +61,14 @@ export default function ContactForm() {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
+    fd.set("phone", phone); // чистий E.164 замість відформатованого значення інпута
 
     const errs = validate(fd);
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
       const firstKey = (["name", "phone", "email", "message"] as const).find((k) => errs[k]);
-      if (firstKey) form.querySelector<HTMLElement>(`[name="${firstKey}"]`)?.focus();
+      if (firstKey === "phone") phoneRef.current?.focus();
+      else if (firstKey) form.querySelector<HTMLElement>(`[name="${firstKey}"]`)?.focus();
       return;
     }
 
@@ -52,6 +79,7 @@ export default function ContactForm() {
       if (!res.ok) throw new Error("request failed");
       form.reset();
       setFileName("");
+      setPhone("");
       setStatus("idle");
       setSuccess(true);
     } catch {
@@ -106,24 +134,18 @@ export default function ContactForm() {
         <label htmlFor="cf-phone" className="font-mono-label uppercase text-[var(--muted-foreground)] block mb-2">
           {formContent.phoneLabel}
         </label>
-        <input
-          id="cf-phone"
-          name="phone"
-          type="tel"
-          inputMode="tel"
+        <PhoneInput
+          ref={phoneRef}
+          defaultCountry={formContent.defaultCountry as CountryIso2}
           value={phone}
-          aria-invalid={!!errors.phone}
-          onChange={(e) => {
-            setPhone(e.currentTarget.value);
+          onChange={(value, meta) => {
+            phoneTouched.current = true;
+            setPhone(value);
+            setDialCode(meta.country.dialCode);
             clearError("phone");
           }}
-          onFocus={(e) => {
-            if (!e.currentTarget.value) setPhone(formContent.phoneDefault);
-          }}
-          onBlur={(e) => {
-            if (e.currentTarget.value.replace(/\D/g, "") === "380") setPhone("");
-          }}
-          className={`${inputBase} ${errors.phone ? "border-[var(--signal)]" : "border-hair focus:border-[var(--signal)]"}`}
+          inputProps={{ id: "cf-phone", "aria-invalid": !!errors.phone }}
+          className={`cf-phone-field${errors.phone ? " cf-phone-field--invalid" : ""}`}
         />
         {errors.phone && <p className="font-mono-label text-signal mt-1.5 normal-case">{errors.phone}</p>}
       </div>
