@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Політика конфіденційності — Fast Tent",
   description:
     "Політика конфіденційності та використання файлів cookie сайту Fast Tent — обробка персональних даних відповідно до Закону України «Про захист персональних даних».",
+  alternates: { canonical: "/privacy-policy" },
 };
 
 export default function PrivacyPolicyPage() {

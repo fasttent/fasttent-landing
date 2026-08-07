@@ -49,7 +49,7 @@ export default function Header() {
               <ArrowIcon />
             </a>
           </span>
-          <button id="mobile-menu-btn" className="min-[1140px]:hidden flex items-center justify-center h-9 w-9 border border-hair rounded-full hover:border-signal transition-colors" aria-label={header.mobileMenuOpenLabel}>
+          <button id="mobile-menu-btn" className="min-[1140px]:hidden flex items-center justify-center h-9 w-9 border border-hair rounded-full hover:border-signal transition-colors" aria-label={header.mobileMenuOpenLabel} aria-controls="mobile-menu" aria-expanded="false">
             <HamburgerIcon />
           </button>
         </div>

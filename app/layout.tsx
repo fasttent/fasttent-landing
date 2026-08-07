@@ -68,10 +68,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <script
           type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.organization) }}
+        />
+        <script
+          type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       </head>
       <body className="antialiased">
+        <a href="#main-content" className="skip-link">{meta.skipToContent}</a>
         {children}
         <SpeedInsights />
         <Analytics />

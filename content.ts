@@ -38,6 +38,7 @@ export const meta = {
   ogTitle: "Fast Tent — виготовлення ПВХ-виробів на замовлення | Бориспіль",
   ogDescription:
     "Виготовлення ПВХ-виробів на замовлення в Борисполі: м'які вікна, тентові накриття, промислові штори будь-якого індивідуального розміру. Проєкти по Києву та Київській області. Гарантія 24 місяці.",
+  skipToContent: "Перейти до основного вмісту",
 };
 
 export const nav = [
@@ -846,5 +847,23 @@ export const jsonLd = {
       { "@type": "AdministrativeArea", name: "Київська область" },
     ],
     foundingDate: "2024-11",
+    dateModified: "2026-08-07",
+  },
+  organization: {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Fast Tent",
+    legalName: "ФОП Голубєва-Єфанова Надія Олександрівна",
+    url: siteUrl + "/",
+    logo: siteUrl + "/assets/logo.svg",
+    email: "tentsfast@gmail.com",
+    telephone: "+380668589390",
+    foundingDate: "2024-11",
+    sameAs: [
+      "https://instagram.com/fast.tent.boryspil",
+      "https://t.me/Fast_Tent",
+      "https://www.tiktok.com/@fasttent",
+      "https://facebook.com/fast.tent.boryspil/",
+    ],
   },
 };

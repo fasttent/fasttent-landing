@@ -22,6 +22,7 @@ export default function Home() {
     <>
       <Header />
       <MobileMenu />
+      <main id="main-content">
       <Hero />
       <ForWhom />
 
@@ -41,6 +42,7 @@ export default function Home() {
       <AboutSection />
       <WarrantyAndSteps />
       <FaqSection />
+      </main>
 
       {/* Контакти + Футер — спільне розмите фото-тло, як у прототипі */}
       <div className="relative overflow-hidden">

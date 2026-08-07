@@ -1,16 +1,17 @@
 import { faqSection } from "@/content";
 import { DownloadIcon } from "./icons";
 
-function FaqItem({ item, isLast }: { item: (typeof faqSection.items)[number]; isLast: boolean }) {
+function FaqItem({ item, isLast, index }: { item: (typeof faqSection.items)[number]; isLast: boolean; index: number }) {
+  const answerId = `faq-answer-${index}`;
   return (
     <div data-faq className={`faq-item border-hair${isLast ? " lg:border-b-0" : ""}`}>
       <dt>
-        <button data-faq-toggle className="w-full flex items-center justify-between gap-4 py-6 px-5 text-left bg-transparent border-0 cursor-pointer">
+        <button data-faq-toggle aria-expanded="false" aria-controls={answerId} className="w-full flex items-center justify-between gap-4 py-6 px-5 text-left bg-transparent border-0 cursor-pointer">
           <span className="text-lg font-semibold tracking-tight faq-question">{item.question}</span>
-          <span className="faq-icon shrink-0 text-signal text-2xl leading-none transition-transform duration-200">+</span>
+          <span className="faq-icon shrink-0 text-signal text-2xl leading-none transition-transform duration-200" aria-hidden="true">+</span>
         </button>
       </dt>
-      <dd className="pb-6 px-5 text-base leading-relaxed text-[var(--muted-foreground)] hidden">
+      <dd id={answerId} className="pb-6 px-5 text-base leading-relaxed text-[var(--muted-foreground)] hidden">
         {item.answer.split("\n\n").map((para, i, arr) => (
           <span key={i}>
             {para}
@@ -25,7 +26,7 @@ function FaqItem({ item, isLast }: { item: (typeof faqSection.items)[number]; is
         {item.downloads && (
           <div className="flex flex-col gap-3">
             {item.downloads.map((d) => (
-              <a key={d.href} href={d.href} target="_blank" className="link-arrow link-download">
+              <a key={d.href} href={d.href} target="_blank" rel="noopener noreferrer" className="link-arrow link-download">
                 <DownloadIcon />
                 {d.label}
               </a>
@@ -54,13 +55,13 @@ export default function FaqSection() {
 
           <dl className="lg:col-span-1 divide-y divide-hair border-t border-hair lg:border-t-0">
             {left.map((item, i) => (
-              <FaqItem key={item.question} item={item} isLast={i === left.length - 1} />
+              <FaqItem key={item.question} item={item} isLast={i === left.length - 1} index={i} />
             ))}
           </dl>
 
           <dl className="lg:col-span-1 divide-y divide-hair border-t border-hair lg:border-t-0">
             {right.map((item, i) => (
-              <FaqItem key={item.question} item={item} isLast={i === right.length - 1} />
+              <FaqItem key={item.question} item={item} isLast={i === right.length - 1} index={left.length + i} />
             ))}
           </dl>
         </div>

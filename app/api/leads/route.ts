@@ -3,6 +3,37 @@ import { getSupabaseServerClient } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
+// Просте in-memory обмеження частоти запитів (на екземпляр функції).
+// Захищає від бурстового спаму формою; для строгого захисту між усіма
+// інстансами варто винести в Upstash/Redis (див. рекомендацію в аудиті).
+const RATE_WINDOW_MS = 10 * 60 * 1000; // 10 хв
+const RATE_MAX = 5; // не більше 5 заявок з однієї IP за вікно
+const rateHits = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (rateHits.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  recent.push(now);
+  rateHits.set(ip, recent);
+  return recent.length > RATE_MAX;
+}
+
+const MAX_NAME = 100;
+const MAX_MESSAGE = 5000;
+const MAX_EMAIL = 254;
+const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 МБ
+const EMAIL_RE = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+// Серверна валідація — дублює клієнтську, бо API можна викликати напряму, минаючи форму.
+function validateLead(name: string, phone: string, email: string, message: string): string | null {
+  const phoneDigits = phone.replace(/\D/g, "");
+  if (!name || name.length > MAX_NAME) return "Некоректне ім'я";
+  if (phoneDigits.length < 8 || phoneDigits.length > 15) return "Некоректний номер телефону";
+  if (!message || message.length > MAX_MESSAGE) return "Некоректне повідомлення";
+  if (email && (email.length > MAX_EMAIL || !EMAIL_RE.test(email))) return "Некоректний email";
+  return null;
+}
+
 async function forwardToKeepinCrm(payload: {
   name: string;
   phone: string;
@@ -45,6 +76,14 @@ async function forwardToKeepinCrm(payload: {
 }
 
 export async function POST(req: NextRequest) {
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ ok: false, error: "Забагато запитів. Спробуйте пізніше." }, { status: 429 });
+  }
+
   let formData: FormData;
   try {
     formData = await req.formData();
@@ -58,14 +97,15 @@ export async function POST(req: NextRequest) {
   const message = String(formData.get("message") || "").trim();
   const file = formData.get("file");
 
-  if (!name || !phone || !message) {
-    return NextResponse.json({ ok: false, error: "Заповніть обов'язкові поля" }, { status: 400 });
+  const validationError = validateLead(name, phone, email, message);
+  if (validationError) {
+    return NextResponse.json({ ok: false, error: validationError }, { status: 400 });
   }
 
   const supabase = getSupabaseServerClient();
 
   let file_url: string | null = null;
-  if (file instanceof File && file.size > 0) {
+  if (file instanceof File && file.size > 0 && file.size <= MAX_FILE_BYTES) {
     const path = `${Date.now()}-${file.name}`;
     const { error: uploadError } = await supabase.storage
       .from("contact-attachments")

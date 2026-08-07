@@ -205,6 +205,35 @@ h3 { letter-spacing: var(--heading-tracking); }
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity var(--transition-slow), transform var(--transition-slow); }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
+/* Skip-to-content: прихована, поки не отримає фокус з клавіатури */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  z-index: 100;
+  background: var(--signal);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: top var(--transition-fast);
+}
+.skip-link:focus { top: 8px; outline: 2px solid #fff; outline-offset: 2px; }
+
+/* Повага до prefers-reduced-motion: вимикаємо scroll-reveal і зайві анімації */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
 .icon-line { stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
 .btn {

@@ -13,6 +13,7 @@ export default function SiteScripts() {
     // при unmount/remount (важливо в React StrictMode, де ефект монтується двічі).
     const controller = new AbortController();
     const { signal } = controller;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     // ── Reveal-анімація при скролі ──
     const revealEls = document.querySelectorAll<HTMLElement>(".reveal:not(.in)");
@@ -37,6 +38,11 @@ export default function SiteScripts() {
           const el = e.target as HTMLElement;
           const target = parseFloat(el.dataset.countTo || "0");
           const decimals = parseInt(el.dataset.countDecimals || "0", 10);
+          if (prefersReduced) {
+            el.textContent = decimals ? target.toFixed(decimals) : String(Math.round(target));
+            countIo.unobserve(el);
+            return;
+          }
           const duration = 1800;
           const start = performance.now();
           el.style.color = "var(--signal)";
@@ -120,6 +126,8 @@ export default function SiteScripts() {
         (e) => {
           e.preventDefault();
           window.scrollTo({ top: 0, behavior: "smooth" });
+          // Прибираємо застарілий якір (#request-form тощо) з URL при скролі на початок
+          history.replaceState(null, "", location.pathname + location.search);
         },
         { signal }
       );
@@ -135,6 +143,7 @@ export default function SiteScripts() {
       menu.classList.toggle("hidden", isOpen);
       menu.classList.toggle("flex", !isOpen);
       document.body.style.overflow = isOpen ? "" : "hidden";
+      menuBtn?.setAttribute("aria-expanded", String(!isOpen));
     }
     menuBtn?.addEventListener("click", toggleMobileMenu, { signal });
     menuCloseBtn?.addEventListener("click", toggleMobileMenu, { signal });
@@ -180,6 +189,7 @@ export default function SiteScripts() {
     function closeAllFaq() {
       document.querySelectorAll<HTMLElement>("[data-faq] dd").forEach((d) => d.classList.add("hidden"));
       document.querySelectorAll<HTMLElement>("[data-faq] .faq-icon").forEach((i) => (i.style.transform = "rotate(0deg)"));
+      document.querySelectorAll<HTMLElement>("[data-faq-toggle]").forEach((b) => b.setAttribute("aria-expanded", "false"));
     }
     function toggleFaq(btn: HTMLElement) {
       const item = btn.closest<HTMLElement>("[data-faq]");
@@ -189,6 +199,7 @@ export default function SiteScripts() {
       closeAllFaq();
       if (!isOpen) {
         answer.classList.remove("hidden");
+        btn.setAttribute("aria-expanded", "true");
         const icon = item.querySelector<HTMLElement>(".faq-icon");
         if (icon) icon.style.transform = "rotate(45deg)";
       }

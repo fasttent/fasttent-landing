@@ -104,6 +104,8 @@ export default function ContactForm() {
     return (
       <div
         id="request-form"
+        role="status"
+        aria-live="polite"
         className="accent-top border border-hair radius bg-[var(--background)]/95 backdrop-blur-sm p-8 flex flex-col items-center justify-center text-center min-h-[420px] scroll-anchor"
       >
         <div className="flex items-center justify-center h-16 w-16 rounded-full border border-[var(--signal)] text-signal mb-6">
@@ -133,11 +135,14 @@ export default function ContactForm() {
           id="cf-name"
           name="name"
           type="text"
+          required
+          aria-required="true"
           aria-invalid={!!errors.name}
+          aria-describedby={errors.name ? "cf-name-error" : undefined}
           onInput={() => clearError("name")}
           className={`${inputBase} ${errors.name ? "border-[var(--signal)]" : "border-hair focus:border-[var(--signal)]"}`}
         />
-        {errors.name && <p className="font-mono-label text-signal mt-1.5 normal-case">{errors.name}</p>}
+        {errors.name && <p id="cf-name-error" role="alert" className="font-mono-label text-signal mt-1.5 normal-case">{errors.name}</p>}
       </div>
       <div>
         <label htmlFor="cf-phone" className="font-mono-label uppercase text-[var(--muted-foreground)] block mb-2">
@@ -154,10 +159,10 @@ export default function ContactForm() {
             setDialCode(meta.country.dialCode);
             clearError("phone");
           }}
-          inputProps={{ id: "cf-phone", "aria-invalid": !!errors.phone }}
+          inputProps={{ id: "cf-phone", required: true, "aria-required": true, "aria-invalid": !!errors.phone, "aria-describedby": errors.phone ? "cf-phone-error" : undefined }}
           className={`cf-phone-field${errors.phone ? " cf-phone-field--invalid" : ""}`}
         />
-        {errors.phone && <p className="font-mono-label text-signal mt-1.5 normal-case">{errors.phone}</p>}
+        {errors.phone && <p id="cf-phone-error" role="alert" className="font-mono-label text-signal mt-1.5 normal-case">{errors.phone}</p>}
       </div>
       <div>
         <label htmlFor="cf-email" className="font-mono-label uppercase text-[var(--muted-foreground)] block mb-2">
@@ -168,10 +173,11 @@ export default function ContactForm() {
           name="email"
           type="email"
           aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? "cf-email-error" : undefined}
           onInput={() => clearError("email")}
           className={`${inputBase} ${errors.email ? "border-[var(--signal)]" : "border-hair focus:border-[var(--signal)]"}`}
         />
-        {errors.email && <p className="font-mono-label text-signal mt-1.5 normal-case">{errors.email}</p>}
+        {errors.email && <p id="cf-email-error" role="alert" className="font-mono-label text-signal mt-1.5 normal-case">{errors.email}</p>}
       </div>
       <div>
         <label htmlFor="cf-message" className="font-mono-label uppercase text-[var(--muted-foreground)] block mb-2">
@@ -181,11 +187,14 @@ export default function ContactForm() {
           id="cf-message"
           name="message"
           rows={3}
+          required
+          aria-required="true"
           aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? "cf-message-error" : undefined}
           onInput={() => clearError("message")}
           className={`${inputBase} ${errors.message ? "border-[var(--signal)]" : "border-hair focus:border-[var(--signal)]"}`}
         ></textarea>
-        {errors.message && <p className="font-mono-label text-signal mt-1.5 normal-case">{errors.message}</p>}
+        {errors.message && <p id="cf-message-error" role="alert" className="font-mono-label text-signal mt-1.5 normal-case">{errors.message}</p>}
       </div>
       <div>
         <label htmlFor="cf-file" className="font-mono-label uppercase text-[var(--muted-foreground)] block mb-2">
@@ -209,7 +218,7 @@ export default function ContactForm() {
           {formContent.privacyNoteLink}
         </a>
       </p>
-      {status === "error" && <p className="font-mono-label text-signal text-center !mt-2">{formContent.statusError}</p>}
+      {status === "error" && <p role="alert" className="font-mono-label text-signal text-center !mt-2">{formContent.statusError}</p>}
     </form>
   );
 }
