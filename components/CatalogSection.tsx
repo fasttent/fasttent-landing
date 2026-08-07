@@ -14,10 +14,13 @@ function CatalogCardItem({ card }: { card: CatalogCard }) {
         <span className="text-signal">{card.segment}</span>
       </div>
       <div
-        className="aspect-[4/3] overflow-hidden relative cursor-pointer"
+        className="aspect-[4/3] overflow-hidden relative cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--signal)]"
         data-lightbox-trigger
         data-lightbox-photos={photosPayload}
         data-lightbox-alt={card.title}
+        role="button"
+        tabIndex={0}
+        aria-label={`${catalogSection.zoomLabel}: ${card.title}`}
       >
         <img loading="lazy" src={`/assets/${card.photos[0].src}`} alt={card.coverAlt} width={800} height={600} className="w-full h-full object-cover" />
         <div className="absolute top-3 right-3 h-9 w-9 rounded-full bg-[var(--background)]/70 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">

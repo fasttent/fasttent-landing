@@ -266,6 +266,7 @@ export default function SiteScripts() {
     let lightboxImages: LightboxPhoto[] = [];
     let lightboxIndex = 0;
     let lightboxAltBase = "";
+    let lightboxReturnFocus: HTMLElement | null = null; // куди повернути фокус після закриття
 
     function renderLightbox() {
       const multi = lightboxImages.length > 1;
@@ -303,6 +304,8 @@ export default function SiteScripts() {
       lb?.classList.remove("hidden");
       lb?.classList.add("flex");
       document.body.style.overflow = "hidden";
+      // Переносимо фокус у модалку (кнопка "Закрити" завжди видима)
+      (document.getElementById("lightbox-close") as HTMLElement | null)?.focus();
     }
 
     function closeLightbox() {
@@ -310,6 +313,9 @@ export default function SiteScripts() {
       lb?.classList.add("hidden");
       lb?.classList.remove("flex");
       document.body.style.overflow = "";
+      // Повертаємо фокус на елемент каталогу, з якого відкрили лайтбокс
+      lightboxReturnFocus?.focus();
+      lightboxReturnFocus = null;
     }
 
     function lightboxNav(direction: number) {
@@ -318,17 +324,25 @@ export default function SiteScripts() {
     }
 
     document.querySelectorAll<HTMLElement>("[data-lightbox-trigger]").forEach((trigger) => {
+      const openFromTrigger = () => {
+        const raw = trigger.getAttribute("data-lightbox-photos");
+        const altBase = trigger.getAttribute("data-lightbox-alt") || "";
+        if (!raw) return;
+        try {
+          const photos = JSON.parse(raw) as LightboxPhoto[];
+          lightboxReturnFocus = trigger; // запам'ятовуємо, куди повернути фокус
+          openLightbox(photos, altBase);
+        } catch {
+          /* noop */
+        }
+      };
+      trigger.addEventListener("click", openFromTrigger, { signal });
       trigger.addEventListener(
-        "click",
-        () => {
-          const raw = trigger.getAttribute("data-lightbox-photos");
-          const altBase = trigger.getAttribute("data-lightbox-alt") || "";
-          if (!raw) return;
-          try {
-            const photos = JSON.parse(raw) as LightboxPhoto[];
-            openLightbox(photos, altBase);
-          } catch {
-            /* noop */
+        "keydown",
+        (e: KeyboardEvent) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openFromTrigger();
           }
         },
         { signal }
@@ -405,6 +419,28 @@ export default function SiteScripts() {
         if (e.key === "Escape") closeLightbox();
         if (e.key === "ArrowLeft") lightboxNav(-1);
         if (e.key === "ArrowRight") lightboxNav(1);
+        if (e.key === "Tab") {
+          // Focus-trap: Tab циклічно ходить лише всередині модалки
+          const focusables = Array.from(lb.querySelectorAll<HTMLElement>("button")).filter(
+            (b) => b.offsetParent !== null
+          );
+          if (focusables.length === 0) {
+            e.preventDefault();
+            return;
+          }
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          const active = document.activeElement as HTMLElement | null;
+          if (e.shiftKey) {
+            if (active === first || !active || !lb.contains(active)) {
+              e.preventDefault();
+              last.focus();
+            }
+          } else if (active === last || !active || !lb.contains(active)) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
       },
       { signal }
     );

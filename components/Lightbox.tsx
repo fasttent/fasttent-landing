@@ -3,7 +3,7 @@ import { ChevronIcon, CloseIcon } from "./icons";
 
 export default function Lightbox() {
   return (
-    <div id="lightbox" className="fixed inset-0 z-[100] hidden flex-col items-center justify-center gap-4 lightbox-backdrop">
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label={misc.lightboxDialogLabel} className="fixed inset-0 z-[100] hidden flex-col items-center justify-center gap-4 lightbox-backdrop">
       <button id="lightbox-close" className="absolute top-6 right-6 flex items-center justify-center h-11 w-11 border border-hair rounded-full hover:bg-[var(--card)] hover:border-signal transition-colors" aria-label={misc.lightboxCloseLabel}>
         <CloseIcon />
       </button>
