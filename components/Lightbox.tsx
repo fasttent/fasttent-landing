@@ -15,9 +15,7 @@ export default function Lightbox() {
         <ChevronIcon direction="left" />
       </button>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img loading="lazy" id="lightbox-img" src="" alt="" className="max-w-[85vw] max-h-[75vh] object-contain radius" />
-      <p id="lightbox-caption" className="text-sm text-[var(--muted-foreground)] text-center max-w-[85vw]"></p>
-      <p id="lightbox-counter" className="font-mono-label text-[var(--muted-foreground)]"></p>
+      <img loading="lazy" id="lightbox-img" src="" alt="" className="max-w-[85vw] max-h-[70vh] object-contain radius" />
       <button
         id="lightbox-next"
         className="absolute right-2 sm:right-8 top-1/2 -translate-y-1/2 flex items-center justify-center h-11 w-11 border border-hair rounded-full hover:bg-[var(--card)] hover:border-signal transition-colors before:content-[''] before:absolute before:-inset-4"
@@ -25,6 +23,12 @@ export default function Lightbox() {
       >
         <ChevronIcon direction="right" />
       </button>
+
+      {/* Підпис і лічильник — поза потоком (absolute), тож їхня висота не зсуває фото */}
+      <div className="absolute bottom-8 left-0 right-0 px-6 flex flex-col items-center gap-1 text-center pointer-events-none">
+        <p id="lightbox-caption" className="text-sm text-[var(--muted-foreground)] max-w-[85vw]"></p>
+        <p id="lightbox-counter" className="font-mono-label text-[var(--muted-foreground)]"></p>
+      </div>
     </div>
   );
 }

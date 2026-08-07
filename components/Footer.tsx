@@ -1,8 +1,9 @@
 import { footerContent, contactsSection } from "@/content";
 
-// Прозорий розширювач тап-зони до ≥44×44px (padding без фону/рамки — візуально непомітний)
+// Прозорий розширювач тап-зони до ≥44px без зміни візуального ритму:
+// py-3 збільшує зону кліку, -my-3 компенсує відступ, тож рядки лишаються компактними.
 const contactLinkClass =
-  "inline-flex items-center min-h-[44px] min-w-[44px] hover:text-[var(--foreground)] transition-colors";
+  "inline-flex items-center min-w-[44px] py-3 -my-3 hover:text-[var(--foreground)] transition-colors";
 
 export default function Footer() {
   return (

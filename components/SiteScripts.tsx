@@ -458,6 +458,40 @@ export default function SiteScripts() {
       { signal }
     );
 
+    // ── Крапки-пагінація каруселі відгуків (мобільний) ──
+    const reviewDots = Array.from(document.querySelectorAll<HTMLElement>("[data-review-dot]"));
+    const reviewCards = reviewsTrack ? (Array.from(reviewsTrack.children) as HTMLElement[]) : [];
+    function updateReviewDots() {
+      if (!reviewsTrack || reviewDots.length === 0) return;
+      const center = reviewsTrack.scrollLeft + reviewsTrack.clientWidth / 2;
+      let activeIdx = 0;
+      let min = Infinity;
+      reviewCards.forEach((card, i) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const d = Math.abs(cardCenter - center);
+        if (d < min) {
+          min = d;
+          activeIdx = i;
+        }
+      });
+      reviewDots.forEach((dot, i) => {
+        const on = i === activeIdx;
+        dot.style.backgroundColor = on ? "var(--signal)" : "";
+        dot.style.width = on ? "20px" : "";
+        if (on) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+    }
+    reviewsTrack?.addEventListener("scroll", updateReviewDots, { passive: true, signal });
+    reviewDots.forEach((dot, i) => {
+      dot.addEventListener(
+        "click",
+        () => reviewCards[i]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }),
+        { signal }
+      );
+    });
+    updateReviewDots();
+
     return () => controller.abort();
   }, []);
 

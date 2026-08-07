@@ -20,11 +20,11 @@ export default function ReviewsSection() {
           </div>
         </div>
 
-        <div id="reviews-track" className="carousel-track flex gap-4">
+        <div id="reviews-track" className="carousel-track flex gap-4 -mx-4 px-[10vw] sm:mx-0 sm:px-0">
           {reviewsSection.items.map((review, i) => (
             <div
               key={i}
-              className="reveal shrink-0 w-[88vw] sm:w-[calc((100%-16px)/2)] lg:w-[calc((100%-32px)/3)] border border-hair bg-[var(--card)]/40 backdrop-blur-sm p-6 flex flex-col snap-start"
+              className="reveal shrink-0 w-[80vw] sm:w-[calc((100%-16px)/2)] lg:w-[calc((100%-32px)/3)] border border-hair bg-[var(--card)]/40 backdrop-blur-sm p-6 flex flex-col snap-center sm:snap-start"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-10 w-10 rounded-full flex items-center justify-center font-semibold shrink-0 avatar-initial">{review.initial}</div>
@@ -43,7 +43,7 @@ export default function ReviewsSection() {
             href={reviewsSection.moreCard.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="reveal group shrink-0 w-[88vw] sm:w-[calc((100%-16px)/2)] lg:w-[calc((100%-32px)/3)] border border-hair bg-[var(--card)]/40 backdrop-blur-sm p-6 flex flex-col items-center justify-center text-center hover:bg-[var(--card)]/70 transition-colors snap-end"
+            className="reveal group shrink-0 w-[80vw] sm:w-[calc((100%-16px)/2)] lg:w-[calc((100%-32px)/3)] border border-hair bg-[var(--card)]/40 backdrop-blur-sm p-6 flex flex-col items-center justify-center text-center hover:bg-[var(--card)]/70 transition-colors snap-center sm:snap-end"
           >
             <div className="text-4xl font-semibold mb-2">{reviewsSection.moreCard.rating}</div>
             <p className="text-[var(--muted-foreground)] group-hover:text-[var(--foreground)] transition-colors mb-4">{reviewsSection.moreCard.text}</p>
@@ -52,6 +52,18 @@ export default function ReviewsSection() {
               <ArrowIcon />
             </span>
           </a>
+        </div>
+
+        {/* Крапки-пагінація (мобільний) — центрують натяк на гортання у стилі сайту */}
+        <div id="reviews-dots" className="flex sm:hidden justify-center items-center gap-2.5 mt-6">
+          {Array.from({ length: reviewsSection.items.length + 1 }).map((_, i) => (
+            <button
+              key={i}
+              data-review-dot={i}
+              aria-label={`${reviewsSection.dotLabel} ${i + 1}`}
+              className="h-2 w-2 rounded-full bg-[var(--border)] transition-all duration-200"
+            />
+          ))}
         </div>
       </div>
     </section>
