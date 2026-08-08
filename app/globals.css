@@ -290,6 +290,17 @@ h3 { letter-spacing: var(--heading-tracking); }
    Ховаємо лише кнопку-тригер, iframe самої форми callback не чіпаємо. */
 .rngst_phone_button { display: none !important; }
 
+/* Кнопка "Передзвоніть мені": разовий делікатний ping через кілька секунд після
+   завантаження — одна хвиля кільця, далі не повторюється (ненав'язливо). */
+@keyframes callback-ping {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+.callback-ping {
+  opacity: 0;
+  animation: callback-ping 1.4s ease-out 3s 1 forwards;
+}
+
 /* ── Міжнародний інпут телефону (react-international-phone), у стилі форми ── */
 /* Прапори flag-icons мають формат 4:3 — задаємо коробку 24×18, щоб не спотворювались.
    Змінні читаються і в інпуті, і у випадному списку (він рендериться в <body>). */

@@ -39,18 +39,18 @@ export default function CallbackButton() {
     }, 300);
   }
 
-  // Стилі 1:1 з рештою CTA сайту (клас .btn .btn-primary), плюс floating-позиція
+  // Кругла плаваюча кнопка (форма — як "Вгору"), акцентний колір, іконка телефона.
   return (
     <button
       id="callback-floating"
       type="button"
       onClick={handleClick}
       disabled={loading}
-      aria-label={misc.callbackLabel}
-      className="btn btn-primary fixed bottom-6 right-4 sm:right-6 z-40 shadow-lg disabled:opacity-70"
+      aria-label={loading ? misc.callbackLoadingLabel : misc.callbackLabel}
+      className="fixed bottom-6 right-4 sm:right-6 z-40 flex items-center justify-center h-12 w-12 rounded-full bg-[var(--signal)] text-white shadow-lg transition-[bottom,transform] duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 disabled:opacity-70 disabled:animate-pulse"
     >
-      <PhoneIcon />
-      {loading ? misc.callbackLoadingLabel : misc.callbackLabel}
+      <span aria-hidden="true" className="callback-ping absolute inset-0 rounded-full bg-[var(--signal)]" />
+      <PhoneIcon className="relative h-5 w-5" />
     </button>
   );
 }
