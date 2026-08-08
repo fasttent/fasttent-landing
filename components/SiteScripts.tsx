@@ -149,6 +149,19 @@ export default function SiteScripts() {
     menuCloseBtn?.addEventListener("click", toggleMobileMenu, { signal });
     menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", toggleMobileMenu, { signal }));
 
+    // iOS Safari: overflow:hidden на body не блокує тач-скрол фону під меню.
+    // Якщо контент меню вміщається (нема внутрішнього скролу) — глушимо touchmove,
+    // щоб фон не прокручувався. Якщо меню довше за екран — дозволяємо його власний
+    // скрол (overscroll-contain не дає передати прокрутку на сторінку).
+    menu?.addEventListener(
+      "touchmove",
+      (e: TouchEvent) => {
+        const el = e.currentTarget as HTMLElement;
+        if (el.scrollHeight <= el.clientHeight) e.preventDefault();
+      },
+      { signal, passive: false }
+    );
+
     // ── Картки напрямків: hover/tap toggle ──
     function positionTrustDropdown() {
       const card = document.querySelector<HTMLElement>("[data-trust-item]");
