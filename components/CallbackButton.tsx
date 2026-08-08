@@ -47,10 +47,9 @@ export default function CallbackButton() {
       onClick={handleClick}
       disabled={loading}
       aria-label={loading ? misc.callbackLoadingLabel : misc.callbackLabel}
-      className="fixed bottom-6 right-4 sm:right-6 z-40 flex items-center justify-center h-12 w-12 rounded-full bg-[var(--signal)] text-white shadow-lg transition-[bottom,transform] duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 disabled:opacity-70 disabled:animate-pulse"
+      className="callback-breathe fixed bottom-6 right-4 sm:right-6 z-40 flex items-center justify-center h-11 w-11 rounded-full bg-[var(--signal)] text-white shadow-lg hover:shadow-xl transition-[bottom,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 disabled:opacity-70"
     >
-      <span aria-hidden="true" className="callback-ping absolute inset-0 rounded-full bg-[var(--signal)]" />
-      <PhoneIcon className="relative h-5 w-5" />
+      <PhoneIcon className="h-5 w-5" />
     </button>
   );
 }

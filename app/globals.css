@@ -290,15 +290,14 @@ h3 { letter-spacing: var(--heading-tracking); }
    Ховаємо лише кнопку-тригер, iframe самої форми callback не чіпаємо. */
 .rngst_phone_button { display: none !important; }
 
-/* Кнопка "Передзвоніть мені": разовий делікатний ping через кілька секунд після
-   завантаження — одна хвиля кільця, далі не повторюється (ненав'язливо). */
-@keyframes callback-ping {
-  0% { transform: scale(1); opacity: 0.5; }
-  100% { transform: scale(1.9); opacity: 0; }
+/* Кнопка "Передзвоніть мені": повільне ненав'язливе "дихання" (scale 1↔1.06).
+   Вимикається автоматично при prefers-reduced-motion (глобальне правило вище). */
+@keyframes callback-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
 }
-.callback-ping {
-  opacity: 0;
-  animation: callback-ping 1.4s ease-out 3s 1 forwards;
+.callback-breathe {
+  animation: callback-breathe 2.5s ease-in-out infinite;
 }
 
 /* ── Міжнародний інпут телефону (react-international-phone), у стилі форми ── */
