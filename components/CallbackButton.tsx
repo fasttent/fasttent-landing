@@ -39,6 +39,7 @@ export default function CallbackButton() {
     }, 300);
   }
 
+  // Стилі 1:1 з рештою CTA сайту (клас .btn .btn-primary), плюс floating-позиція
   return (
     <button
       id="callback-floating"
@@ -46,10 +47,10 @@ export default function CallbackButton() {
       onClick={handleClick}
       disabled={loading}
       aria-label={misc.callbackLabel}
-      className="fixed bottom-6 right-4 sm:right-6 z-40 inline-flex items-center gap-2 h-12 px-5 rounded-full bg-[var(--signal)] text-white font-mono-label uppercase shadow-lg transition-[bottom,opacity] duration-300 hover:opacity-90 disabled:opacity-70"
+      className="btn btn-primary fixed bottom-6 right-4 sm:right-6 z-40 shadow-lg disabled:opacity-70"
     >
       <PhoneIcon />
-      <span>{loading ? misc.callbackLoadingLabel : misc.callbackLabel}</span>
+      {loading ? misc.callbackLoadingLabel : misc.callbackLabel}
     </button>
   );
 }
