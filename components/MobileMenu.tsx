@@ -3,19 +3,19 @@ import { ArrowIcon, CloseIcon, PhoneIcon } from "./icons";
 
 export default function MobileMenu() {
   return (
-    <div id="mobile-menu" className="fixed inset-0 z-[60] hidden flex-col bg-[var(--background)]">
+    <div id="mobile-menu" className="fixed inset-0 z-[60] hidden flex-col bg-[var(--background)] overflow-y-auto overscroll-contain">
       <div className="flex items-center justify-between px-6 h-14 border-b border-hair shrink-0">
-        <div className="flex items-center gap-3">
+        <a href="#" data-scroll-top aria-label="На початок сторінки" className="flex items-center gap-3">
           <img loading="lazy" src="/assets/icon-only.svg" alt="" width={443} height={308} className="h-8 w-auto object-contain" />
           <img loading="lazy" src="/assets/wordmark-only.svg" alt="Fast Tent" width={558} height={234} className="h-8 w-auto object-contain" />
-        </div>
+        </a>
         <button id="mobile-menu-close" className="flex items-center justify-center h-9 w-9 border border-hair rounded-full hover:border-signal transition-colors" aria-label={header.mobileMenuCloseLabel}>
           <CloseIcon />
         </button>
       </div>
-      <nav className="flex flex-col px-6 py-6 font-mono-label uppercase text-lg text-[var(--muted-foreground)] overflow-y-auto">
+      <nav className="flex flex-col px-6 py-6 font-mono-label uppercase text-lg text-[var(--muted-foreground)]">
         {nav.map((item) => (
-          <a key={item.href} href={item.href} className="py-4 border-b border-hair hover:text-signal transition-colors">
+          <a key={item.href} href={item.href} className="py-3 border-b border-hair hover:text-signal transition-colors">
             {item.label}
           </a>
         ))}
