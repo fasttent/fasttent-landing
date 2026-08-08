@@ -358,7 +358,11 @@ export default function SiteScripts() {
     lightboxBackdrop?.addEventListener(
       "click",
       (e) => {
-        if (e.target === lightboxBackdrop) closeLightbox();
+        // Клік по будь-якій темній зоні (фон, сцена, footer) закриває лайтбокс.
+        // Кнопки мають власні обробники; кліки по фото не доходять сюди (stopPropagation).
+        const target = e.target as HTMLElement;
+        if (target.closest("button") || target === lightboxImg) return;
+        closeLightbox();
       },
       { signal }
     );
