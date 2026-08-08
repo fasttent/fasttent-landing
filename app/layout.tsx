@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { meta, siteUrl, jsonLd, faqSection } from "@/content";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+
+// Google Ads (gtag.js) — тег відстеження конверсій клієнта
+const GTAG_ID = "AW-16805820064";
 
 const plexSans = IBM_Plex_Sans({
   subsets: ["latin", "cyrillic"],
@@ -82,6 +86,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <SpeedInsights />
         <Analytics />
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`} strategy="afterInteractive" />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GTAG_ID}');`}
+        </Script>
       </body>
     </html>
   );
