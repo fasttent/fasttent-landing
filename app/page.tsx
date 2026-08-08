@@ -13,6 +13,7 @@ import FaqSection from "@/components/FaqSection";
 import ContactsSection from "@/components/ContactsSection";
 import Footer from "@/components/Footer";
 import { BackToTop, ViberFloating } from "@/components/BackToTop";
+import CallbackButton from "@/components/CallbackButton";
 import Lightbox from "@/components/Lightbox";
 import SiteScripts from "@/components/SiteScripts";
 import { businessSection, contactsSection } from "@/content";
@@ -56,6 +57,7 @@ export default function Home() {
 
       <BackToTop />
       <ViberFloating />
+      <CallbackButton />
       <Lightbox />
       <SiteScripts />
     </>
