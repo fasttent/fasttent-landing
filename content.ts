@@ -849,7 +849,7 @@ export const jsonLd = {
       { "@type": "AdministrativeArea", name: "Київська область" },
     ],
     foundingDate: "2024-11",
-    dateModified: "2026-08-07",
+    dateModified: "2026-08-08",
   },
   organization: {
     "@context": "https://schema.org",

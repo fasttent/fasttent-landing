@@ -36,11 +36,11 @@ export default function PrivacyPolicyPage() {
           </div>
           <div className="flex gap-2">
             <dt>Дата набрання чинності:</dt>
-            <dd className="text-[var(--foreground)]">06.08.2026</dd>
+            <dd className="text-[var(--foreground)]">08.08.2026</dd>
           </div>
           <div className="flex gap-2">
             <dt>Останнє оновлення:</dt>
-            <dd className="text-[var(--foreground)]">06.08.2026</dd>
+            <dd className="text-[var(--foreground)]">08.08.2026</dd>
           </div>
         </dl>
 
