@@ -798,8 +798,6 @@ export const footerContent = {
 export const misc = {
   scrollTopLabel: "Прокрутити вгору",
   viberFloatingLabel: "Написати у Viber",
-  callbackLabel: "Передзвоніть мені",
-  callbackLoadingLabel: "Завантаження...",
   lightboxCloseLabel: "Закрити",
   lightboxPrevLabel: "Попереднє фото",
   lightboxNextLabel: "Наступне фото",

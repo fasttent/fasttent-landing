@@ -99,34 +99,25 @@ export default function SiteScripts() {
     }
 
     // ── Header scrolled + позиції плаваючих кнопок ──
-    // Стек у кутку (знизу вгору): "Вгору" → Viber → "Передзвоніть мені" (найвище).
-    // Viber вторинний і займає нижній динамічний слот; callback завжди над ним.
-    // Коли "Вгору" зʼявляється — весь стек піднімається на слот вище.
+    // Стек у кутку (знизу вгору): "Вгору" → Viber. Коли "Вгору" зʼявляється,
+    // Viber піднімається на слот вище (bottom-6 → bottom-20).
     const header = document.getElementById("site-header");
     const topBtn = document.getElementById("scroll-top-btn");
     const viberBtn = document.getElementById("viber-floating");
-    const callbackBtn = document.getElementById("callback-floating");
-    function positionFloating() {
-      const upVisible = window.scrollY > 200;
-      // Viber (моб., вторинний) — нижній динамічний слот bottom-6 ↔ bottom-20
-      viberBtn?.classList.toggle("bottom-20", upVisible);
-      viberBtn?.classList.toggle("bottom-6", !upVisible);
-      // Callback — вище за Viber (на моб., де Viber є) або вище за "Вгору" (на десктопі)
-      if (callbackBtn) {
-        const viberPresent = window.matchMedia("(max-width: 1139px)").matches;
-        const px = viberPresent ? (upVisible ? 136 : 80) : upVisible ? 80 : 24;
-        callbackBtn.style.bottom = `${px}px`;
-      }
-    }
     function onScroll() {
       if (window.scrollY > 40) header?.classList.add("scrolled");
       else header?.classList.remove("scrolled");
-      if (window.scrollY > 200) topBtn?.classList.remove("opacity-0", "pointer-events-none");
-      else topBtn?.classList.add("opacity-0", "pointer-events-none");
-      positionFloating();
+      if (window.scrollY > 200) {
+        topBtn?.classList.remove("opacity-0", "pointer-events-none");
+        viberBtn?.classList.remove("bottom-6");
+        viberBtn?.classList.add("bottom-20");
+      } else {
+        topBtn?.classList.add("opacity-0", "pointer-events-none");
+        viberBtn?.classList.remove("bottom-20");
+        viberBtn?.classList.add("bottom-6");
+      }
     }
     window.addEventListener("scroll", onScroll, { passive: true, signal });
-    window.addEventListener("resize", positionFloating, { passive: true, signal });
     onScroll();
 
     // ── Скрол угору (лого хедера + кнопка "Вгору") ──
