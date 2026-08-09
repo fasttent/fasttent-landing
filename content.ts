@@ -805,6 +805,16 @@ export const misc = {
   backToTopLogoScrollLabel: "На початок сторінки",
 };
 
+export const cookieConsent = {
+  ariaLabel: "Згода на використання cookies",
+  text: "Використовуємо cookies для аналітики та реклами. Детальніше — ",
+  linkLabel: "Політика конфіденційності",
+  linkHref: "/privacy-policy",
+  acceptLabel: "Прийняти",
+  rejectLabel: "Відхилити",
+  closeLabel: "Закрити",
+};
+
 export const jsonLd = {
   localBusiness: {
     "@context": "https://schema.org",
