@@ -5,7 +5,6 @@ import "./globals.css";
 import { meta, siteUrl, jsonLd, faqSection } from "@/content";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
-import CookieConsent from "@/components/CookieConsent";
 
 // Google Ads (gtag.js) — тег відстеження конверсій клієнта
 const GTAG_ID = "AW-16805820064";
@@ -81,10 +80,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
-        {/* Google Consent Mode v2 — default denied до вибору користувача (ставимо ПЕРЕД GTM) */}
-        <Script id="consent-default" strategy="beforeInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}var __c=null;try{__c=localStorage.getItem('cookie-consent');}catch(e){}var __g=__c==='accepted'?'granted':'denied';gtag('consent','default',{ad_storage:__g,analytics_storage:__g,ad_user_data:__g,ad_personalization:__g,wait_for_update:500});`}
-        </Script>
         {/* Google Tag Manager — контейнер клієнта (містить Ringostat, GA4, Ads-теги) */}
         <Script id="gtm-init" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W8FTJL2L');`}
@@ -102,7 +97,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
         <a href="#main-content" className="skip-link">{meta.skipToContent}</a>
         {children}
-        <CookieConsent />
         <SpeedInsights />
         <Analytics />
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`} strategy="afterInteractive" />
