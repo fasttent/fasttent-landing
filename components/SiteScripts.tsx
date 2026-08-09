@@ -98,14 +98,15 @@ export default function SiteScripts() {
       window.addEventListener("load", () => scrollToSectionTop(location.hash.slice(1)), { signal });
     }
 
-    // ── Header scrolled + back-to-top visibility + Viber button position ──
+    // ── Header scrolled + позиції плаваючих кнопок ──
+    // Стек у кутку (знизу вгору): "Вгору" → Viber. Коли "Вгору" зʼявляється,
+    // Viber піднімається на слот вище (bottom-6 → bottom-20).
     const header = document.getElementById("site-header");
     const topBtn = document.getElementById("scroll-top-btn");
     const viberBtn = document.getElementById("viber-floating");
     function onScroll() {
       if (window.scrollY > 40) header?.classList.add("scrolled");
       else header?.classList.remove("scrolled");
-
       if (window.scrollY > 200) {
         topBtn?.classList.remove("opacity-0", "pointer-events-none");
         viberBtn?.classList.remove("bottom-6");
