@@ -807,7 +807,8 @@ export const misc = {
 
 export const cookieConsent = {
   ariaLabel: "Згода на використання cookies",
-  text: "Використовуємо cookies для аналітики та реклами. Детальніше — ",
+  text: "Використовуємо cookies для аналітики та реклами.",
+  detailsPrefix: "Детальніше — ",
   linkLabel: "Політика конфіденційності",
   linkHref: "/privacy-policy",
   acceptLabel: "Прийняти",

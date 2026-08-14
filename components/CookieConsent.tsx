@@ -50,9 +50,9 @@ export default function CookieConsent() {
     <div
       role="dialog"
       aria-label={cookieConsent.ariaLabel}
-      className="fixed bottom-4 inset-x-4 sm:inset-x-auto sm:left-6 sm:bottom-6 z-[70] sm:max-w-sm"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] w-[calc(100%-2rem)] max-w-3xl"
     >
-      <div className="relative rounded-2xl border border-hair bg-[var(--card)] shadow-2xl px-5 pt-5 pb-4 text-center">
+      <div className="relative flex items-center gap-6 rounded-[var(--radius-card)] border border-hair bg-[var(--card)] shadow-2xl pl-6 pr-12 py-4">
         <button
           type="button"
           onClick={() => choose(false)}
@@ -61,20 +61,23 @@ export default function CookieConsent() {
         >
           <CloseIcon size={16} />
         </button>
-        <p className="text-sm text-[var(--muted-foreground)] px-2">
-          {cookieConsent.text}
-          <a href={cookieConsent.linkHref} className="underline hover:text-[var(--foreground)] transition-colors">
-            {cookieConsent.linkLabel}
-          </a>
-          .
+        <p className="flex-1 text-sm text-[var(--muted-foreground)]">
+          <span className="block">{cookieConsent.text}</span>
+          <span className="block">
+            {cookieConsent.detailsPrefix}
+            <a href={cookieConsent.linkHref} className="underline hover:text-[var(--foreground)] transition-colors">
+              {cookieConsent.linkLabel}
+            </a>
+            .
+          </span>
         </p>
-        <div className="flex gap-3 mt-4">
-          <button type="button" onClick={() => choose(false)} className="btn btn-outline flex-1">
-            {cookieConsent.rejectLabel}
+        <div className="flex flex-col gap-2 shrink-0 w-40">
+          <button type="button" onClick={() => choose(true)} className="btn btn-primary w-full">
+            {cookieConsent.acceptLabel}
             <ArrowIcon />
           </button>
-          <button type="button" onClick={() => choose(true)} className="btn btn-primary flex-1">
-            {cookieConsent.acceptLabel}
+          <button type="button" onClick={() => choose(false)} className="btn btn-outline w-full">
+            {cookieConsent.rejectLabel}
             <ArrowIcon />
           </button>
         </div>
