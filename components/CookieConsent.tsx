@@ -50,7 +50,7 @@ export default function CookieConsent() {
     <div
       role="dialog"
       aria-label={cookieConsent.ariaLabel}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] w-[calc(100%-2rem)] max-w-3xl"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] w-[calc(100%-2rem)] sm:w-2/3"
     >
       <div className="relative flex items-center gap-6 rounded-[var(--radius-card)] border border-hair bg-[var(--card)] shadow-2xl pl-6 pr-12 py-4">
         <button

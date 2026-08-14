@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import Script from "next/script";
+import { headers } from "next/headers";
 import "./globals.css";
 import { meta, siteUrl, jsonLd, faqSection } from "@/content";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import CookieConsent from "@/components/CookieConsent";
+import { isConsentRequiredCountry } from "@/lib/geo";
 
 // Google Ads (gtag.js) — тег відстеження конверсій клієнта
 const GTAG_ID = "AW-16805820064";
@@ -62,7 +64,20 @@ const faqJsonLd = {
   })),
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// Google Consent Mode v2: у EEA/UK/CH default — denied до вибору користувача
+// (чекає на update від банера); поза цим списком (включно з UA) — одразу granted,
+// банер не рендериться, теги вантажаться без затримки.
+function buildConsentDefaultScript(consentRequired: boolean) {
+  if (!consentRequired) {
+    return `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'granted',analytics_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});`;
+  }
+  return `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}var __c=null;try{__c=localStorage.getItem('cookie-consent');}catch(e){}var __g=__c==='accepted'?'granted':'denied';gtag('consent','default',{ad_storage:__g,analytics_storage:__g,ad_user_data:__g,ad_personalization:__g,wait_for_update:500});`;
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const country = (await headers()).get("x-vercel-ip-country");
+  const consentRequired = isConsentRequiredCountry(country);
+
   return (
     <html lang="uk" className={`dark ${plexSans.variable} ${plexMono.variable}`}>
       <head>
@@ -81,9 +96,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
-        {/* Google Consent Mode v2 — default denied до вибору користувача (ставимо ПЕРЕД GTM) */}
+        {/* Google Consent Mode v2 — значення default залежить від країни (ставимо ПЕРЕД GTM) */}
         <Script id="consent-default" strategy="beforeInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}var __c=null;try{__c=localStorage.getItem('cookie-consent');}catch(e){}var __g=__c==='accepted'?'granted':'denied';gtag('consent','default',{ad_storage:__g,analytics_storage:__g,ad_user_data:__g,ad_personalization:__g,wait_for_update:500});`}
+          {buildConsentDefaultScript(consentRequired)}
         </Script>
         {/* Google Tag Manager — контейнер клієнта (містить Ringostat, GA4, Ads-теги) */}
         <Script id="gtm-init" strategy="afterInteractive">
@@ -102,7 +117,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
         <a href="#main-content" className="skip-link">{meta.skipToContent}</a>
         {children}
-        <CookieConsent />
+        {consentRequired && <CookieConsent />}
         <SpeedInsights />
         <Analytics />
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`} strategy="afterInteractive" />
