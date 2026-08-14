@@ -1,6 +1,11 @@
+import dynamic from "next/dynamic";
 import { contactsSection } from "@/content";
 import { ArrowIcon } from "./icons";
-import ContactForm from "./ContactForm";
+
+// react-international-phone + libphonenumber-js ~176 KiB — код-спліт окремим чанком,
+// щоб не вантажити його в критичному шляху initial load (форма нижче за fold, HTML
+// і так SSR-иться повністю: ssr не вимикаємо, тож без JS форма все одно видима).
+const ContactForm = dynamic(() => import("./ContactForm"));
 
 export default function ContactsSection() {
   return (
