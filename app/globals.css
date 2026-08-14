@@ -101,6 +101,13 @@ h3 { letter-spacing: var(--heading-tracking); }
   .photo-hero-bg img { object-position: center top; }
 }
 
+/* Короткий viewport (широкі панелі браузера на ноутбуці тощо) — зменшуємо відступ
+   зверху hero, щоб cookie-банер (fixed знизу) не наліз на CTA-кнопки. На звичайних
+   висотах (700px+) відступ лишається як є, ширину/розмір hero не чіпаємо. */
+@media (max-height: 700px) {
+  .hero-top-pad { padding-top: 5rem !important; }
+}
+
 @media (min-width: 900px) and (max-width: 1139px) and (min-height: 550px) {
   header nav { display: flex !important; }
   header #mobile-menu-btn { display: none !important; }
@@ -284,11 +291,6 @@ h3 { letter-spacing: var(--heading-tracking); }
 .link-download:hover .download-icon { transform: translateY(2px); }
 
 .accent-top { border-top: 1px solid var(--signal); }
-
-/* Ховаємо авто-кнопку віджета Ringostat (тригер вантажиться разом зі скриптом через
-   GTM). Дзвінок ініціюємо власною кнопкою через window.ringostatAPI.openCallbackForm().
-   Ховаємо лише кнопку-тригер, iframe самої форми callback не чіпаємо. */
-.rngst_phone_button { display: none !important; }
 
 /* ── Міжнародний інпут телефону (react-international-phone), у стилі форми ── */
 /* Прапори flag-icons мають формат 4:3 — задаємо коробку 24×18, щоб не спотворювались.

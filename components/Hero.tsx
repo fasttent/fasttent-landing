@@ -13,7 +13,7 @@ export default function Hero() {
       </div>
       <div className="photo-hero-overlay"></div>
 
-      <div className="relative z-10 pt-28 sm:pt-32">
+      <div className="relative z-10 pt-28 sm:pt-32 hero-top-pad">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-6 flex flex-wrap gap-x-2 gap-y-1">
             {hero.eyebrow.map((word, i) => (

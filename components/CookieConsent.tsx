@@ -50,17 +50,9 @@ export default function CookieConsent() {
     <div
       role="dialog"
       aria-label={cookieConsent.ariaLabel}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] w-[calc(100%-2rem)] sm:w-2/3"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] w-[calc(100%-2rem)] sm:w-3/5"
     >
-      <div className="relative flex items-center gap-6 rounded-[var(--radius-card)] border border-hair bg-[var(--card)] shadow-2xl pl-6 pr-12 py-4">
-        <button
-          type="button"
-          onClick={() => choose(false)}
-          aria-label={cookieConsent.closeLabel}
-          className="absolute top-2 right-2 flex items-center justify-center h-8 w-8 rounded-full border border-hair bg-transparent text-[var(--muted-foreground)] hover:border-signal hover:text-[var(--foreground)] transition-colors"
-        >
-          <CloseIcon size={16} />
-        </button>
+      <div className="flex items-center gap-6 rounded-[var(--radius-card)] border border-hair bg-[var(--card)] shadow-2xl pl-6 pr-4 py-4">
         <p className="flex-1 text-sm text-[var(--muted-foreground)]">
           <span className="block">{cookieConsent.text}</span>
           <span className="block">
@@ -71,14 +63,22 @@ export default function CookieConsent() {
             .
           </span>
         </p>
-        <div className="flex flex-col gap-2 shrink-0 w-40">
-          <button type="button" onClick={() => choose(true)} className="btn btn-primary w-full">
+        <div className="flex items-center gap-2 shrink-0">
+          <button type="button" onClick={() => choose(false)} className="btn btn-outline">
+            {cookieConsent.rejectLabel}
+            <ArrowIcon />
+          </button>
+          <button type="button" onClick={() => choose(true)} className="btn btn-primary">
             {cookieConsent.acceptLabel}
             <ArrowIcon />
           </button>
-          <button type="button" onClick={() => choose(false)} className="btn btn-outline w-full">
-            {cookieConsent.rejectLabel}
-            <ArrowIcon />
+          <button
+            type="button"
+            onClick={() => choose(false)}
+            aria-label={cookieConsent.closeLabel}
+            className="flex items-center justify-center h-9 w-9 rounded-full border border-hair bg-transparent text-[var(--muted-foreground)] hover:border-signal hover:text-[var(--foreground)] transition-colors"
+          >
+            <CloseIcon size={16} />
           </button>
         </div>
       </div>
