@@ -15,6 +15,7 @@ import Footer from "@/components/Footer";
 import { BackToTop, ViberFloating } from "@/components/BackToTop";
 import Lightbox from "@/components/Lightbox";
 import SiteScripts from "@/components/SiteScripts";
+import Image from "next/image";
 import { businessSection, contactsSection } from "@/content";
 
 export default function Home() {
@@ -29,7 +30,7 @@ export default function Home() {
       {/* У цифрах + Для бізнесу — спільне розмите фото-тло, як у прототипі */}
       <div className="relative overflow-hidden">
         <div className="hero-bg hero-dim-50">
-          <img loading="lazy" src={`/assets/${businessSection.bgImg}`} alt="" />
+          <Image src={`/assets/${businessSection.bgImg}`} alt="" fill sizes="100vw" quality={35} />
         </div>
         <div className="hero-overlay"></div>
         <Stats />

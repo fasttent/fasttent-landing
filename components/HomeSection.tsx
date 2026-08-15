@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { homeSection } from "@/content";
 import { ArrowIcon } from "./icons";
 import DirectionCardItem from "./DirectionCardItem";
@@ -6,7 +7,7 @@ export default function HomeSection() {
   return (
     <section id="home-segment" className="relative section-y-lg border-t border-hair scroll-anchor">
       <div className="hero-bg hero-dim-50">
-        <img loading="lazy" src={`/assets/${homeSection.bgImg}`} alt="" />
+        <Image src={`/assets/${homeSection.bgImg}`} alt="" fill sizes="100vw" quality={35} />
       </div>
       <div className="hero-overlay"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">

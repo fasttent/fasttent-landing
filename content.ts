@@ -125,7 +125,7 @@ export const stats = {
   sublabel: "Факти, а не обіцянки",
   reviewsHref: "https://www.google.com/maps/search/?api=1&query=Fast+Tent+Бориспіль+вулиця+Чумацька+12",
   reviewsLabel: "Google-відгуки",
-  reviewsCount: "67",
+  reviewsCount: "68",
   reviewsValueSuffix: "відгуків",
   reviewsLinkLabel: "Переглянути",
   geography: { label: "Географія", value: "Вся Україна та ЄС", note: "Крім тимчасово окупованих територій" },
@@ -633,7 +633,7 @@ export const reviewsSection = {
   ],
   moreCard: {
     rating: "5.0",
-    text: "67 відгуків на Google",
+    text: "68 відгуків на Google",
     linkLabel: "Переглянути всі",
     href: "https://www.google.com/maps/search/?api=1&query=Fast+Tent+Бориспіль+вулиця+Чумацька+12",
   },
@@ -805,6 +805,17 @@ export const misc = {
   backToTopLogoScrollLabel: "На початок сторінки",
 };
 
+export const cookieConsent = {
+  ariaLabel: "Згода на використання cookies",
+  text: "Використовуємо cookies для аналітики та реклами.",
+  detailsPrefix: "Детальніше — ",
+  linkLabel: "Політика конфіденційності",
+  linkHref: "/privacy-policy",
+  acceptLabel: "Прийняти",
+  rejectLabel: "Відхилити",
+  closeLabel: "Закрити",
+};
+
 export const jsonLd = {
   localBusiness: {
     "@context": "https://schema.org",
@@ -842,7 +853,7 @@ export const jsonLd = {
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "5.0",
-      reviewCount: "67",
+      reviewCount: "68",
     },
     areaServed: [
       { "@type": "Country", name: "UA" },
