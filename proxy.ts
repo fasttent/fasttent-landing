@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 export function proxy() {
   const response = NextResponse.next();
   response.headers.set("Cache-Control", "private, no-cache, must-revalidate");
+  response.headers.set("x-proxy-hit", "1"); // TEMP-DIAGNOSTIC
   return response;
 }
 
