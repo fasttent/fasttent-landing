@@ -25,7 +25,11 @@
 - Сайт: https://fasttent.com.ua
 
 ## Ключові сторінки
-- Головна: https://fasttent.com.ua/
-- Каталог: https://fasttent.com.ua/#products
-- Контакти та заявка: https://fasttent.com.ua/#contacts
-- Політика конфіденційності: https://fasttent.com.ua/privacy-policy
+- [Головна](https://fasttent.com.ua/): огляд компанії, розвилка "Для бізнесу" / "Для дому"
+- [Для бізнесу](https://fasttent.com.ua/#business): рішення для транспорту, складів, комерційних об'єктів
+- [Для дому](https://fasttent.com.ua/#home-segment): рішення для терас, альтанок, басейнів, навісів
+- [Каталог виробів](https://fasttent.com.ua/#products): фото та опис усіх ПВХ-виробів
+- [Про виробництво](https://fasttent.com.ua/#about): історія компанії, гарантії, етапи роботи
+- [FAQ](https://fasttent.com.ua/#faq): відповіді на 14 поширених питань про ПВХ-вироби
+- [Контакти та заявка](https://fasttent.com.ua/#contacts): адреса, телефон, форма заявки
+- [Політика конфіденційності](https://fasttent.com.ua/privacy-policy): обробка персональних даних

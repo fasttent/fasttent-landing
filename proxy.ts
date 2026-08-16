@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 
 // HTML-документ рендериться динамічно (headers() для гео cookie-банера), тому Next.js
 // сам ставить Cache-Control: no-store, що блокує bfcache. no-store прибираємо, лишаючи
 // приватне без-кешування (жоден спільний/CDN-кеш це не збереже — країна визначається
 // на кожен запит окремо, крос-юзерної підміни контенту тут немає).
-export function middleware() {
+export function proxy() {
   const response = NextResponse.next();
   response.headers.set("Cache-Control", "private, no-cache, must-revalidate");
   return response;
