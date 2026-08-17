@@ -63,7 +63,7 @@ export default function ContactsSection() {
                   </dd>
                 </div>
               </dl>
-              <div className="flex flex-wrap gap-3">
+              <div className="grid grid-cols-[repeat(3,max-content)] justify-items-start gap-x-3 gap-y-4">
                 {contactsSection.buttons.map((btn) => (
                   <a
                     key={btn.label}
@@ -76,10 +76,14 @@ export default function ContactsSection() {
                     <ArrowIcon />
                   </a>
                 ))}
-              </div>
-              <div className="flex gap-4 mt-4 pl-[11px] font-mono-label uppercase text-[var(--muted-foreground)]">
                 {contactsSection.socials.map((s) => (
-                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--signal)] transition-colors">
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pl-[11px] font-mono-label uppercase text-[var(--muted-foreground)] hover:text-[var(--signal)] transition-colors"
+                  >
                     {s.label}
                   </a>
                 ))}
