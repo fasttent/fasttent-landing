@@ -260,18 +260,35 @@ export default function SiteScripts() {
     if (founderImg && !founderImg.complete) founderImg.addEventListener("load", scheduleAlign, { signal });
 
     // ── About: читати повністю / згорнути ──
-    document.getElementById("about-toggle")?.addEventListener(
+    const aboutToggleBtn = document.getElementById("about-toggle");
+    function setAboutExpanded(expanded: boolean) {
+      const m = document.getElementById("about-more");
+      if (!m) return;
+      m.classList.toggle("hidden", !expanded);
+      const label = document.getElementById("about-toggle-label");
+      const icon = document.getElementById("about-toggle-icon");
+      if (label) label.textContent = expanded ? "Згорнути" : "Читати повністю";
+      icon?.classList.toggle("reversed", expanded);
+      scheduleAlign(); // згорнули → перерахувати; розгорнули → freeze (no-op)
+    }
+    aboutToggleBtn?.addEventListener(
       "click",
       () => {
         const m = document.getElementById("about-more");
         if (!m) return;
-        const shown = !m.classList.contains("hidden");
-        m.classList.toggle("hidden", shown);
-        const label = document.getElementById("about-toggle-label");
-        const icon = document.getElementById("about-toggle-icon");
-        if (label) label.textContent = shown ? "Читати повністю" : "Згорнути";
-        icon?.classList.toggle("reversed", !shown);
-        scheduleAlign(); // згорнули → перерахувати; розгорнули → freeze (no-op)
+        setAboutExpanded(m.classList.contains("hidden"));
+      },
+      { signal }
+    );
+    // Клік будь-де поза розгорнутим текстом (і поза самою кнопкою) згортає його назад.
+    document.addEventListener(
+      "click",
+      (e) => {
+        const m = document.getElementById("about-more");
+        if (!m || m.classList.contains("hidden")) return;
+        const target = e.target as HTMLElement;
+        if (m.contains(target) || aboutToggleBtn?.contains(target)) return;
+        setAboutExpanded(false);
       },
       { signal }
     );
