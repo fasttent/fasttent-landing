@@ -96,7 +96,7 @@ export default function Footer() {
               href={footerContent.craftedByHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[var(--foreground)] transition-colors"
+              className="hover:text-signal transition-colors"
             >
               {footerContent.craftedByLabel}
             </a>
