@@ -84,9 +84,22 @@ export default function Footer() {
 
       <div className="border-t border-hair relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row justify-between gap-3 font-mono-label text-[var(--muted-foreground)]">
-          <span>
-            {footerContent.copyrightLine1}
-            <br className="md:hidden" /> {footerContent.copyrightLine2}
+          <span className="flex flex-wrap items-baseline">
+            {footerContent.copyrightParts.map((part, i) => (
+              <span key={part}>
+                {i > 0 && <span className="sep-dot">·</span>}
+                {part}
+              </span>
+            ))}
+            <span className="sep-dot">·</span>
+            <a
+              href={footerContent.craftedByHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--foreground)] transition-colors"
+            >
+              {footerContent.craftedByLabel}
+            </a>
           </span>
           <span className="hidden sm:inline">{footerContent.copyrightAddress}</span>
         </div>

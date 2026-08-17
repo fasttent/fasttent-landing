@@ -15,11 +15,11 @@ export default function Hero() {
 
       <div className="relative z-10 pt-28 sm:pt-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
-          <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-6 flex flex-wrap gap-x-2 gap-y-1">
+          <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-6 flex flex-wrap gap-y-1">
             {hero.eyebrow.map((word, i) => (
               <span key={word} className="whitespace-nowrap">
                 {word}
-                {i < hero.eyebrow.length - 1 ? " ·" : ""}
+                {i < hero.eyebrow.length - 1 && <span className="sep-dot">·</span>}
               </span>
             ))}
           </p>

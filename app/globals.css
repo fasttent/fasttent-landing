@@ -53,6 +53,9 @@ body { font-family: var(--font-sans); background: var(--background); color: var(
 .fmono { font-family: var(--font-mono); }
 .font-mono-label { font-family: var(--font-mono); font-size: var(--label-size); letter-spacing: var(--label-tracking); }
 
+/* Крапка-роздільник між текстовими сегментами в одному рядку (hero eyebrow, футер) */
+.sep-dot { margin: 0 0.5em; }
+
 .text-signal { color: var(--signal); }
 .text-signal-80 { color: var(--signal); opacity: var(--signal-opacity); }
 .border-hair { border-color: var(--border); }

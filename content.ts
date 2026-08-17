@@ -790,8 +790,9 @@ export const footerContent = {
     { label: "Політика конфіденційності", href: "/privacy-policy" },
   ],
   contactLabel: "Зв'язок",
-  copyrightLine1: "© 2026 FAST TENT.",
-  copyrightLine2: "ФОП ГОЛУБЄВА-ЄФАНОВА НАДІЯ ОЛЕКСАНДРІВНА",
+  copyrightParts: ["© 2026 FAST TENT", "ФОП ГОЛУБЄВА-ЄФАНОВА НАДІЯ ОЛЕКСАНДРІВНА"],
+  craftedByLabel: "CRAFTED BY ELENIE",
+  craftedByHref: "https://www.instagram.com/sh.elenie/",
   copyrightAddress: "м. БОРИСПІЛЬ, ВУЛ. ЧУМАЦЬКА, 12",
 };
 
