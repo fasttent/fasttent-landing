@@ -733,9 +733,9 @@ export const contactsSection = {
     { label: "Маршрут", href: "https://maps.app.goo.gl/tbS3CZRiXbU8ADx3A?g_st=ic", external: true },
   ],
   socials: [
-    { label: "Instagram", href: "https://www.instagram.com/fast.tent.boryspil" },
-    { label: "Facebook", href: "https://www.facebook.com/fast.tent.boryspil/" },
     { label: "TikTok", href: "https://www.tiktok.com/@fasttent" },
+    { label: "Facebook", href: "https://www.facebook.com/fast.tent.boryspil/" },
+    { label: "Instagram", href: "https://www.instagram.com/fast.tent.boryspil" },
   ],
   hoursManagers: { title: "Менеджери на зв'язку", value: "Пн–Сб 08:00–21:00, Нд вихідний" },
   hoursProduction: { title: "Виробництво", value: "Пн–Пт 08:00–17:00, Сб за домовленістю" },

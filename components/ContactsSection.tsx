@@ -77,7 +77,7 @@ export default function ContactsSection() {
                   </a>
                 ))}
               </div>
-              <div className="flex gap-4 mt-4 font-mono-label uppercase text-[var(--muted-foreground)]">
+              <div className="flex gap-4 mt-4 pl-[11px] font-mono-label uppercase text-[var(--muted-foreground)]">
                 {contactsSection.socials.map((s) => (
                   <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--signal)] transition-colors">
                     {s.label}
