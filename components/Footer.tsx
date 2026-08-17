@@ -97,7 +97,14 @@ export default function Footer() {
               <span className="group-hover:text-[var(--signal)] transition-colors">{footerContent.craftedByName}</span>
             </a>
           </span>
-          <span className="hidden sm:inline">{footerContent.copyrightAddress}</span>
+          <a
+            href={contactsSection.addressHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline hover:text-[var(--foreground)] transition-colors"
+          >
+            {footerContent.copyrightAddress}
+          </a>
         </div>
       </div>
     </footer>

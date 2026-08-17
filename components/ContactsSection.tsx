@@ -51,7 +51,16 @@ export default function ContactsSection() {
                 </div>
                 <div className="flex gap-3">
                   <dt className="shrink-0">{contactsSection.addressLabel}</dt>
-                  <dd className="text-[var(--foreground)]">{contactsSection.address}</dd>
+                  <dd>
+                    <a
+                      href={contactsSection.addressHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[var(--foreground)] hover:text-[var(--signal)] transition-colors"
+                    >
+                      {contactsSection.address}
+                    </a>
+                  </dd>
                 </div>
               </dl>
               <div className="flex flex-wrap gap-3">

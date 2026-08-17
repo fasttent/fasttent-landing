@@ -726,6 +726,7 @@ export const contactsSection = {
   email: "tentsfast@gmail.com",
   addressLabel: "Адреса",
   address: "м. Бориспіль, вул. Чумацька, 12",
+  addressHref: "https://maps.app.goo.gl/tbS3CZRiXbU8ADx3A?g_st=ic",
   buttons: [
     { label: "Viber", href: "viber://chat?number=%2B380668589390", external: false },
     { label: "Telegram", href: "https://t.me/Fast_Tent", external: false },
