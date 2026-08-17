@@ -792,7 +792,8 @@ export const footerContent = {
   ],
   contactLabel: "Зв'язок",
   copyrightParts: ["© 2026 FAST TENT"],
-  craftedByLabel: "CRAFTED BY ELENIE",
+  craftedByPrefix: "CRAFTED BY",
+  craftedByName: "ELENIE",
   craftedByHref: "https://www.instagram.com/sh.elenie/",
   copyrightAddress: "м. БОРИСПІЛЬ, ВУЛ. ЧУМАЦЬКА, 12",
 };

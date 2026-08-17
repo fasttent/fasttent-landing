@@ -92,13 +92,9 @@ export default function Footer() {
               </span>
             ))}
             <span className="sep-dot">·</span>
-            <a
-              href={footerContent.craftedByHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-signal transition-colors"
-            >
-              {footerContent.craftedByLabel}
+            <a href={footerContent.craftedByHref} target="_blank" rel="noopener noreferrer">
+              <span className="hover:text-[var(--foreground)] transition-colors">{footerContent.craftedByPrefix} </span>
+              <span className="hover:text-[var(--signal)] transition-colors">{footerContent.craftedByName}</span>
             </a>
           </span>
           <span className="hidden sm:inline">{footerContent.copyrightAddress}</span>
