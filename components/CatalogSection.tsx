@@ -28,7 +28,7 @@ function CatalogCardItem({ card }: { card: CatalogCard }) {
         </div>
       </div>
       <p className="font-mono-label text-[var(--muted-foreground)] mt-3">{card.captionLabel}</p>
-      <h3 className="text-3xl font-semibold tracking-tight group-hover:text-signal transition-colors sm:text-4xl">{card.title}</h3>
+      <h3 className="text-3xl font-semibold tracking-tight group-hover:text-[var(--signal)] transition-colors sm:text-4xl">{card.title}</h3>
       <dl className="font-mono-label grid grid-cols-2 gap-x-6 gap-y-3 border-t border-hair pt-6 text-[var(--muted-foreground)]">
         {card.specs.map((spec) => (
           <div key={spec.label} className="contents">

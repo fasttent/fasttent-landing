@@ -28,7 +28,7 @@ export default function ContactsSection() {
                 <div className="flex gap-3">
                   <dt className="shrink-0">{contactsSection.phoneLabel}</dt>
                   <dd>
-                    <a href={contactsSection.phoneHref} className="text-[var(--foreground)] hover:text-signal transition-colors">
+                    <a href={contactsSection.phoneHref} className="text-[var(--foreground)] hover:text-[var(--signal)] transition-colors">
                       {contactsSection.phoneDisplay}
                     </a>
                   </dd>
@@ -36,7 +36,7 @@ export default function ContactsSection() {
                 <div className="flex gap-3">
                   <dt className="shrink-0">{contactsSection.accountingLabel}</dt>
                   <dd>
-                    <a href={contactsSection.accountingHref} className="text-[var(--foreground)] hover:text-signal transition-colors">
+                    <a href={contactsSection.accountingHref} className="text-[var(--foreground)] hover:text-[var(--signal)] transition-colors">
                       {contactsSection.accountingDisplay}
                     </a>
                   </dd>
@@ -44,7 +44,7 @@ export default function ContactsSection() {
                 <div className="flex gap-3">
                   <dt className="shrink-0">{contactsSection.emailLabel}</dt>
                   <dd>
-                    <a href={`mailto:${contactsSection.email}`} className="text-[var(--foreground)] hover:text-signal transition-colors">
+                    <a href={`mailto:${contactsSection.email}`} className="text-[var(--foreground)] hover:text-[var(--signal)] transition-colors">
                       {contactsSection.email}
                     </a>
                   </dd>
@@ -70,7 +70,7 @@ export default function ContactsSection() {
               </div>
               <div className="flex gap-4 mt-4 font-mono-label uppercase text-[var(--muted-foreground)]">
                 {contactsSection.socials.map((s) => (
-                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-signal transition-colors">
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--signal)] transition-colors">
                     {s.label}
                   </a>
                 ))}
@@ -112,7 +112,7 @@ export default function ContactsSection() {
                             {contactsSection.trustDocsFooter.line2prefix}
                             <br />
                             {contactsSection.trustDocsFooter.line2accounting}{" "}
-                            <a href={contactsSection.accountingHref} className="text-[var(--foreground)] hover:text-signal transition-colors">
+                            <a href={contactsSection.accountingHref} className="text-[var(--foreground)] hover:text-[var(--signal)] transition-colors">
                               {contactsSection.accountingDisplay}
                             </a>
                           </p>

@@ -15,11 +15,11 @@ export default function MobileMenu() {
       </div>
       <nav className="flex flex-col px-6 py-6 font-mono-label uppercase text-lg text-[var(--muted-foreground)]">
         {nav.map((item) => (
-          <a key={item.href} href={item.href} className="py-3 border-b border-hair hover:text-signal transition-colors">
+          <a key={item.href} href={item.href} className="py-3 border-b border-hair hover:text-[var(--signal)] transition-colors">
             {item.label}
           </a>
         ))}
-        <a href={header.phoneHref} className="py-4 mt-4 flex items-center gap-2 normal-case text-[var(--foreground)] hover:text-signal transition-colors">
+        <a href={header.phoneHref} className="py-4 mt-4 flex items-center gap-2 normal-case text-[var(--foreground)] hover:text-[var(--signal)] transition-colors">
           <PhoneIcon />
           {header.phoneDisplay}
         </a>

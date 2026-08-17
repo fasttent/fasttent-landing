@@ -27,7 +27,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-4 shrink-0">
-          <a href={header.phoneHref} className="hidden sm:flex items-center gap-2 font-mono-label text-[var(--foreground)] hover:text-signal transition-colors">
+          <a href={header.phoneHref} className="hidden sm:flex items-center gap-2 font-mono-label text-[var(--foreground)] hover:text-[var(--signal)] transition-colors">
             <PhoneIcon />
             {header.phoneDisplay}
           </a>
