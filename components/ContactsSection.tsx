@@ -23,6 +23,7 @@ export default function ContactsSection() {
 
           <div className="grid lg:grid-cols-3 gap-8 mb-14">
             <div>
+              <p className="text-[var(--foreground)] font-mono-label uppercase mb-5">{contactsSection.legalEntity}</p>
               <dl className="font-mono-label space-y-3 text-[var(--muted-foreground)] mb-6">
                 <div className="flex gap-3">
                   <dt className="shrink-0">{contactsSection.phoneLabel}</dt>
