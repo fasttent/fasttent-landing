@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 141 18" aria-label="Автодинастія — ВІДІ">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0.5 104 14" aria-label="Автодинастія — ВІДІ">
   <g id="icon" transform="translate(0,2.5) scale(0.75)">
     <path d="M54.193 0h4.213v18.325h-4.213zM40.685 0h-6.934v18.325h6.971c6.822 0 10.352-4.115 10.352-9.169S47.544 0 40.722 0m0 14.297h-2.796V4.028h2.759c3.815 0 5.791 2.299 5.791 5.128s-1.976 5.141-5.791 5.141M24.232 0h4.213v18.325h-4.213zM14.751 11.677 5.343 0H0l14.751 18.325h4.212V0H14.75z" fill="#fff"/>
   </g>
-  <text id="label" x="52" y="16.5" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" fill="#fff">Автодинастія</text>
+  <text id="label" x="50" y="14.5" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="600" fill="#fff">Автодинастія</text>
 </svg>

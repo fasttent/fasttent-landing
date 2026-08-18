@@ -85,7 +85,7 @@ export const hero = {
     { name: "Bozamet", href: "https://www.bozamet.pl/", img: "partner-bozamet.svg", width: "w-16", mono: false, w: 192, h: 70 },
     { name: "Achilles", href: "https://www.achilles.jp/english/", img: "partner-achilles.svg", width: "w-24", mono: true, w: 402, h: 37 },
     { name: "Prostir", href: "https://prostirco.com.ua/ua/", img: "partner-prostir.webp", width: "w-16", mono: true, w: 163, h: 78 },
-    { name: "Spectekh-VIDI — Автодинастія", href: "http://specteh-vidi.com.ua/ua", img: "partner-specteh-vidi.svg", width: "w-40", mono: true, w: 141, h: 18 },
+    { name: "Spectekh-VIDI — Автодинастія", href: "http://specteh-vidi.com.ua/ua", img: "partner-specteh-vidi.svg", width: "w-16", mono: true, w: 104, h: 14 },
     { name: "UkrArmor", href: "https://ukrarmor.com/uk/", img: "partner-ukrarmor.svg", width: "w-16", mono: true, w: 140, h: 47 },
   ],
   trustSignals: [
