@@ -32,7 +32,7 @@ export default function Hero() {
             {hero.h2}
           </h2>
 
-          <p className="mt-8 max-w-2xl text-base text-[var(--muted-foreground)] sm:text-lg">{hero.p}</p>
+          <p className="mt-12 max-w-2xl text-base text-[var(--muted-foreground)] sm:text-lg">{hero.p}</p>
 
           <div className="flex flex-wrap gap-3 mt-10">
             <a href={hero.ctaPrimary.href} className="btn btn-primary">
