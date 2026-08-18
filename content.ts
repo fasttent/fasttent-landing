@@ -29,7 +29,7 @@ export type CatalogCard = {
   specs: { label: string; value: string }[];
 };
 
-export const siteUrl = "https://fasttent.com.ua";
+export const siteUrl = "https://www.fasttent.com.ua";
 
 export const meta = {
   title: "Fast Tent — виготовлення ПВХ-виробів на замовлення | Бориспіль",

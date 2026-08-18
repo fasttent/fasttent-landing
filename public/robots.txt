@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fasttent.com.ua/sitemap.xml
+Sitemap: https://www.fasttent.com.ua/sitemap.xml

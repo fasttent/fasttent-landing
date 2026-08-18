@@ -32,7 +32,7 @@ export default function PrivacyPolicyPage() {
         <dl className="font-mono-label text-[var(--muted-foreground)] mb-12 space-y-1 border-t border-b border-hair py-4">
           <div className="flex gap-2">
             <dt>Сайту FAST TENT:</dt>
-            <dd className="text-[var(--foreground)]">fasttent.com.ua</dd>
+            <dd className="text-[var(--foreground)]">www.fasttent.com.ua</dd>
           </div>
           <div className="flex gap-2">
             <dt>Дата набрання чинності:</dt>
@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-xl font-semibold text-[var(--foreground)] mb-3">1. Загальні положення</h2>
             <p>
               Ця Політика конфіденційності та використання файлів cookie (далі — <strong>Політика</strong>) пояснює, які персональні
-              дані відвідувачів сайту FAST TENT за адресою fasttent.com.ua (далі — <strong>Сайт</strong>) збираються, для чого і на
+              дані відвідувачів сайту FAST TENT за адресою www.fasttent.com.ua (далі — <strong>Сайт</strong>) збираються, для чого і на
               яких підставах вони обробляються, кому можуть передаватися, як захищаються та як особа може реалізувати свої права.
             </p>
             <p>
