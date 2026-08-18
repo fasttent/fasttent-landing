@@ -47,10 +47,10 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 mt-10 sm:mt-12">
+      <div className="relative z-10 mt-14 sm:mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-6">{hero.partnersLabel}</p>
-          <ul className="flex flex-wrap items-center gap-x-10 gap-y-6 mb-6">
+          <ul className="grid grid-cols-3 items-center justify-items-center gap-x-6 gap-y-8 mb-6 lg:flex lg:flex-wrap lg:justify-start lg:gap-x-10 lg:gap-y-6">
             {hero.partners.map((p) => (
               <li key={p.name} className="flex items-center">
                 <a href={p.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] opacity-70 hover:opacity-100 transition-opacity">
@@ -66,7 +66,7 @@ export default function Hero() {
             ))}
           </ul>
 
-          <ul aria-label="Trust signals" className="grid grid-cols-1 gap-3 mt-8 sm:grid-cols-2 lg:grid-cols-5">
+          <ul aria-label="Trust signals" className="grid grid-cols-1 gap-3 mt-12 sm:grid-cols-2 lg:grid-cols-5">
             {hero.trustSignals.map((t, i) => (
               <li
                 key={t.label}
