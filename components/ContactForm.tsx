@@ -146,6 +146,7 @@ export default function ContactForm() {
           id="cf-name"
           name="name"
           type="text"
+          autoComplete="name"
           required
           aria-required="true"
           aria-invalid={!!errors.name}
@@ -170,7 +171,7 @@ export default function ContactForm() {
             setDialCode(meta.country.dialCode);
             clearError("phone");
           }}
-          inputProps={{ id: "cf-phone", required: true, "aria-required": true, "aria-invalid": !!errors.phone, "aria-describedby": errors.phone ? "cf-phone-error" : undefined }}
+          inputProps={{ id: "cf-phone", autoComplete: "tel", required: true, "aria-required": true, "aria-invalid": !!errors.phone, "aria-describedby": errors.phone ? "cf-phone-error" : undefined }}
           className={`cf-phone-field${errors.phone ? " cf-phone-field--invalid" : ""}`}
         />
         {errors.phone && <p id="cf-phone-error" role="alert" className="font-mono-label text-signal mt-1.5 normal-case">{errors.phone}</p>}
@@ -183,6 +184,7 @@ export default function ContactForm() {
           id="cf-email"
           name="email"
           type="email"
+          autoComplete="email"
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "cf-email-error" : undefined}
           onInput={() => clearError("email")}
