@@ -83,7 +83,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-hair relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-7 flex flex-col sm:flex-row justify-between gap-3 font-mono-label text-[var(--muted-foreground)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-[26px] flex flex-col sm:flex-row justify-between gap-3 font-mono-label text-[var(--muted-foreground)]">
           <span className="flex flex-wrap items-baseline">
             {footerContent.copyrightParts.map((part, i) => (
               <span key={part}>

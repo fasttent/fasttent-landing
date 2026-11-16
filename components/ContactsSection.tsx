@@ -11,20 +11,20 @@ export default function ContactsSection() {
   return (
     <section id="contacts" className="relative section-y scroll-anchor">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
-          <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-3">{contactsSection.eyebrow}</p>
+          <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-4">{contactsSection.eyebrow}</p>
           <h2 className="reveal text-3xl font-semibold sm:text-4xl lg:text-5xl mb-6">
             {contactsSection.h2Lines[0]}
             <br />
             {contactsSection.h2Lines[1]}
           </h2>
-          <p className="text-[var(--muted-foreground)] text-lg max-w-md mb-4">{contactsSection.p}</p>
-          <p className="text-signal font-mono-label uppercase mb-2">{contactsSection.responseFast}</p>
-          <p className="text-[var(--muted-foreground)] font-mono-label uppercase mb-10">{contactsSection.responseEstimate}</p>
+          <p className="text-[var(--muted-foreground)] text-lg max-w-md mb-8">{contactsSection.p}</p>
+          <p className="text-signal font-mono-label uppercase mb-3">{contactsSection.responseFast}</p>
+          <p className="text-[var(--muted-foreground)] font-mono-label uppercase mb-16">{contactsSection.responseEstimate}</p>
 
-          <div className="grid lg:grid-cols-3 gap-8 mb-14">
+          <div className="grid lg:grid-cols-3 gap-12 mb-16 sm:mb-20">
             <div>
               <p className="text-[var(--foreground)] font-mono-label uppercase mb-5">{contactsSection.legalEntity}</p>
-              <dl className="font-mono-label space-y-3 text-[var(--muted-foreground)] mb-6">
+              <dl className="font-mono-label space-y-4 text-[var(--muted-foreground)] mb-8">
                 <div className="flex gap-3">
                   <dt className="shrink-0">{contactsSection.phoneLabel}</dt>
                   <dd>
@@ -93,19 +93,19 @@ export default function ContactsSection() {
             <div>
               <dl className="font-mono-label space-y-3 text-[var(--muted-foreground)]">
                 <div>
-                  <dt className="text-[var(--foreground)] mb-1">{contactsSection.hoursManagers.title}</dt>
+                  <dt className="text-[var(--foreground)] mb-2">{contactsSection.hoursManagers.title}</dt>
                   <dd>{contactsSection.hoursManagers.value}</dd>
                 </div>
-                <div className="mt-3">
-                  <dt className="text-[var(--foreground)] mb-1">{contactsSection.hoursProduction.title}</dt>
+                <div className="mt-6">
+                  <dt className="text-[var(--foreground)] mb-2">{contactsSection.hoursProduction.title}</dt>
                   <dd>{contactsSection.hoursProduction.value}</dd>
                 </div>
               </dl>
-              <p className="text-sm text-[var(--muted-foreground)] mt-3">{contactsSection.hoursNote}</p>
+              <p className="text-sm text-[var(--muted-foreground)] mt-6">{contactsSection.hoursNote}</p>
             </div>
 
             <div>
-              <ul className="space-y-2 font-mono-label text-[var(--muted-foreground)]">
+              <ul className="space-y-4 font-mono-label text-[var(--muted-foreground)]">
                 <li data-direction-card data-trust-item className="trust-item direction-card direction-card-up relative group">
                   <div className="trust-item-trigger flex flex-col cursor-pointer relative">
                     <span className="inline-flex items-center gap-2">
@@ -143,7 +143,7 @@ export default function ContactsSection() {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-10">
             <div className="border border-hair radius overflow-hidden aspect-[4/3] lg:aspect-auto">
               <iframe
                 src={contactsSection.mapSrc}
