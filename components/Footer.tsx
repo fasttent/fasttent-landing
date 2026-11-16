@@ -24,7 +24,7 @@ export default function Footer() {
 
         <div className="order-3 md:order-2">
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-5">{footerContent.sectionsLabel}</p>
-          <ul className="space-y-3 text-sm text-[var(--foreground)]/80">
+          <ul className="space-y-2.5 text-sm text-[var(--foreground)]/80">
             {footerContent.sectionsLinks.map((link) => (
               <li key={link.href}>
                 <a href={link.href} className="hover:text-[var(--foreground)] transition-colors">
@@ -37,7 +37,7 @@ export default function Footer() {
 
         <div className="order-4 md:order-3">
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-5">{footerContent.companyLabel}</p>
-          <ul className="space-y-3 text-sm text-[var(--foreground)]/80">
+          <ul className="space-y-2.5 text-sm text-[var(--foreground)]/80">
             {footerContent.companyLinks.map((link) => (
               <li key={link.href}>
                 <a href={link.href} className="hover:text-[var(--foreground)] transition-colors">
@@ -50,7 +50,7 @@ export default function Footer() {
 
         <div className="order-2 md:order-4">
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-5">{footerContent.contactLabel}</p>
-          <ul className="space-y-3 text-sm text-[var(--foreground)]/80">
+          <ul className="space-y-2.5 text-sm text-[var(--foreground)]/80">
             <li>
               <a href={contactsSection.phoneHref} className={contactLinkClass}>
                 {contactsSection.phoneDisplay}
@@ -83,7 +83,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-hair relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col sm:flex-row justify-between gap-3 font-mono-label text-[var(--muted-foreground)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-7 flex flex-col sm:flex-row justify-between gap-3 font-mono-label text-[var(--muted-foreground)]">
           <span className="flex flex-wrap items-baseline">
             {footerContent.copyrightParts.map((part, i) => (
               <span key={part}>
