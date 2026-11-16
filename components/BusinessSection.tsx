@@ -4,7 +4,7 @@ import DirectionCardItem from "./DirectionCardItem";
 
 export default function BusinessSection() {
   return (
-    <section id="business" className="relative section-y-lg scroll-anchor">
+    <section id="business" className="relative section-y scroll-anchor">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
         <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-3">{businessSection.eyebrow}</p>
         <h2 className="reveal text-3xl font-semibold sm:text-4xl lg:text-5xl max-w-2xl">{businessSection.h2}</h2>

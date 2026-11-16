@@ -34,7 +34,6 @@
 
   --section-py-mobile: 4rem;
   --section-py-desktop: 7.5rem; /* 120px — усі секції */
-  --section-py-lg: 6rem;        /* 96px — «Для бізнесу» і «Для дому», налаштовуються окремо */
 
   --radius-btn: 2px;
   --radius-card: 2px;
@@ -67,7 +66,6 @@ h2 { letter-spacing: var(--heading-tracking); }
 h3 { letter-spacing: var(--heading-tracking); }
 
 .section-y { padding-top: var(--section-py-mobile); padding-bottom: var(--section-py-mobile); }
-.section-y-lg { padding-top: var(--section-py-lg); padding-bottom: var(--section-py-lg); }
 /* Лише нижній відступ секції (Hero: верх задає шапка) */
 .section-pb { padding-bottom: var(--section-py-mobile); }
 @media (min-width: 640px) {

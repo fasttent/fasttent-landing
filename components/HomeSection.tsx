@@ -5,7 +5,7 @@ import DirectionCardItem from "./DirectionCardItem";
 
 export default function HomeSection() {
   return (
-    <section id="home-segment" className="relative section-y-lg border-t border-hair scroll-anchor">
+    <section id="home-segment" className="relative section-y border-t border-hair scroll-anchor">
       <div className="hero-bg hero-dim-50">
         <Image src={`/assets/${homeSection.bgImg}`} alt="" fill sizes="100vw" quality={35} />
       </div>
