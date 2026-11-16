@@ -17,7 +17,7 @@ export default function ContactsSection() {
             <br />
             {contactsSection.h2Lines[1]}
           </h2>
-          <p className="text-[var(--muted-foreground)] text-lg max-w-md mb-8">{contactsSection.p}</p>
+          <p className="text-[var(--muted-foreground)] text-lg max-w-md mb-12">{contactsSection.p}</p>
           <p className="text-signal font-mono-label uppercase mb-3">{contactsSection.responseFast}</p>
           <p className="text-[var(--muted-foreground)] font-mono-label uppercase mb-16">{contactsSection.responseEstimate}</p>
 
