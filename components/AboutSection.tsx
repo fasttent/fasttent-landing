@@ -6,7 +6,7 @@ export default function AboutSection() {
     <section id="about" className="section-y bg-[var(--muted)] scroll-anchor">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <p className="font-mono-label uppercase text-signal mb-3">{aboutSection.eyebrow}</p>
-        <h2 className="reveal text-3xl font-semibold sm:text-4xl lg:text-5xl mb-10">{aboutSection.h2}</h2>
+        <h2 className="reveal text-3xl font-semibold sm:text-4xl lg:text-5xl mb-12">{aboutSection.h2}</h2>
 
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-14">
           <div className="lg:col-span-2 flex flex-col">

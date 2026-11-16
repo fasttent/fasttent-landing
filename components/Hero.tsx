@@ -72,7 +72,7 @@ export default function Hero() {
             ))}
           </ul>
 
-          <ul aria-label="Trust signals" className="grid grid-cols-1 gap-3 mt-14 sm:mt-[72px] sm:grid-cols-2 lg:grid-cols-5">
+          <ul aria-label="Trust signals" className="grid grid-cols-1 gap-4 mt-14 sm:mt-[72px] sm:grid-cols-2 lg:grid-cols-5">
             {hero.trustSignals.map((t, i) => (
               <li
                 key={t.label}
