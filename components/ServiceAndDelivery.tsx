@@ -13,7 +13,7 @@ export default function ServiceAndDelivery() {
       <section className="relative section-y border-t border-hair">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="font-mono-label uppercase text-signal mb-3">{serviceSection.eyebrow}</p>
-          <h2 className="text-2xl font-semibold sm:text-3xl max-w-2xl mb-8">{serviceSection.h2}</h2>
+          <h2 className="text-3xl font-semibold sm:text-4xl max-w-2xl mb-8">{serviceSection.h2}</h2>
           <div className="card-grid grid-cols-1 sm:grid-cols-3">
             {serviceSection.items.map((item) => (
               <div key={item.title} className="bg-[var(--background)] p-6">
@@ -29,7 +29,7 @@ export default function ServiceAndDelivery() {
       <section className="relative section-y border-t border-hair">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="font-mono-label uppercase text-signal mb-3">{deliverySection.eyebrow}</p>
-          <h2 className="text-2xl font-semibold sm:text-3xl max-w-2xl mb-8">{deliverySection.h2}</h2>
+          <h2 className="text-3xl font-semibold sm:text-4xl max-w-2xl mb-8">{deliverySection.h2}</h2>
           <div className="card-grid grid-cols-2 sm:grid-cols-4">
             {deliverySection.steps.map((step) => (
               <div key={step.number} className="bg-[var(--background)] p-5 text-center">

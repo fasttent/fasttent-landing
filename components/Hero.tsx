@@ -2,6 +2,12 @@ import Image from "next/image";
 import { hero } from "@/content";
 import { ArrowIcon, LineIcon } from "./icons";
 
+// Слова з дефісом («ПВХ-конструкцій») не рвемо на два рядки
+const keepHyphenated = (text: string) =>
+  text.split(/(\S+-\S+)/).map((part, i) =>
+    i % 2 ? <span key={i} className="whitespace-nowrap">{part}</span> : part
+  );
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
@@ -24,12 +30,12 @@ export default function Hero() {
             ))}
           </p>
 
-          <h1 className="text-4xl font-semibold sm:text-5xl lg:text-[56px] lg:leading-[1.05] max-w-3xl">
-            {hero.h1}
+          <h1 className="text-4xl font-semibold sm:text-5xl lg:text-[56px] lg:leading-[1.05] max-w-3xl lg:max-w-[52rem]">
+            {keepHyphenated(hero.h1)}
           </h1>
 
           <h2 className="reveal in mt-6 sm:mt-8 max-w-[50rem] text-balance text-2xl font-light leading-tight text-[var(--muted-foreground)] sm:text-3xl lg:text-[32px]">
-            {hero.h2}
+            {keepHyphenated(hero.h2)}
           </h2>
 
           <p className="mt-10 sm:mt-16 max-w-2xl text-base text-[var(--muted-foreground-light)] sm:text-lg">{hero.p}</p>

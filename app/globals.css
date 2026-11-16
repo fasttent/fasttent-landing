@@ -11,7 +11,7 @@
   --card: #202020;
   --muted: #0f0f0f;
   --muted-foreground: #a3a3a3;
-  --muted-foreground-light: #c4c4c4; /* трохи світліший сірий — текст поверх фото */
+  --muted-foreground-light: #b5b5b5; /* трохи світліший сірий — текст поверх фото */
   --border: rgba(255, 255, 255, 0.08);
   --signal: #ff3800;
   --signal-opacity: .85;
@@ -33,7 +33,8 @@
   --h1-tracking: -0.025em;
 
   --section-py-mobile: 4rem;
-  --section-py-desktop: 6rem;
+  --section-py-desktop: 7.5rem; /* 120px — усі секції */
+  --section-py-lg: 6rem;        /* 96px — «Для бізнесу» і «Для дому», налаштовуються окремо */
 
   --radius-btn: 2px;
   --radius-card: 2px;
@@ -66,7 +67,7 @@ h2 { letter-spacing: var(--heading-tracking); }
 h3 { letter-spacing: var(--heading-tracking); }
 
 .section-y { padding-top: var(--section-py-mobile); padding-bottom: var(--section-py-mobile); }
-.section-y-lg { padding-top: var(--section-py-desktop); padding-bottom: var(--section-py-desktop); }
+.section-y-lg { padding-top: var(--section-py-lg); padding-bottom: var(--section-py-lg); }
 @media (min-width: 640px) {
   .section-y { padding-top: var(--section-py-desktop); padding-bottom: var(--section-py-desktop); }
 }
