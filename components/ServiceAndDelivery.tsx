@@ -10,7 +10,7 @@ export default function ServiceAndDelivery() {
       </div>
       <div className="hero-overlay"></div>
 
-      <section className="relative py-16 sm:py-20 border-t border-hair">
+      <section className="relative section-y border-t border-hair">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="font-mono-label uppercase text-signal mb-3">{serviceSection.eyebrow}</p>
           <h2 className="text-2xl font-semibold sm:text-3xl max-w-2xl mb-8">{serviceSection.h2}</h2>
@@ -26,7 +26,7 @@ export default function ServiceAndDelivery() {
         </div>
       </section>
 
-      <section className="relative py-16 sm:py-20 border-t border-hair">
+      <section className="relative section-y border-t border-hair">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="font-mono-label uppercase text-signal mb-3">{deliverySection.eyebrow}</p>
           <h2 className="text-2xl font-semibold sm:text-3xl max-w-2xl mb-8">{deliverySection.h2}</h2>

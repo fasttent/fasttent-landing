@@ -4,7 +4,7 @@ import { ArrowIcon } from "./icons";
 
 export default function ForWhom() {
   return (
-    <section className="py-16 sm:py-20 border-b border-hair">
+    <section className="section-y border-b border-hair">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-8">{forWhom.label}</p>
         <div className="grid gap-4 md:grid-cols-2">
