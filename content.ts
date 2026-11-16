@@ -137,7 +137,7 @@ export const stats = {
 
 export const businessSection = {
   eyebrow: "Для бізнесу",
-  h2: "Рішення з ПВХ для бізнесу.",
+  h2: "Рішення з ПВХ для бізнесу",
   p: "Транспорт, склади, комерційні об'єкти та індивідуальні промислові конструкції.",
   ctaPrimary: { label: "Отримати розрахунок", href: "#request-form" },
   ctaSecondary: { label: "Переглянути вироби", href: "#catalog-business" },
@@ -208,7 +208,7 @@ export const businessSection = {
 export const homeSection = {
   id: "home-segment",
   eyebrow: "Для дому та відпочинку",
-  h2: "ПВХ-рішення для приватних будинків, терас, альтанок та зон відпочинку.",
+  h2: "ПВХ-рішення для приватних будинків, терас, альтанок та зон відпочинку",
   p: "Виготовляємо ПВХ-вироби за індивідуальними розмірами для захисту від дощу, вітру, пилу, комах і сонця. Підбираємо рішення відповідно до особливостей кожного об'єкта та побажань замовника.",
   ctaPrimary: { label: "Отримати розрахунок", href: "#request-form" },
   ctaSecondary: { label: "Переглянути вироби", href: "#catalog-home" },
@@ -279,7 +279,7 @@ export const homeSection = {
 
 export const catalogSection = {
   eyebrow: "Каталог",
-  h2: "Наші роботи та вироби.",
+  h2: "Наші роботи та вироби",
   p: "Реалізовані проєкти та повний перелік ПВХ-виробів — для бізнесу і для дому.",
   bgImg: "warehouse-storage.webp",
   businessLabel: "Для бізнесу",
@@ -537,7 +537,7 @@ export const catalogSection = {
 
 export const serviceSection = {
   eyebrow: "Сервісне обслуговування",
-  h2: "Підтримуємо виріб і після монтажу.",
+  h2: "Підтримуємо виріб і після монтажу",
   bgImg: "tile-business.webp",
   items: [
     { icon: "repair", title: "Ремонт", description: "Виробу, накриття, м'яких вікон — швидко відновлюємо працездатність." },
@@ -548,7 +548,7 @@ export const serviceSection = {
 
 export const deliverySection = {
   eyebrow: "Доставка та монтаж",
-  h2: "Від заміру до встановлення — під ключ.",
+  h2: "Від заміру до встановлення — під ключ",
   steps: [
     { number: "01", label: "Замірювання" },
     { number: "02", label: "Виготовлення" },
@@ -559,7 +559,7 @@ export const deliverySection = {
 
 export const aboutSection = {
   eyebrow: "Про виробництво",
-  h2: "Історія FAST TENT.",
+  h2: "Історія FAST TENT",
   founderImgAlt: "Надія Голубєва — засновниця Fast Tent",
   founderName: "Надія Голубєва",
   founderRole: "Засновниця FAST TENT",
@@ -586,7 +586,7 @@ export const aboutSection = {
 export const warrantySection = {
   eyebrow: "Гарантія",
   bgImg: "truck-sunset.webp",
-  h2: "Ми залишаємося на зв'язку навіть після завершення замовлення.",
+  h2: "Ми залишаємося на зв'язку навіть після завершення замовлення",
   paragraphs: [
     "Ми впевнені у якості власного виробництва, тому надаємо 24 місяці гарантії на виготовлені вироби. Якщо монтаж виконує команда FAST TENT, гарантія також поширюється на виконані монтажні роботи.",
     "Якщо протягом гарантійного строку виникне виробничий дефект, ми оперативно розглянемо звернення та запропонуємо оптимальне рішення.",
@@ -606,7 +606,7 @@ export const warrantySection = {
 
 export const stepsSection = {
   eyebrow: "Як ми працюємо",
-  h2: "Ваш шлях до готового виробу.",
+  h2: "Ваш шлях до готового виробу",
   p: "Від першої консультації до отримання готового виробу ви завжди знаєте, на якому етапі перебуває ваше замовлення.",
   steps: [
     { number: "01", title: "Звернення", description: "Опишіть бажаний виріб, розміри та фото через сайт, телефон або месенджер." },
@@ -620,7 +620,7 @@ export const stepsSection = {
 
 export const reviewsSection = {
   eyebrow: "Відгуки",
-  h2: "Клієнти кажуть.",
+  h2: "Клієнти кажуть",
   prevLabel: "Попередній відгук",
   nextLabel: "Наступний відгук",
   dotLabel: "Перейти до відгуку",
@@ -644,7 +644,7 @@ export const reviewsSection = {
 export const faqSection = {
   eyebrow: "FAQ",
   eyebrowTitle: "Згорнути всі питання",
-  h2: "Питання, що часто ставлять.",
+  h2: "Питання, що часто ставлять",
   items: [
     {
       question: "Що таке ПВХ-тканина?",
@@ -712,7 +712,7 @@ export const faqSection = {
 
 export const contactsSection = {
   eyebrow: "Контакти",
-  h2Lines: ["Обговоримо ваше", "технічне завдання."],
+  h2Lines: ["Обговоримо ваше", "технічне завдання"],
   p: "Підготуємо оптимальне рішення з ПВХ та розрахунок вартості під ваші параметри.",
   responseFast: "Відповідаємо протягом 15–30 хв у робочий час",
   responseEstimate: "Попередній розрахунок більшості виробів — протягом 1–2 годин",

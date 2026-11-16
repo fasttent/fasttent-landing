@@ -38,7 +38,7 @@ export default function Hero() {
             {keepHyphenated(hero.h2)}
           </h2>
 
-          <p className="mt-12 sm:mt-20 max-w-2xl text-base text-[var(--muted-foreground-light)] sm:text-lg">{hero.p}</p>
+          <p className="mt-14 sm:mt-24 max-w-2xl text-base text-[var(--muted-foreground-light)] sm:text-lg">{hero.p}</p>
 
           <div className="flex flex-wrap gap-3 mt-6 sm:mt-8">
             <a href={hero.ctaPrimary.href} className="btn btn-primary">
