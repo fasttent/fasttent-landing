@@ -68,8 +68,11 @@ h3 { letter-spacing: var(--heading-tracking); }
 
 .section-y { padding-top: var(--section-py-mobile); padding-bottom: var(--section-py-mobile); }
 .section-y-lg { padding-top: var(--section-py-lg); padding-bottom: var(--section-py-lg); }
+/* Лише нижній відступ секції (Hero: верх задає шапка) */
+.section-pb { padding-bottom: var(--section-py-mobile); }
 @media (min-width: 640px) {
   .section-y { padding-top: var(--section-py-desktop); padding-bottom: var(--section-py-desktop); }
+  .section-pb { padding-bottom: var(--section-py-desktop); }
 }
 
 #site-header {

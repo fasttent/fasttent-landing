@@ -54,7 +54,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mt-16 sm:mt-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 section-pb">
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-6">{hero.partnersLabel}</p>
           <ul className="grid grid-cols-3 items-center justify-items-center gap-x-6 gap-y-8 mb-6 lg:flex lg:flex-wrap lg:justify-start lg:gap-x-10 lg:gap-y-6">
             {hero.partners.map((p) => (
