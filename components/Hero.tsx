@@ -19,10 +19,9 @@ export default function Hero() {
       </div>
       <div className="photo-hero-overlay"></div>
 
-      {/* lg+: перший екран на всю висоту вікна, «Власний цех…» і кнопки притиснуті до низу */}
-      <div className="relative z-10 pt-28 sm:pt-32 lg:min-h-[100svh] lg:flex lg:flex-col lg:pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full lg:flex-1 lg:flex lg:flex-col">
-          <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-6 flex flex-wrap gap-y-1">
+      <div className="relative z-10 pt-28 sm:pt-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
+          <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-4 flex flex-wrap gap-y-1">
             {hero.eyebrow.map((word, i) => (
               <span key={word} className="whitespace-nowrap">
                 {word}
@@ -39,8 +38,7 @@ export default function Hero() {
             {keepHyphenated(hero.h2)}
           </h2>
 
-          <div className="lg:mt-auto">
-          <p className="mt-10 sm:mt-16 max-w-2xl text-base text-[var(--muted-foreground-light)] sm:text-lg">{hero.p}</p>
+          <p className="mt-12 sm:mt-20 max-w-2xl text-base text-[var(--muted-foreground-light)] sm:text-lg">{hero.p}</p>
 
           <div className="flex flex-wrap gap-3 mt-6 sm:mt-8">
             <a href={hero.ctaPrimary.href} className="btn btn-primary">
@@ -51,7 +49,6 @@ export default function Hero() {
               {hero.ctaSecondary.label}
               <ArrowIcon />
             </a>
-          </div>
           </div>
         </div>
       </div>
