@@ -8,7 +8,7 @@ export default function Hero() {
       <div className="photo-hero-bg">
         <picture>
           <source media="(max-width: 767px)" srcSet="/assets/hero-mobile-candidate-3.webp" />
-          <img src="/assets/truck-hero.webp" alt={hero.imgAlt} width={1920} height={1280} fetchPriority="high" />
+          <img src="/assets/truck-hero-ext.webp" alt={hero.imgAlt} width={1920} height={1920} fetchPriority="high" />
         </picture>
       </div>
       <div className="photo-hero-overlay"></div>
