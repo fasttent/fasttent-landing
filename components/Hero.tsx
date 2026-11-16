@@ -28,13 +28,13 @@ export default function Hero() {
             {hero.h1}
           </h1>
 
-          <h2 className="reveal in mt-8 sm:mt-10 max-w-3xl text-2xl font-light leading-tight text-[var(--muted-foreground)] sm:text-3xl lg:text-4xl">
+          <h2 className="reveal in mt-6 sm:mt-8 max-w-[50rem] text-balance text-2xl font-light leading-tight text-[var(--muted-foreground)] sm:text-3xl lg:text-[32px]">
             {hero.h2}
           </h2>
 
-          <p className="mt-12 max-w-2xl text-base text-[var(--muted-foreground)] sm:text-lg">{hero.p}</p>
+          <p className="mt-10 sm:mt-16 max-w-2xl text-base text-[var(--muted-foreground-light)] sm:text-lg">{hero.p}</p>
 
-          <div className="flex flex-wrap gap-3 mt-12 sm:mt-14">
+          <div className="flex flex-wrap gap-3 mt-6 sm:mt-8">
             <a href={hero.ctaPrimary.href} className="btn btn-primary">
               {hero.ctaPrimary.label}
               <ArrowIcon />
@@ -47,7 +47,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 mt-14 sm:mt-16">
+      <div className="relative z-10 mt-16 sm:mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
           <p className="font-mono-label uppercase text-[var(--muted-foreground)] mb-6">{hero.partnersLabel}</p>
           <ul className="grid grid-cols-3 items-center justify-items-center gap-x-6 gap-y-8 mb-6 lg:flex lg:flex-wrap lg:justify-start lg:gap-x-10 lg:gap-y-6">

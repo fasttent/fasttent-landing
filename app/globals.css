@@ -11,6 +11,7 @@
   --card: #202020;
   --muted: #0f0f0f;
   --muted-foreground: #a3a3a3;
+  --muted-foreground-light: #c4c4c4; /* трохи світліший сірий — текст поверх фото */
   --border: rgba(255, 255, 255, 0.08);
   --signal: #ff3800;
   --signal-opacity: .85;
