@@ -28,13 +28,13 @@ export default function Hero() {
             {hero.h1}
           </h1>
 
-          <h2 className="reveal in mt-7 max-w-3xl text-2xl font-light leading-tight text-[var(--muted-foreground)] sm:text-3xl lg:text-4xl">
+          <h2 className="reveal in mt-8 sm:mt-10 max-w-3xl text-2xl font-light leading-tight text-[var(--muted-foreground)] sm:text-3xl lg:text-4xl">
             {hero.h2}
           </h2>
 
           <p className="mt-12 max-w-2xl text-base text-[var(--muted-foreground)] sm:text-lg">{hero.p}</p>
 
-          <div className="flex flex-wrap gap-3 mt-10">
+          <div className="flex flex-wrap gap-3 mt-12 sm:mt-14">
             <a href={hero.ctaPrimary.href} className="btn btn-primary">
               {hero.ctaPrimary.label}
               <ArrowIcon />
@@ -66,7 +66,7 @@ export default function Hero() {
             ))}
           </ul>
 
-          <ul aria-label="Trust signals" className="grid grid-cols-1 gap-3 mt-12 sm:grid-cols-2 lg:grid-cols-5">
+          <ul aria-label="Trust signals" className="grid grid-cols-1 gap-3 mt-14 sm:mt-[72px] sm:grid-cols-2 lg:grid-cols-5">
             {hero.trustSignals.map((t, i) => (
               <li
                 key={t.label}
