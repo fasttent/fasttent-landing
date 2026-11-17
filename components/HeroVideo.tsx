@@ -23,9 +23,28 @@ type VideoWithRVFC = HTMLVideoElement & {
 
 function startVideo(video: HTMLVideoElement | null, src: string) {
   if (!video || video.getAttribute("src")) return;
-  video.muted = true; // без цього браузери не дають автозапуск
+  // iOS Safari дає автозапуск лише беззвучному inline-відео і перевіряє саме атрибути
+  // (React не виводить атрибут muted у DOM), тож ставимо все явно.
+  video.muted = true;
+  video.defaultMuted = true;
+  video.setAttribute("muted", "");
+  video.setAttribute("playsinline", "");
+  video.setAttribute("webkit-playsinline", "");
   video.src = src;
-  video.play().catch(() => {});
+  video.load();
+  const tryPlay = () => video.play().catch(() => {});
+  video.play().catch(() => {
+    // Не стартувало (напр., iPhone у режимі енергозбереження) — пробуємо, щойно
+    // відео довантажиться, і при першому дотику до екрана.
+    video.addEventListener("canplay", tryPlay, { once: true });
+    const onTouch = () => {
+      tryPlay();
+      document.removeEventListener("touchstart", onTouch);
+      document.removeEventListener("click", onTouch);
+    };
+    document.addEventListener("touchstart", onTouch, { passive: true });
+    document.addEventListener("click", onTouch);
+  });
 }
 
 // Малює нижню смугу кадру в canvas на кожному новому кадрі відео
