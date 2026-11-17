@@ -130,7 +130,7 @@ h3 { letter-spacing: var(--heading-tracking); }
     mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
   }
   /* на телефоні відео закриває весь перший екран (вищі екрани трохи обрізають боки) */
-  .hero-video--mobile { display: block; aspect-ratio: 3 / 8; min-height: 100svh; }
+  .hero-video--mobile { display: block; aspect-ratio: 3 / 7; min-height: 100svh; }
 }
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
   .hero-video--mobile { display: none; }
