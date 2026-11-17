@@ -52,6 +52,7 @@ export default function HeroVideo() {
   const desktopRef = useRef<HTMLVideoElement>(null);
   const mobileRef = useRef<HTMLVideoElement>(null);
   const ambientRef = useRef<HTMLCanvasElement>(null);
+  const ambientMobileRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
@@ -59,6 +60,7 @@ export default function HeroVideo() {
     const motion = window.matchMedia(MOTION_OK);
     const desktop = window.matchMedia(DESKTOP);
     let stopAmbient: (() => void) | null = null;
+    let stopAmbientMobile: (() => void) | null = null;
 
     const update = () => {
       if (!motion.matches) return;
@@ -69,6 +71,9 @@ export default function HeroVideo() {
         }
       } else {
         startVideo(mobileRef.current, "/assets/hero-video-mobile.mp4");
+        if (!stopAmbientMobile && mobileRef.current && ambientMobileRef.current) {
+          stopAmbientMobile = runAmbient(mobileRef.current, ambientMobileRef.current);
+        }
       }
     };
     update();
@@ -93,6 +98,7 @@ export default function HeroVideo() {
       desktop.removeEventListener("change", update);
       io?.disconnect();
       stopAmbient?.();
+      stopAmbientMobile?.();
     };
   }, []);
 
@@ -103,6 +109,7 @@ export default function HeroVideo() {
         <video ref={desktopRef} muted loop playsInline preload="none" poster="/assets/hero-video-poster.webp" />
       </div>
       <div className="hero-video hero-video--mobile" aria-hidden="true">
+        <canvas ref={ambientMobileRef} className="hero-video-ambient" width={24} height={24} />
         <video ref={mobileRef} muted loop playsInline preload="none" poster="/assets/hero-video-mobile-poster.webp" />
       </div>
     </>
