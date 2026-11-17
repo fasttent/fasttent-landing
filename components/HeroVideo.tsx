@@ -1,20 +1,19 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { DESKTOP, MOTION_OK, SRC_DESKTOP, SRC_MOBILE } from "@/lib/heroVideo";
 
 // Фонове відео Hero «Шлях тенту» (16 с, по колу, без звуку).
 // Два варіанти: 16:9 для десктопу і вертикальний 9:16 для телефону (кожна сцена кадрована окремо).
 // CSS показує потрібний за шириною екрана; файл вантажимо лише для видимого
 // і лише коли в системі не вимкнені анімації та не ввімкнено «економію трафіку».
 // Інакше лишається статична картинка (див. globals.css).
-// /assets кешуються на рік: після заміни файлу відео/постера збільшуй ?v=N.
+// Адреси й версії файлів — у lib/heroVideo.ts.
 //
 // Під відео (партнери, плашки) — «ambient»-продовження: нижня смуга кожного кадру
 // стискається в canvas шириною 1 px (середній колір по всій ширині, лише зміна згори вниз),
 // браузер розтягує й розмиває його. Кольори продовжують поточну сцену без шва,
 // але без плям від окремих світлих об'єктів (вагони, траса) не в тих місцях.
-const DESKTOP = "(min-width: 768px)";
-const MOTION_OK = "(prefers-reduced-motion: no-preference)";
 const SLICE = 0.35; // яку частку кадру знизу беремо для продовження (більше — м'якше, без окремих плям)
 
 type VideoWithRVFC = HTMLVideoElement & {
@@ -22,7 +21,7 @@ type VideoWithRVFC = HTMLVideoElement & {
 };
 
 function startVideo(video: HTMLVideoElement | null, src: string) {
-  if (!video || video.getAttribute("src")) return;
+  if (!video) return;
   // iOS Safari дає автозапуск лише беззвучному inline-відео і перевіряє саме атрибути
   // (React не виводить атрибут muted у DOM), тож ставимо все явно.
   video.muted = true;
@@ -30,8 +29,12 @@ function startVideo(video: HTMLVideoElement | null, src: string) {
   video.setAttribute("muted", "");
   video.setAttribute("playsinline", "");
   video.setAttribute("webkit-playsinline", "");
-  video.src = src;
-  video.load();
+  if (!video.getAttribute("src")) {
+    video.src = src;
+    video.load();
+  } else if (!video.paused) {
+    return; // ранній скрипт уже запустив
+  }
   const tryPlay = () => video.play().catch(() => {});
   video.play().catch(() => {
     // Не стартувало (напр., iPhone у режимі енергозбереження) — пробуємо, щойно
@@ -92,12 +95,12 @@ export default function HeroVideo() {
     const update = () => {
       if (!motion.matches) return;
       if (desktop.matches) {
-        startVideo(desktopRef.current, "/assets/hero-video.mp4?v=2");
+        startVideo(desktopRef.current, SRC_DESKTOP);
         if (!stopAmbient && desktopRef.current && ambientRef.current) {
           stopAmbient = runAmbient(desktopRef.current, ambientRef.current);
         }
       } else {
-        startVideo(mobileRef.current, "/assets/hero-video-mobile.mp4?v=6");
+        startVideo(mobileRef.current, SRC_MOBILE);
         if (!stopAmbientMobile && mobileRef.current && ambientMobileRef.current) {
           stopAmbientMobile = runAmbient(mobileRef.current, ambientMobileRef.current);
         }
@@ -133,11 +136,11 @@ export default function HeroVideo() {
     <>
       <div className="hero-video hero-video--desktop" aria-hidden="true">
         <canvas ref={ambientRef} className="hero-video-ambient" width={1} height={4} />
-        <video ref={desktopRef} muted loop playsInline preload="none" poster="/assets/hero-video-poster.webp?v=2" />
+        <video id="hero-video-d" ref={desktopRef} muted loop playsInline preload="none" poster="/assets/hero-video-poster.webp?v=2" suppressHydrationWarning />
       </div>
       <div className="hero-video hero-video--mobile" aria-hidden="true">
         <canvas ref={ambientMobileRef} className="hero-video-ambient" width={1} height={4} />
-        <video ref={mobileRef} muted loop playsInline preload="none" poster="/assets/hero-video-mobile-poster.webp?v=5" />
+        <video id="hero-video-m" ref={mobileRef} muted loop playsInline preload="none" poster="/assets/hero-video-mobile-poster.webp?v=5" suppressHydrationWarning />
       </div>
     </>
   );

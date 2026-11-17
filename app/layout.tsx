@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import CookieConsent from "@/components/CookieConsent";
 import { isConsentRequiredCountry } from "@/lib/geo";
+import { EARLY_START as HERO_VIDEO_EARLY_START } from "@/lib/heroVideo";
 
 // Google Ads (gtag.js) — тег відстеження конверсій клієнта
 const GTAG_ID = "AW-16805820064";
@@ -98,9 +99,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
-        {/* Google Consent Mode v2 — значення default залежить від країни (ставимо ПЕРЕД GTM) */}
+        {/* Google Consent Mode v2 — значення default залежить від країни (ставимо ПЕРЕД GTM).
+            Сюди ж дописано ранній старт фонового відео Hero (lib/heroVideo.ts): окремий
+            beforeInteractive-скрипт React у dev позначає помилкою. */}
         <Script id="consent-default" strategy="beforeInteractive">
-          {buildConsentDefaultScript(consentRequired)}
+          {buildConsentDefaultScript(consentRequired) + HERO_VIDEO_EARLY_START}
         </Script>
         {/* Google Tag Manager — контейнер клієнта (містить Ringostat, GA4, Ads-теги) */}
         <Script id="gtm-init" strategy="afterInteractive">
