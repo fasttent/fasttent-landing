@@ -107,22 +107,25 @@ h3 { letter-spacing: var(--heading-tracking); }
   .photo-hero-bg img { object-position: center top; }
 }
 
-/* Відео Hero: лише десктоп і лише без prefers-reduced-motion.
-   Кадр 16:9 стоїть угорі без обрізання, низ плавно переходить у той самий
-   темний тон, у який переходить подовжений асфальт (truck-hero-ext). */
+/* Відео Hero: лише без prefers-reduced-motion (інакше — статичні картинки).
+   Десктоп 16:9, телефон 9:16. Кадр стоїть угорі без обрізання, низ плавно
+   переходить у той самий темний тон, у який переходить подовжений асфальт. */
 .hero-video { display: none; }
-@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .photo-hero-bg { background: rgb(44, 39, 38); }
   .photo-hero-bg picture { display: none; }
-  .hero-video {
-    display: block; position: absolute; top: 0; left: 0;
-    width: 100%; aspect-ratio: 16 / 9;
-  }
+  .hero-video { position: absolute; top: 0; left: 0; width: 100%; }
   .hero-video video { width: 100%; height: 100%; object-fit: cover; }
   .hero-video::after {
     content: ""; position: absolute; inset: 0;
     background: linear-gradient(to bottom, transparent 62%, rgb(44, 39, 38) 100%);
   }
+  /* на телефоні відео закриває весь перший екран (вищі екрани трохи обрізають боки) */
+  .hero-video--mobile { display: block; aspect-ratio: 9 / 16; min-height: 100svh; }
+}
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .hero-video--mobile { display: none; }
+  .hero-video--desktop { display: block; aspect-ratio: 16 / 9; }
 }
 
 @media (min-width: 900px) and (max-width: 1139px) and (min-height: 550px) {
