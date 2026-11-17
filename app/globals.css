@@ -126,6 +126,21 @@ h3 { letter-spacing: var(--heading-tracking); }
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
   .hero-video--mobile { display: none; }
   .hero-video--desktop { display: block; aspect-ratio: 16 / 9; }
+  /* Десктоп: замість обриву в темне — низ відео розчиняється в розмите
+     «продовження» (canvas з HeroVideo.tsx), яке тягнеться під партнерами й плашками */
+  .hero-video--desktop::after { display: none; }
+  .hero-video--desktop video {
+    position: relative;
+    -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+  }
+  .hero-video-ambient {
+    position: absolute; left: -4%; width: 108%;
+    top: 70%; height: calc(30% + 60vh);
+    filter: blur(28px) saturate(1.1);
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  }
 }
 
 @media (min-width: 900px) and (max-width: 1139px) and (min-height: 550px) {

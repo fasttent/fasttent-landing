@@ -7,8 +7,17 @@ import { useEffect, useRef } from "react";
 // CSS показує потрібний за шириною екрана; файл вантажимо лише для видимого
 // і лише коли в системі не вимкнені анімації та не ввімкнено «економію трафіку».
 // Інакше лишається статична картинка (див. globals.css).
+//
+// Під відео (партнери, плашки) — «ambient»-продовження: нижня смуга кожного кадру
+// малюється в крихітний canvas, браузер розтягує й розмиває його — кольори
+// продовжують поточну сцену без шва.
 const DESKTOP = "(min-width: 768px)";
 const MOTION_OK = "(prefers-reduced-motion: no-preference)";
+const SLICE = 0.22; // яку частку кадру знизу беремо для продовження
+
+type VideoWithRVFC = HTMLVideoElement & {
+  requestVideoFrameCallback?: (cb: () => void) => number;
+};
 
 function startVideo(video: HTMLVideoElement | null, src: string) {
   if (!video || video.getAttribute("src")) return;
@@ -17,32 +26,80 @@ function startVideo(video: HTMLVideoElement | null, src: string) {
   video.play().catch(() => {});
 }
 
+// Малює нижню смугу кадру в canvas на кожному новому кадрі відео
+function runAmbient(video: VideoWithRVFC, canvas: HTMLCanvasElement) {
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return () => {};
+  let stopped = false;
+  const draw = () => {
+    if (stopped) return;
+    const vw = video.videoWidth;
+    const vh = video.videoHeight;
+    if (vw && vh) {
+      const sy = vh * (1 - SLICE);
+      ctx.drawImage(video, 0, sy, vw, vh - sy, 0, 0, canvas.width, canvas.height);
+    }
+    if (video.requestVideoFrameCallback) video.requestVideoFrameCallback(draw);
+    else requestAnimationFrame(draw);
+  };
+  draw();
+  return () => {
+    stopped = true;
+  };
+}
+
 export default function HeroVideo() {
   const desktopRef = useRef<HTMLVideoElement>(null);
   const mobileRef = useRef<HTMLVideoElement>(null);
+  const ambientRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
     if (saveData) return;
     const motion = window.matchMedia(MOTION_OK);
     const desktop = window.matchMedia(DESKTOP);
+    let stopAmbient: (() => void) | null = null;
+
     const update = () => {
       if (!motion.matches) return;
-      if (desktop.matches) startVideo(desktopRef.current, "/assets/hero-video.mp4");
-      else startVideo(mobileRef.current, "/assets/hero-video-mobile.mp4");
+      if (desktop.matches) {
+        startVideo(desktopRef.current, "/assets/hero-video.mp4");
+        if (!stopAmbient && desktopRef.current && ambientRef.current) {
+          stopAmbient = runAmbient(desktopRef.current, ambientRef.current);
+        }
+      } else {
+        startVideo(mobileRef.current, "/assets/hero-video-mobile.mp4");
+      }
     };
     update();
     motion.addEventListener("change", update);
     desktop.addEventListener("change", update);
+
+    // Відео не крутиться, коли Hero прокручено з екрана
+    const section = desktopRef.current?.closest("section");
+    const io = section
+      ? new IntersectionObserver(([entry]) => {
+          for (const v of [desktopRef.current, mobileRef.current]) {
+            if (!v || !v.getAttribute("src")) continue;
+            if (entry.isIntersecting) v.play().catch(() => {});
+            else v.pause();
+          }
+        })
+      : null;
+    if (section && io) io.observe(section);
+
     return () => {
       motion.removeEventListener("change", update);
       desktop.removeEventListener("change", update);
+      io?.disconnect();
+      stopAmbient?.();
     };
   }, []);
 
   return (
     <>
       <div className="hero-video hero-video--desktop" aria-hidden="true">
+        <canvas ref={ambientRef} className="hero-video-ambient" width={48} height={24} />
         <video ref={desktopRef} muted loop playsInline preload="none" poster="/assets/hero-video-poster.webp" />
       </div>
       <div className="hero-video hero-video--mobile" aria-hidden="true">
