@@ -125,7 +125,7 @@ h3 { letter-spacing: var(--heading-tracking); }
   .hero-video-ambient {
     position: absolute; left: -4%; width: 108%;
     top: 70%; height: calc(30% + 90vh);
-    filter: blur(28px) saturate(1.1);
+    filter: blur(40px) saturate(1.1);
     -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
   }

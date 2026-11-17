@@ -31,13 +31,19 @@ function runAmbient(video: VideoWithRVFC, canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext("2d");
   if (!ctx) return () => {};
   let stopped = false;
+  let first = true;
   const draw = () => {
     if (stopped) return;
     const vw = video.videoWidth;
     const vh = video.videoHeight;
     if (vw && vh) {
       const sy = vh * (1 - SLICE);
+      // Згладжування в часі: новий кадр лише трохи підмішується до попереднього
+      // (≈1 с на повну зміну), тому дрібні деталі лісу/вагонів не дають мерехтіння,
+      // а зміна сцени перетікає плавно.
+      ctx.globalAlpha = first ? 1 : 0.06;
       ctx.drawImage(video, 0, sy, vw, vh - sy, 0, 0, canvas.width, canvas.height);
+      first = false;
     }
     if (video.requestVideoFrameCallback) video.requestVideoFrameCallback(draw);
     else requestAnimationFrame(draw);
@@ -105,7 +111,7 @@ export default function HeroVideo() {
   return (
     <>
       <div className="hero-video hero-video--desktop" aria-hidden="true">
-        <canvas ref={ambientRef} className="hero-video-ambient" width={48} height={24} />
+        <canvas ref={ambientRef} className="hero-video-ambient" width={32} height={16} />
         <video ref={desktopRef} muted loop playsInline preload="none" poster="/assets/hero-video-poster.webp" />
       </div>
       <div className="hero-video hero-video--mobile" aria-hidden="true">
