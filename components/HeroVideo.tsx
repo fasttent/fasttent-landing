@@ -9,11 +9,12 @@ import { useEffect, useRef } from "react";
 // Інакше лишається статична картинка (див. globals.css).
 //
 // Під відео (партнери, плашки) — «ambient»-продовження: нижня смуга кожного кадру
-// малюється в крихітний canvas, браузер розтягує й розмиває його — кольори
-// продовжують поточну сцену без шва.
+// стискається в canvas шириною 1 px (середній колір по всій ширині, лише зміна згори вниз),
+// браузер розтягує й розмиває його. Кольори продовжують поточну сцену без шва,
+// але без плям від окремих світлих об'єктів (вагони, траса) не в тих місцях.
 const DESKTOP = "(min-width: 768px)";
 const MOTION_OK = "(prefers-reduced-motion: no-preference)";
-const SLICE = 0.22; // яку частку кадру знизу беремо для продовження
+const SLICE = 0.35; // яку частку кадру знизу беремо для продовження (більше — м'якше, без окремих плям)
 
 type VideoWithRVFC = HTMLVideoElement & {
   requestVideoFrameCallback?: (cb: () => void) => number;
@@ -111,11 +112,11 @@ export default function HeroVideo() {
   return (
     <>
       <div className="hero-video hero-video--desktop" aria-hidden="true">
-        <canvas ref={ambientRef} className="hero-video-ambient" width={32} height={16} />
+        <canvas ref={ambientRef} className="hero-video-ambient" width={1} height={4} />
         <video ref={desktopRef} muted loop playsInline preload="none" poster="/assets/hero-video-poster.webp" />
       </div>
       <div className="hero-video hero-video--mobile" aria-hidden="true">
-        <canvas ref={ambientMobileRef} className="hero-video-ambient" width={24} height={24} />
+        <canvas ref={ambientMobileRef} className="hero-video-ambient" width={1} height={4} />
         <video ref={mobileRef} muted loop playsInline preload="none" poster="/assets/hero-video-mobile-poster.webp" />
       </div>
     </>
