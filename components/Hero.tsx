@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { hero } from "@/content";
 import { ArrowIcon, LineIcon } from "./icons";
+import HeroVideo from "./HeroVideo";
 
 // Слова з дефісом («ПВХ-конструкцій») не рвемо на два рядки
 const keepHyphenated = (text: string) =>
@@ -16,6 +17,7 @@ export default function Hero() {
           <source media="(max-width: 767px)" srcSet="/assets/hero-mobile-candidate-3.webp" />
           <img src="/assets/truck-hero-ext.webp" alt={hero.imgAlt} width={1920} height={1920} fetchPriority="high" />
         </picture>
+        <HeroVideo />
       </div>
       <div className="photo-hero-overlay"></div>
 

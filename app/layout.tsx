@@ -83,7 +83,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         {/* Preload саме того hero-зображення, що реально показується на кожному брейкпоінті (LCP) */}
         <link rel="preload" as="image" href="/assets/hero-mobile-candidate-3.webp" media="(max-width: 767px)" fetchPriority="high" />
-        <link rel="preload" as="image" href="/assets/truck-hero-ext.webp" media="(min-width: 768px)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/assets/hero-video-poster.webp" media="(min-width: 768px) and (prefers-reduced-motion: no-preference)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/assets/truck-hero-ext.webp" media="(min-width: 768px) and (prefers-reduced-motion: reduce)" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.localBusiness) }}
