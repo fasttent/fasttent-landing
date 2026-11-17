@@ -78,7 +78,7 @@ export default function HeroVideo() {
           stopAmbient = runAmbient(desktopRef.current, ambientRef.current);
         }
       } else {
-        startVideo(mobileRef.current, "/assets/hero-video-mobile.mp4?v=3");
+        startVideo(mobileRef.current, "/assets/hero-video-mobile.mp4?v=4");
         if (!stopAmbientMobile && mobileRef.current && ambientMobileRef.current) {
           stopAmbientMobile = runAmbient(mobileRef.current, ambientMobileRef.current);
         }
