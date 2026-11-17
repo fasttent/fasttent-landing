@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 // CSS показує потрібний за шириною екрана; файл вантажимо лише для видимого
 // і лише коли в системі не вимкнені анімації та не ввімкнено «економію трафіку».
 // Інакше лишається статична картинка (див. globals.css).
+// /assets кешуються на рік: після заміни файлу відео/постера збільшуй ?v=N.
 //
 // Під відео (партнери, плашки) — «ambient»-продовження: нижня смуга кожного кадру
 // стискається в canvas шириною 1 px (середній колір по всій ширині, лише зміна згори вниз),
@@ -72,12 +73,12 @@ export default function HeroVideo() {
     const update = () => {
       if (!motion.matches) return;
       if (desktop.matches) {
-        startVideo(desktopRef.current, "/assets/hero-video.mp4");
+        startVideo(desktopRef.current, "/assets/hero-video.mp4?v=2");
         if (!stopAmbient && desktopRef.current && ambientRef.current) {
           stopAmbient = runAmbient(desktopRef.current, ambientRef.current);
         }
       } else {
-        startVideo(mobileRef.current, "/assets/hero-video-mobile.mp4");
+        startVideo(mobileRef.current, "/assets/hero-video-mobile.mp4?v=3");
         if (!stopAmbientMobile && mobileRef.current && ambientMobileRef.current) {
           stopAmbientMobile = runAmbient(mobileRef.current, ambientMobileRef.current);
         }
@@ -113,11 +114,11 @@ export default function HeroVideo() {
     <>
       <div className="hero-video hero-video--desktop" aria-hidden="true">
         <canvas ref={ambientRef} className="hero-video-ambient" width={1} height={4} />
-        <video ref={desktopRef} muted loop playsInline preload="none" poster="/assets/hero-video-poster.webp" />
+        <video ref={desktopRef} muted loop playsInline preload="none" poster="/assets/hero-video-poster.webp?v=2" />
       </div>
       <div className="hero-video hero-video--mobile" aria-hidden="true">
         <canvas ref={ambientMobileRef} className="hero-video-ambient" width={1} height={4} />
-        <video ref={mobileRef} muted loop playsInline preload="none" poster="/assets/hero-video-mobile-poster.webp" />
+        <video ref={mobileRef} muted loop playsInline preload="none" poster="/assets/hero-video-mobile-poster.webp?v=3" />
       </div>
     </>
   );

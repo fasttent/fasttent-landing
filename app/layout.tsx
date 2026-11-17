@@ -82,9 +82,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="uk" className={`dark ${plexSans.variable} ${plexMono.variable}`}>
       <head>
         {/* Preload саме того hero-зображення, що реально показується на кожному брейкпоінті (LCP) */}
-        <link rel="preload" as="image" href="/assets/hero-video-mobile-poster.webp" media="(max-width: 767px) and (prefers-reduced-motion: no-preference)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/assets/hero-video-mobile-poster.webp?v=3" media="(max-width: 767px) and (prefers-reduced-motion: no-preference)" fetchPriority="high" />
         <link rel="preload" as="image" href="/assets/hero-mobile-candidate-3.webp" media="(max-width: 767px) and (prefers-reduced-motion: reduce)" fetchPriority="high" />
-        <link rel="preload" as="image" href="/assets/hero-video-poster.webp" media="(min-width: 768px) and (prefers-reduced-motion: no-preference)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/assets/hero-video-poster.webp?v=2" media="(min-width: 768px) and (prefers-reduced-motion: no-preference)" fetchPriority="high" />
         <link rel="preload" as="image" href="/assets/truck-hero-ext.webp" media="(min-width: 768px) and (prefers-reduced-motion: reduce)" fetchPriority="high" />
         <script
           type="application/ld+json"
