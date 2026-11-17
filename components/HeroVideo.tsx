@@ -78,7 +78,7 @@ export default function HeroVideo() {
           stopAmbient = runAmbient(desktopRef.current, ambientRef.current);
         }
       } else {
-        startVideo(mobileRef.current, "/assets/hero-video-mobile.mp4?v=4");
+        startVideo(mobileRef.current, "/assets/hero-video-mobile.mp4?v=5");
         if (!stopAmbientMobile && mobileRef.current && ambientMobileRef.current) {
           stopAmbientMobile = runAmbient(mobileRef.current, ambientMobileRef.current);
         }
@@ -118,7 +118,7 @@ export default function HeroVideo() {
       </div>
       <div className="hero-video hero-video--mobile" aria-hidden="true">
         <canvas ref={ambientMobileRef} className="hero-video-ambient" width={1} height={4} />
-        <video ref={mobileRef} muted loop playsInline preload="none" poster="/assets/hero-video-mobile-poster.webp?v=3" />
+        <video ref={mobileRef} muted loop playsInline preload="none" poster="/assets/hero-video-mobile-poster.webp?v=4" />
       </div>
     </>
   );
