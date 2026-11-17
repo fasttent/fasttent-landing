@@ -831,7 +831,7 @@ export const jsonLd = {
     alternateName: ["ФОП Голубєва-Єфанова Надія Олександрівна", "Фаст Тент", "Фасттент"],
     description:
       "Виготовлення та монтаж ПВХ-конструкцій під замовлення: м'які вікна, тентові накриття, промислові штори, індивідуальні рішення для бізнесу та приватних клієнтів по всій Україні.",
-    image: siteUrl + "/assets/og-image.png",
+    image: siteUrl + "/assets/og-image.png?v=2",
     logo: siteUrl + "/assets/logo.svg",
     telephone: "+380668589390",
     email: "tentsfast@gmail.com",
