@@ -12,7 +12,7 @@ export const EARLY_START = `(function(){try{
 var c=navigator.connection;if(c&&c.saveData)return;
 if(!matchMedia(${JSON.stringify(MOTION_OK)}).matches)return;
 var d=matchMedia(${JSON.stringify(DESKTOP)}).matches,id=d?"hero-video-d":"hero-video-m";
-var go=function(v){if(v.getAttribute("src"))return;v.muted=true;v.defaultMuted=true;v.setAttribute("muted","");
+var go=function(v){if(v.getAttribute("src"))return;v.addEventListener("playing",function(){v.setAttribute("data-playing","")},{once:true});v.muted=true;v.defaultMuted=true;v.setAttribute("muted","");
 v.src=d?${JSON.stringify(SRC_DESKTOP)}:${JSON.stringify(SRC_MOBILE)};var p=v.play();if(p&&p.catch)p.catch(function(){});};
 var v=document.getElementById(id);if(v)return go(v);
 var mo=new MutationObserver(function(){var e=document.getElementById(id);if(e){mo.disconnect();go(e);}});

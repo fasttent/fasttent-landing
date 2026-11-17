@@ -29,6 +29,9 @@ function startVideo(video: HTMLVideoElement | null, src: string) {
   video.setAttribute("muted", "");
   video.setAttribute("playsinline", "");
   video.setAttribute("webkit-playsinline", "");
+  // Відео стає видимим (CSS), лише коли реально пішли кадри — без чорного проміжку на iOS
+  if (!video.paused && video.currentTime > 0) video.setAttribute("data-playing", "");
+  else video.addEventListener("playing", () => video.setAttribute("data-playing", ""), { once: true });
   if (!video.getAttribute("src")) {
     video.src = src;
     video.load();

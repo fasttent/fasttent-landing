@@ -117,11 +117,22 @@ h3 { letter-spacing: var(--heading-tracking); }
   .hero-video { position: absolute; top: 0; left: 0; width: 100%; }
   /* Низ відео розчиняється в розмите «продовження» (canvas з HeroVideo.tsx),
      яке тягнеться під партнерами й плашками в кольорах поточної сцени */
-  .hero-video video {
+  .hero-video video,
+  .hero-video::before {
     position: relative; width: 100%; height: 100%; object-fit: cover;
     -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
   }
+  /* Перший кадр лежить картинкою під відео, а відео прозоре, доки реально не заграє
+     (data-playing ставить скрипт): iOS між постером і першим кадром показує чорне. */
+  .hero-video::before {
+    content: ""; position: absolute; inset: 0;
+    background: center / cover no-repeat;
+  }
+  .hero-video--desktop::before { background-image: url("/assets/hero-video-poster.webp?v=2"); }
+  .hero-video--mobile::before { background-image: url("/assets/hero-video-mobile-poster.webp?v=5"); }
+  .hero-video video { opacity: 0; transition: opacity 0.4s ease; }
+  .hero-video video[data-playing] { opacity: 1; }
   .hero-video-ambient {
     position: absolute; left: -4%; width: 108%;
     top: 70%; height: calc(30% + 90vh);
